@@ -1,0 +1,15 @@
+.box-navbar{
+	width: 890px;
+	height: 39px;
+	display: flex;
+	background-color: #eaeaea;
+}
+
+.box-navbar p,
+a {
+	text-align: center;
+	color: #999999;
+	font-size: 15px;
+	line-height: 39px;
+	margin-left: 10px;
+}

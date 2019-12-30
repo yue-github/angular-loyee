@@ -1,0 +1,838 @@
+
+<style>
+    .orv-h{
+        height: 110px;overflow: hidden
+    }
+</style>
+<!-- BEGIN: 椤甸潰鍐呭-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-order-complete-1 c-content-bar-1 c-align-left c-bordered  c-border-grey">
+
+            <div class="c-padding-20">
+                <div class="findPwd_bar_box">
+                    <div class="findPwd_bar"></div>
+                    <div class="state1 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >1</div>
+                        <p>鎷嶄笅鍟嗗搧</p>
+                    </div>
+                    <div class="state2 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >2</div>
+                        <p>浠樻</p>
+                    </div>
+                    <div class="state3 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >3</div>
+                        <p>鍗栧鍙戣揣</p>
+                    </div>
+                    <div class="state4 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >4</div>
+                        <p>纭鏀惰揣</p>
+                    </div>
+                    <div class="state5 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >5</div>
+                        <p>璇勪环</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEGIN: 鍦板潃淇℃伅 -->
+            <div class="c-bank-details ">
+                <h3 class="c-margin-t-40 c-margin-b-20 c-font-16 c-font-bold">閫夋嫨鏀惰揣鍦板潃
+                    <botton ng-click="isShow()" style="float: right;padding: 2px 20px;"  class="btn btn-default c-btn-uppercase">
+                        <span style="margin-right: 5px" ng-if="ShowType==0">灞曞紑</span>
+                        <i ng-if="ShowType==0" class="fa fa-angle-double-down"></i>
+                        <span style="margin-right: 5px" ng-if="ShowType==1">鏀惰捣</span>
+                        <i ng-if="ShowType==1" class="fa fa-angle-double-up"></i>
+                    </botton>
+                </h3>
+                <div class="simplelineicons-demo customline-demo {{ShowType==1? '':'orv-h'}}">
+                    <div class="item-box col-md-4" ng-repeat="item in address">
+                        <div class="item" style="cursor: pointer; position: relative" ng-click="selAddress(item.id,$index)">
+                            <div class=" c-font-16 c-font-bold c-line-height-20" >{{item.contacts}}</div>
+                            <div class="c-font-14 c-line-height-20">{{item.phone}}</div>
+                            <div class="c-font-14 c-line-height-20" style="width: 100%;overflow: hidden;height: 40px;">{{item.province}}{{item.city}}{{item.district}}{{item.detailedAddress}}</div>
+                            <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="item.is_default==false"/>
+                            <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="item.is_default==true"/>
+                        </div>
+                    </div>
+
+                    <div class="item-box col-md-4" style="cursor: pointer">
+                        <div class="item c-line-height-27" data-toggle="modal" data-target="#addressform" ng-click="getaddress()">
+                            <br/>
+                            <a ng-click="getaddress()" class="c-order-date c-font-14 c-font-thin c-theme-font" >+鏂板鏀惰揣鍦板潃</a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END: 鍦板潃淇℃伅-->
+            <!-- BEGIN: 鏀粯鏂瑰紡 -->
+            <div class="c-bank-details  c-margin-b-30 col-md-12 ">
+                <h3 class="c-margin-t-40 c-margin-b-20 c-font-uppercase c-font-16 c-font-bold">鏀粯鏂瑰紡</h3>
+                <div class="simplelineicons-demo customline-demo col-md-6 row">
+
+                    <div class="item-box" ng-click="paytype(1)" style="cursor: pointer">
+                        <div class="item" style="position: relative">
+                            <a class="c-order-date c-font-14 c-font-thin ">寰俊鏀粯</a>
+                            <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==2||data.payType==3||data.payType==4"/>
+                            <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1"/>
+                        </div>
+                    </div>
+                    <div class="item-box"  ng-click="paytype(2)" style="cursor: pointer">
+                        <div class="item" style="position: relative">
+                            <a class="c-order-date c-font-14 c-font-thin ">鏀粯瀹濇敮浠�</a>
+                            <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1||data.payType==3||data.payType==4"/>
+                            <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==2"/>
+                        </div>
+                    </div>
+                    <div class="item-box"  ng-click="paytype(3)" style="cursor: pointer">
+                        <div class="item" style="position: relative">
+                            <a class="c-order-date c-font-14 c-font-thin ">閾惰仈鏀粯</a>
+                            <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1||data.payType==2||data.payType==4"/>
+                            <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==3"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: 鏀粯鏂瑰紡-->
+            <!-- BEGIN: 璁㈠崟淇℃伅-->
+            <div class="c-order-details">
+                <div class="c-border-bottom hidden-sm hidden-xs">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold">鍟嗗搧淇℃伅</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold">鏁伴噺</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold">鍗曚环</h3>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h3 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold">鎬讳环</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- BEGIN: 鍟嗗搧淇℃伅鍒楄〃 -->
+                <div ng-repeat="cart in list.shops">
+                    <div class="row c-margin-0 c-bg-grey">
+                        <div class="col-md-4 c-padding-10 c-font-16 c-font-red">{{cart.shopName}}</div>
+                        <div class="col-md-8 c-padding-10 c-font-14 c-right">
+                            <label class="c-font-14" ng-if="cart.couponList[0]">
+                                浼樻儬鍒革細
+                                <select ng-model="cart.customerCouponId" ng-change="setDiscount()" ng-options="x.id as x.title for x in cart.couponList">
+                                    <option value="0">浼樻儬鍔�</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div ng-repeat="product in cart.productList">
+                        <div class="row c-cart-table-row c-margin-b-15 c-margin-t-15" ng-repeat="item in product.products">
+                            <div class="col-md-2 col-sm-3 col-xs-5">
+                                <img ng-src="{{item.mainPic}}" src="images/default.jpg" class="img-max-100"/></div>
+                            <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
+                                <h3>
+                                    <a href="#/product?id={{item.product_id}}" class="c-theme-link c-font-18 c-font-dark">{{item.productName}}</a>
+                                </h3>
+                                <p class="c-font-14">{{item.selectProterties}}</p>
+                                <p class="c-font-14 c-font-red" ng-if="item.isSupportReturn==0">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>姝ゅ晢鍝佷笉鏀寔涓冨ぉ鏃犵悊鐢�</span>
+                                </p>
+                                <p class="c-font-14 c-font-red" ng-if="item.isSupportReturn==1">
+                                    <i class="fa fa-gift c-font-red"></i>
+                                    <span>鏀寔涓冨ぉ鏃犵悊鐢�</span>
+                                </p>
+                            </div>
+
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                                <div class="c-input-group c-spinner">
+                                    <input ng-model="item.amount" ng-change="addamount(item.amount,$index,$parent.$index,$parent.$parent.$index)" type="text"
+                                           class="form-control c-item-1" value="1">
+                                    <div class="c-input-group-btn-vertical">
+                                        <button class="btn btn-default" ng-click="addCount($index,1,$parent.$index,$parent.$parent.$index)" type="button"
+                                                data_input="c-item-1">
+                                            <i class="fa fa-caret-up"></i>
+                                        </button>
+                                        <button class="btn btn-default" ng-click="addCount($index,-1,$parent.$index,$parent.$parent.$index)" type="button"
+                                                data_input="c-item-1">
+                                            <i class="fa fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                <p class="c-cart-price c-font-bold c-font-red">锟�<span ng-model="suggestedRetailUnitPrice">{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                                <p class="c-cart-price c-font-bold c-font-red">锟{toDecimal2(item.totalPrice)}}</p>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="{{product.isHasProm}}">
+                            <div class="col-md-12 ">
+                                <div class="col-md-12 c-bg-grey-1 c-border-bottom c-margin-b-10" ng-hide="{{product.remainPay}}">
+                                    <div class="c-margin-t-20 c-margin-b-20 c-font-red col-md-10">
+                                        <span class="c-margin-r-20">{{product.promotion.promotionTitle}}</span>
+                                        <span class="c-font-14 c-font-grey-2">宸蹭紭鎯狅細{{product.promotionDiscount}}</span>
+                                    </div>
+                                    <div class="col-md-2 c-margin-t-20">
+                                        <span class="c-font-12 c-font-red">锟�</span><span class="c-font-red c-font-16">{{toDecimal2(product.productSelectPay-product.promotionDiscount)}}</span>&nbsp;
+                                        <span class="c-font-12">锟�</span><span class="c-font-14 c-font-line-through">{{toDecimal2(product.productSelectPay)}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 c-bg-grey-1" ng-show="{{product.remainPay}}">
+                                    <div class="c-margin-t-20 c-margin-b-20 c-font-red col-md-10">
+                                        <span class="c-margin-r-20">{{product.promotion.promotionTitle}}</span>
+                                        <span class="c-font-14 c-font-grey-2">杩樺樊{{product.remainPay}}鍏冩墠鍙互浼樻儬</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-0 c-padding-10 c-bg-grey-1">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label>澶囨敞锛�<input class="" type="text" ng-model="data.note"/></label>
+                            </div>
+                            <div class="col-md-6 c-padding-10 c-font-14 c-right">
+                                <label class="c-font-14 c-margin-r-20 c-hide">
+                                    杩愰�佹柟寮忥細
+                                    <select ng-model="cart.expressType" style="width: 60px">
+                                        <option value="1">蹇��</option>
+                                        <option value="2">EMS</option>
+                                        <option value="3">骞抽偖</option>
+                                    </select>
+                                </label>
+                                杩愯垂锛�<span class="c-font-red">锟{toDecimal2(cart.deliveryPrice)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-margin-t-30"></div>
+                </div>
+                <!-- END: 鍟嗗搧淇℃伅鍒楄〃-->
+
+                <div class="c-row-item c-row-total c-right">
+                    <ul class="c-list list-unstyled">
+
+                        <li class="row">
+                            <div class="col-md-3 col-md-offset-7 col-sm-6 col-xs-6 c-no-padding">
+                                <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">
+                                    <div class="c-checkbox c-toggle-hide" data-object-selector="c-account" data-animation-speed="600">
+                                        <input type="checkbox" id="checkbox6-444"  class="c-check">
+                                        <label for="checkbox6-444">
+                                            <span class="inc" style="left: 20px"></span>
+                                            <span class="check" style="left: 20px"></span>
+                                            <span class="box" style="left: 20px"></span>
+                                            鍙娇鐢▄{MyGold}}閲戝竵鎶垫墸锟{toDecimal2(goldDiscount)}}
+                                        </label>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="col-md-2 c-margin-t-5">
+                                <input class="form-control  c-square c-theme" type="text" ng-model="data.gold"  ng-change="getGoldDiscount()" />
+                            </div>
+                        </li>
+
+                        <li class="row">
+                            <div class="col-md-6 col-md-offset-4 col-sm-6 col-xs-6 c-no-padding c-right">
+                                <h2 class="c-font-regular c-font-16" ng-if="data.invoiceHead.invoiceHead">鍙戠エ鎶ご锛歿{data.invoiceHead.invoiceHead}}
+                                    <span style="margin-left: 10px" class="{{invoiceHead.type==1?'':'c-hide'}}">鏅�氬彂绁�</span>
+                                    <span style="margin-left: 10px" class="{{invoiceHead.type==2?'':'c-hide'}}">鐢靛瓙鍙戠エ</span>
+                                    <span style="margin-left: 10px" class="{{invoiceHead.type==3?'':'c-hide'}}">澧炲�煎彂绁�</span>
+                                </h2>
+                            </div>
+                            <div class="col-md-2  col-sm-6 col-xs-6 c-no-padding">
+                                <button ng-click="getInvoice()" class="btn btn-default c-btn-uppercase c-btn-square" data-toggle="modal" data-target="#invoiceWin">
+                                    閫夋嫨鍙戠エ鎶ご
+                                </button>
+                            </div>
+                        </li>
+                        <!--<li ng-if="couponDiscount!=null">-->
+                        <!--<h3 class="c-font-regular c-font-16">-->
+                        <!-- -锟{couponDiscount}}-->
+                        <!--</h3>-->
+                        <!--</li>-->
+                        <!--<li ng-if="Discount!=null">-->
+                        <!--<h3 class="c-font-regular c-font-16">-->
+                        <!--閲戝竵鎶垫墸-锟{Discount}}-->
+                        <!--</h3>-->
+                        <!--</li>-->
+                        <li>
+                            <h3 class="c-font-regular c-font-16">鎬讳环 : &nbsp;
+                                <span class=" c-font-bold c-font-16 c-font-red">锟{toDecimal2(list.totalPrice)}}</span>
+                                &nbsp;<span ng-if="discount">宸蹭紭鎯�:</span> &nbsp;
+                                <span class=" c-font-bold c-font-16 c-font-red" ng-if="discount">锟{toDecimal2(discount)}}</span>
+                            </h3>
+                        </li>
+                        <li>
+                            <h3 class="c-font-regular c-font-16">搴斾粯鎬婚 : &nbsp;
+                                <span class=" c-font-bold c-font-16 c-font-red">锟{toDecimal2(list.yifuTotalPrice-discount)}}</span>
+                                &nbsp; &nbsp;
+                                <button class="btn btn-danger c-btn-square c-btn-uppercase c-btn-bold" ng-disabled="flog" ng-click="submit()">鎻愪氦璁㈠崟</button>
+                                <a data-toggle="modal" data-target="#payform" id="payformBut" class="hide"></a>
+                                <a data-toggle="modal" data-target="#bangpaypwdform" id="bangpayform" class="hide"></a>
+                            </h3>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END: 璁㈠崟淇℃伅-->
+        </div>
+    </div>
+</div>
+<!-- END:椤甸潰鍐呭 -->
+
+
+<div class="modal fade c-content-login-form" id="invoiceWin" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>鍙戠エ淇℃伅</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row c-margin-b-20 c-margin-t-20 c-border-bottom">
+                    <div class="simplelineicons-demo customline-demo col-md-12 row">
+                        <div class="item-box" ng-click="selectType(1)" style="cursor: pointer">
+                            <div class="item" style="position: relative">
+                                <a class="c-order-date c-font-14 c-font-thin ">鏅�氬彂绁�</a>
+                                <img src="images/def.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==3||invoiceHead.type==2"/>
+                                <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==1"/>
+                            </div>
+                        </div>
+                        <div class="item-box" ng-click="selectType(2)" style="cursor: pointer">
+                            <div class="item" style="position: relative">
+                                <a class="c-order-date c-font-14 c-font-thin ">鐢靛瓙鍙戠エ</a>
+                                <img src="images/def.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==1||invoiceHead.type==3"/>
+                                <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==2"/>
+                            </div>
+                        </div>
+                        <div class="item-box" ng-click="selectType(3)" style="cursor: pointer">
+                            <div class="item" style="position: relative">
+                                <a class="c-order-date c-font-14 c-font-thin ">澧炲�煎彂绁�</a>
+                                <img src="images/def.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==1||invoiceHead.type==2"/>
+                                <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;"
+                                     ng-if="invoiceHead.type==3"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="invoiceHead.type==1">
+                    <div class="col-md-12">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鍙戠エ鎶ご锛�</label>
+                        </div>
+                        <div class="col-md-10 ">
+                            <div class="col-md-12 c-margin-b-10">
+                                <div class="input-group c-square c-border {{isPerson==1?'c-border-red':''}}" ng-click="selPerson()">
+                                    <div class="form-control  c-square  c-border-right-white">涓汉</div>
+                                    <div class="input-group-addon c-bg-white">
+                                        <img src="images/sel.png" ng-show="isPerson" style="position: absolute;right: 0;bottom:0;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-margin-b-10" ng-repeat="item in getinVoice">
+                                <div class="input-group c-square c-border {{item.selInvoice==1?'c-border-red':''}}">
+                                    <div ng-hide="item.isShow" ng-click="SelInVoice($index)" class="form-control  c-square c-theme">
+                                        {{item.invoiceHead}}
+                                    </div>
+                                    <input ng-show="item.isShow" ng-model="createInvoice.invoiceHead" type="text"
+                                           class="form-control  c-square c-theme {{item.isShow==1?'c-border-green':''}}"/>
+
+                                    <div class="input-group-addon c-bg-white" style="padding: 3px 12px;"><a
+                                            class="btn  btn-default c-font-14" style="padding: 2px 10px;"
+                                            ng-click="editInvoice($index)" ng-hide="item.isShow">缂栬緫</a><a
+                                            class="btn btn-default c-font-14" ng-show="item.isShow"
+                                            style="padding: 2px 10px;" ng-click="addInvoiceTitle()">淇濆瓨</a><a class="btn btn-default c-font-14"
+                                                                                style="padding: 2px 10px;" ng-click="deleteInvoice(item.id)">鍒犻櫎</a>
+                                        <img src="images/sel.png" ng-show="item.selInvoice" style="position: absolute;right: 0;bottom:0;"/></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-margin-b-10">
+                                <a class="c-font-blue" style="cursor: pointer" ng-click="addInvoicePerson(addInvoicePersonType,0)">鏂板鍗曚綅鍙戠エ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 c-margin-t-10">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鍙戠エ鍐呭锛�</label>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="col-md-12">璁㈠崟鏄庣粏</div>
+                            <div class="col-md-12 c-margin-t-10">
+                                <div class="form-group ">
+                                    <button class="btn btn-lg c-btn-green c-btn-square" data-dismiss="modal" ng-click="submitInvoice1()">淇濆瓨
+                                    </button>
+                                    <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x"
+                                            data-dismiss="modal"  ng-click="addInvoicePerson(0,1)">鍙栨秷
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="invoiceHead.type==2">
+                    <div class="col-md-12 c-margin-b-20 c-font-14 " style="color: #ffa657">
+                        鐢靛瓙鍙戠エ鏄◣鍔″眬璁ゅ彲鐨勬湁鏁堝嚟璇侊紝鍏舵硶寰嬫晥鍔涖�佸熀鏈敤閫斿強浣跨敤瑙勫畾鍚岀焊璐ㄥ彂绁紝濡傞渶绾歌川绁ㄥ彲鑷涓嬭浇鎵撳嵃銆�
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鍙戠エ鎶ご锛�</label>
+                        </div>
+                        <div class="col-md-10 ">
+                            <div class="col-md-12 c-margin-b-10 ">
+                                <div class="input-group c-square  c-border {{saveInvoiceEmailType==1?'c-border-red':''}}" ng-click="selInvoiceEmail(1)">
+                                    <div class="form-control  c-square  c-border-right-white">涓汉</div>
+                                    <div class="input-group-addon c-bg-white">
+                                        <img ng-show="saveInvoiceEmailType" src="images/sel.png" style="position: absolute;right: 0;bottom:0;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-margin-b-10">
+                                <div class="input-group c-square {{saveInvoiceEmailType==0?'c-border-red':''}}  c-border" ng-click="selInvoiceEmail(0)">
+                                    <input ng-model="invoicePerson1.invoiceHead" type="text" class="form-control  c-square c-theme c-border-right-white"
+                                           placeholder="璇峰～鍐欏叕鍙稿彂绁ㄦ姮澶�"/>
+
+                                    <div class="input-group-addon c-bg-white " style="padding: 3px 12px;">
+                                        <img ng-hide="saveInvoiceEmailType" src="images/sel.png" style="position: absolute;right: 0;bottom:0;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鏀剁エ浜虹數璇濓細<span class="c-font-red">*</span></label>
+                        </div>
+                        <div class="col-md-10 ">
+                            <div class="col-md-12 c-margin-b-10">
+                                <div class="input-group c-square">
+                                    <input ng-model="invoicePerson1.phone" type="text" class="form-control  c-square c-theme c-border-right-white"
+                                           placeholder="璇峰～鍐欐敹绁ㄤ汉鐢佃瘽"/>
+
+                                    <div class="input-group-addon c-bg-white " style="padding: 3px 12px;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鏀剁エ浜洪偖绠憋細<span class="c-font-red">*</span></label>
+                        </div>
+                        <div class="col-md-10 ">
+                            <div class="col-md-12 c-margin-b-10">
+                                <div class="input-group c-square">
+                                    <input ng-model="invoicePerson1.email" type="text" class="form-control  c-square c-theme c-border-right-white"
+                                           placeholder="璇峰～鍐欐敹绁ㄤ汉閭"/>
+
+                                    <div class="input-group-addon c-bg-white c-font-red" style="padding: 3px 12px;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 c-margin-t-10">
+                        <div class="col-md-2 padding-0 c-right">
+                            <label>鍙戠エ鍐呭锛�</label>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="col-md-12">璁㈠崟鏄庣粏</div>
+                            <div class="col-md-12 c-margin-t-10">
+                                <div class="form-group ">
+                                    <button class="btn btn-lg c-btn-green c-btn-square" data-dismiss="modal" ng-click="saveInvoiceEmail()">淇濆瓨
+                                    </button>
+                                    <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x"
+                                            data-dismiss="modal">鍙栨秷
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="invoiceHead.type==3">
+                    <div class="col-md-12 c-margin-b-20 c-font-14 " style="color: #ffa657">
+                        鎴戝叕鍙镐緷娉曞紑鍏峰彂绁紝濡傛偍璐拱鐨勫晢鍝佹寜绋庢硶瑙勫畾灞炰簬涓嶅緱浠庡鍊肩◣閿�椤圭◣棰濅腑鎶垫墸鐨勯」鐩紙渚嬪闆嗕綋绂忓埄鎴栦釜浜烘秷璐圭瓑锛夛紝璇锋偍閫夋嫨鏅�氬彂绁ㄦ垨鐢靛瓙鍙戠エ銆�
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 padding-0 c-right">
+                            <label>寮�绁ㄦ柟寮忥細</label>
+                        </div>
+                        <div class="col-md-9 ">
+                            <div class="col-md-12 c-margin-b-10 ">
+                                <div class="input-group c-square c-border-red c-border">
+                                    <div class="form-control  c-square">璁㈠崟瀹屾垚鍚庡紑绁�&nbsp;&nbsp;&nbsp;<img
+                                            src="images/sel.png" style="position: absolute;right: 0;bottom:0;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="companyinvoice">
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>鍙戠エ鍐呭锛�</label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10 ">
+                                    <div class="input-group c-square c-border-red c-border">
+                                        <div class="form-control  c-square">璁㈠崟鏄庣粏&nbsp;&nbsp;&nbsp;<img
+                                                src="images/sel.png" style="position: absolute;right: 0;bottom:0;"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>鍗曚綅鍚嶇О锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.companyName" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>绾崇◣浜鸿瘑鍒爜锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.companyCode" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>娉ㄥ唽鍦板潃锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.companyAddress" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>娉ㄥ唽鐢佃瘽锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.companyPhone" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>寮�鎴烽摱琛岋細<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.bankName" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>閾惰璐︽埛锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="InvoiceInfo.bankAccount"  type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        <button class="btn btn-lg c-btn-green c-btn-square" ng-click="saveInvoiceInfo()">涓嬩竴姝�</button>
+                                        <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x"
+                                                data-dismiss="modal">鍙栨秷
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-hide="companyinvoice">
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>鏀剁エ浜哄鍚嶏細<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="invoicePerson.name" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>鏀剁エ浜虹數璇濓細<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="invoicePerson.phone" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white "
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>鏀剁エ浜虹渷浠斤細<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                        <select ng-model="invoicePerson.provinceId"  class="form-control c-square c-theme" ng-options="x.id as x.name for x in provinces" ng-change="getCity(invoicePerson.provinceId)">
+                                            <option value="">璇烽�夋嫨鐪�</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                        <select class="form-control c-square c-theme" ng-model="invoicePerson.cityId" ng-options="x.id as x.name for x in cities" ng-change="getDistricts(invoicePerson.cityId)">
+                                            <option value="">璇烽�夋嫨甯�</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                        <select class="form-control c-square c-theme" ng-model="invoicePerson.districtId"  ng-options="x.id as x.name for x in districts">
+                                            <option value="">璇烽�夋嫨鍖�</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3 padding-0 c-right">
+                                <label>璇︾粏鍦板潃锛�<span class="c-font-red">*</span></label>
+                            </div>
+                            <div class="col-md-9 ">
+                                <div class="col-md-12 c-margin-b-10">
+                                    <div class="input-group c-square">
+                                        <input ng-model="invoicePerson.addressDetail" type="text"
+                                               class="form-control  c-square c-theme c-border-right-white"/>
+
+                                        <div class="input-group-addon c-bg-white c-font-red"
+                                             style="padding: 3px 12px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        <button class="btn btn-lg c-btn-green c-btn-square" ng-click="saveInvoicePerson()">淇濆瓨</button>
+                                        <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x" ng-click="callback()">涓婁竴姝�
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="addressform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>鍒涘缓鏀惰揣鍦板潃</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row  ">
+                        <div class="form-group">
+                            <label class="control-label">鏀惰揣浜�</label>
+                            <input type="text" class="form-control c-square c-theme" ng-model="new_address.contacts"> </div>
+                    </div>
+                    <div class="row  " >
+                        <div class="form-group ">
+                            <label class="control-label">鑱旂郴鐢佃瘽</label>
+                            <input type="text" class="form-control c-square c-theme" ng-model="new_address.phone"> </div>
+                    </div>
+                    <div class="row  ">
+                        <div class="form-group ">
+                            <div class="control-label">鎵�鍦ㄧ渷甯傚尯</div>
+                            <div class="row c-margin-t-10">
+                                <div class="col-md-4">
+                                    <select class="form-control c-square c-theme" ng-model="new_address.provinceId" ng-options="x.id as x.name for x in provinces" ng-change="getCity(new_address.provinceId)">
+                                        <option value="">璇烽�夋嫨鐪�</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control c-square c-theme" ng-model="new_address.cityId" ng-options="x.id as x.name for x in cities" ng-change="getDistricts(new_address.cityId)">
+                                        <option value="">璇烽�夋嫨甯�</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control c-square c-theme" ng-model="new_address.districtId"  ng-options="x.id as x.name for x in districts">
+                                        <option value="">璇烽�夋嫨鍖�</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  ">
+                        <div class="form-group ">
+                            <label class="control-label">璇︾粏鍦板潃</label>
+                            <input type="text" class="form-control c-square c-theme" ng-model="new_address.detailedAddress" > </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group ">
+                            <button class="btn btn-lg c-btn-green c-btn-square" ng-click="saveAddress()" data-dismiss="modal">淇濆瓨</button>
+                            <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x" ng-click="cleaned()" data-dismiss="modal">閲嶇疆</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="payform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>浣欓鏀粯瀵嗙爜</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label class="control-label">鏀粯瀵嗙爜:</label>
+                            </div>
+                            <div class="col-md-5"><input type="password" class="form-control c-square c-theme" ng-model="pay.password"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group c-right">
+                            <button class="btn btn-lg c-btn-green c-btn-square" ng-click="isCorrectBalancePwd()" data-dismiss="modal">纭鏀粯</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="bangpaypwdform" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>璁剧疆鏀粯瀵嗙爜</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">鎵嬫満鍙风爜锛�</label>
+                        <input type="text" ng-model="bangPwd.mobilePhone" class="form-control c-square c-theme" placeholder="鎵嬫満鍙风爜">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10">
+                        <label class="control-label">楠岃瘉鐮侊細</label>
+                        <div class="input-group input-group-lg c-square">
+                            <input type="text" ng-model="bangPwd.code" class="form-control c-square c-font-grey-3 c-border-grey c-theme" placeholder="杈撳叆楠岃瘉鐮�" />
+                                <span class="input-group-btn">
+                                    <button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-theme-border c-btn-square c-btn-uppercase c-font-16" type="button" >鑾峰彇鎵嬫満楠岃瘉鐮�</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">鏀粯瀵嗙爜锛�</label>
+                        <input type="password" ng-model="bangPwd.balancePwd" class="form-control c-square c-theme" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">纭瀵嗙爜锛�</label>
+                        <input type="password" ng-model="bangPwd.reBalancePwd" class="form-control c-square c-theme">
+                    </div>
+                </div>
+                <div class="row c-margin-t-30">
+                    <div class="col-md-6 c-right">
+                        <button ng-click="banPwd()" class="btn c-btn-green c-theme-btn c-btn-square" data-dismiss="modal">鎻愪氦</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

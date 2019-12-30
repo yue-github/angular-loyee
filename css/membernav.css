@@ -1,0 +1,81 @@
+.title{
+	text-align: center;
+	padding: 30px 0 20px 0;
+}
+
+.hot{
+	display:flex;
+	width:100%;
+	justify-content:space-between;
+	align-items:center;
+	flex-wrap:wrap;
+	overflow: hidden;
+	margin-top:15px;
+}
+.hot li{
+	width:22%;
+	height:370px;
+	overflow: hidden;
+	margin-bottom: 15px;
+	margin-right: 15px;
+	position:relative;
+	background-color:#fff;
+}
+.hot li:nth-child(4),li:nth-child(8){
+	margin-right:0;
+}
+.hotPic{
+	display:block;
+	width:100%;
+	height:100%;
+	background-size: 100% 100%;
+}
+.goodImg{
+	display:block;
+	width:100%;
+	height:270px;
+	background-size: 100% 100%;
+}
+.comment{
+	font-size:11px;
+	line-height:15px;
+	margin:10px;
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+.money{
+	padding:0 8px 8px 8px;
+	display:flex;
+	flex-direction:row;
+	font-size:10px;
+}
+.now{
+	color:rgb(250,186,0);
+}
+.old{
+	margin-left:12px;
+	color:#000;
+	text-decoration:line-through;
+}
+.btn{
+	position:absolute;
+	bottom:0;
+	left:0;
+	display:flex;
+	flex-direction:row;
+	width:100%;
+	height:33px;
+}
+.success,.add{
+	flex:1;
+	height:23px;
+	line-height:23px;
+	text-align:center;
+	font-size:13px;
+	color:rgba(0,0,0,0.5);
+	cursor: pointer;
+}
+.success{
+	border-right: 1px solid rgba(0,0,0,0.2);
+}

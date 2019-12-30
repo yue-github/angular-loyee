@@ -1,0 +1,93 @@
+<link rel="stylesheet" type="text/css" href="css/add.css"/>
+
+<style>
+	#edui1{z-index: 0!important;}
+	.add-top-6{padding-top: 6px;}
+	input[type=checkbox], input[type=radio]{margin-top: 2px;}
+</style>
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<img src="img/icon-back.png" alt="" />
+	   			<a href="#/pickupAddress">自提地点</a>
+	   		</div>
+	   		<div class="r_down">
+				<div class="row c-margin-b-40 c-padding-20">
+					<div class="col-md-12">
+						<div class="row c-padding-10 c-margin-t-15">
+							<div class="col-md-2 c-font-16 add-top-6" style="padding-right: 0;">名称：
+								<span class="c-font-red" style="float: right">*</span>
+							</div>
+							<div class="col-md-7" style="padding-right: 0">
+								<input ng-model="data.title" class="form-control  c-square c-theme"
+									   type="text"/>
+							</div>
+						</div>
+						<div class="row c-padding-10 c-margin-t-15">
+							<div class="col-md-2 c-font-16 add-top-6" style="padding-right: 0;">省：
+								<span class="c-font-red" style="float: right">*</span>
+							</div>
+							<div class="col-md-7" style="padding-right: 0">
+								<select class="form-control  c-square c-theme" ng-model="data.province_id" ng-change="selectProvince()" ng-options="x.id as x.name for x in provinces">
+									<option value="">请选择省</option>
+								</select>
+							</div>
+						</div>
+						<div class="row c-padding-10 c-margin-t-15">
+							<div class="col-md-2 c-font-16 add-top-6" style="padding-right: 0;">市：
+								<span class="c-font-red" style="float: right">*</span>
+							</div>
+							<div class="col-md-7" style="padding-right: 0">
+								<select class="form-control c-square c-theme" ng-model="data.city_id" ng-change="selectCity()" ng-options="x.id as x.name for x in cities">
+									<option value="">请选择市</option>
+								</select>
+							</div>
+						</div>
+						<div class="row c-padding-10 c-margin-t-15">
+							<div class="col-md-2 c-font-16 add-top-6" style="padding-right: 0;">区：
+								<span class="c-font-red" style="float: right">*</span>
+							</div>
+							<div class="col-md-7" style="padding-right: 0">
+								<select class="form-control c-square c-theme" ng-model="data.district_id" ng-options="x.id as x.name for x in districts">
+									<option value="">请选择区</option>
+								</select>
+							</div>
+						</div>
+						<div class="row c-padding-10 c-margin-t-15">
+							<div class="col-md-2 c-font-16 add-top-6" style="padding-right: 0;">地址：
+								<span class="c-font-red" style="float: right">*</span>
+							</div>
+							<div class="col-md-7" style="padding-right: 0">
+								<input ng-model="data.detail_address" class="form-control  c-square c-theme"
+									   type="text"/>
+							</div>
+						</div>
+					</div>
+				</div>
+	   			<div class="d_detail">
+	   			 <div class="btn">
+	   			 	<button ng-click="submit()">保存</button>
+	   			 </div>
+	   			</div>
+	   		</div>
+	   	</div>
+   	</div>
+   	
+   </div>
+   <!--E content-->
+   
+   <!--S footer-->
+
+   <!--E footer-->
+<script type="text/javascript" src="js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="js/laydate/laydate.js"></script>
+<script type="text/javascript">
+	
+</script>

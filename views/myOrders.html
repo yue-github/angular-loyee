@@ -1,0 +1,152 @@
+
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: 订单列表-->
+        <div class="center-block">
+            <div class="c-content-title-1">
+                <div class="c-font-uppercase c-font-bold c-font-20 c-margin-b-15 ">{{data.orderTitle}}</div>
+            </div>
+            <div class="c-margin-b-40 c-order-history-2 c-font-16">
+                <div class="row c-cart-table-title">
+                    <div class="col-md-5 c-cart-image">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-desc">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">单价</h3>
+                    </div>
+                    <div class="col-md-1 c-cart-price">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">数量</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-total">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">总价</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-qty">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                    </div>
+                </div>
+                <!-- BEGIN: 订单list-->
+                <div class="center-block" ng-repeat="item in orders">
+                    <!-- BEGIN: 订单item-->
+                    <div class="col-md-12 padding-0 c-cart-table-title c-margin-b-10 c-margin-t-10 c-bg-grey-1">
+                        <div class="col-md-3 c-cart-ref">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2">订单号：
+                                <span>{{item.order_code}}</span>
+                            </h2>
+                        </div>
+
+                        <div class="col-md-5 c-cart-desc">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 " ng-if="item.status==1||item.status==6">下单时间：{{item.created_at}}</h2>
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 " ng-if="item.status==2">支付时间：{{item.payTime}}</h2>
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 " ng-if="item.status==3">发货时间：{{item.sendOutTime}}</h2>
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 " ng-if="item.status==4||item.status==7">收货时间：{{item.receiveTime}}</h2>
+                        </div>
+                        <div class="col-md-2 c-cart-ref">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2">总价：
+                                <span class="c-font-red">{{item.totalPayable}}</span>
+                            </h2>
+                        </div>
+                        <div class="col-md-2 c-cart-ref">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2">运费：
+                                <span class="c-font-red">{{item.deliveryPrice}}</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row c-cart-table-row c-font-14 c-border-bottom c-margin-t-10" ng-repeat="detail in item.details">
+                        <div class="col-md-2 col-sm-3 col-xs-5">
+                            <img class="cbp-l-project-img" ng-src="{{detail.mainPic}}" />
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-5">
+                            <a href="#/product?id={{detail.product_id}}" class="c-cart-price c-font-bold c-font-16">{{detail.product_name}}</a>
+                            <p class="c-font-14">{{detail.selectProterties}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-price c-font-red"><span class="c-font-12">￥</span><span ng-model="suggestedRetailUnitPrice">{{toDecimal2(detail.actualUnitPrice)}}</span></p>
+                        </div>
+                        <div class="col-md-1 col-sm-2 col-xs-6 c-cart-total">
+                            <p class="c-cart-price " ng-model="amount">{{detail.unitOrdered}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 c-cart-total">
+                            <p class="c-cart-price  c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(detail.totalPrice)}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-center">
+                            <a class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==1" ng-click="payOrder(item.id)">确认付款</a>
+                            <a href="#order_2?id={{item.id}}"   class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==3&&detail.status==1">确认收货</a>
+                            <a href="#order_3?id={{detail.id}}"  class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==4&&detail.status!=7">立即评价</a>
+                            <p  class="c-font-14" ng-if="item.status==6">订单已关闭</p>
+                            <div class="c-margin-t-10" ng-if="item.status==1">
+                                <a ng-click="remove(item.id)" class="btn c-btn-grey c-btn-square c-font-14" data-toggle="modal" data-target="#cancelForm" >取消订单</a>
+                            </div>
+                            <div ng-if="item.orderState==1&&detail.status==1"><a ng-click="back(detail.id)" class="btn c-font-14">申请售后</a></div>
+                            <div ng-if="item.orderState==1&&detail.status==4"><a  class="btn c-font-14">申请已同意</a></div>
+                            <div ng-if="item.orderState==1&&detail.status==3"><a  class="btn c-font-14">申请已拒绝</a></div>
+                            <div ng-if="item.orderState==1&&detail.status==5"><a  class="btn c-font-14">退款成功</a></div>
+                            <div ng-if="item.orderState==1&&detail.status==2"><a  class="btn c-font-14">售后申请中</a></div>
+                            <div ng-if="item.status==5&&detail.status==7"><a  class="btn c-font-14">已评价</a></div>
+                            <div><a href="#order?id={{item.id}}" class="btn c-font-14">订单详情</a></div>
+                        </div>
+                    </div>
+                    <!-- END: 订单item -->
+                </div>
+                <!-- END: 订单list-->
+            </div>
+        </div>
+        <!-- END: 订单列表-->
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right" ng-if="pages[0]">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="cancelForm" role="dialog" >
+    <div class="modal-dialog" style="width: 600px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>选择取消订单理由</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-4">
+                            选择取消订单理由<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-8">
+                            <select ng-model="cancelReasonId" class="form-control c-square c-theme" name="conditions" ng-options="x.id as x.title for x in cancelReason">
+                                <option value="">请选择取消订单理由</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square"  ng-click="cancelOrder()">确定</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

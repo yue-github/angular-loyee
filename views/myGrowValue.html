@@ -1,0 +1,93 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">我的通币</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="form-group">
+            <div class="c-border c-bg-grey-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6  c-padding-20   c-center">
+                            <p>可用的积分</p>
+                            <p class="c-font-red c-font-24 c-font-bold">{{totalPoint}}</p>
+                        </div>
+
+                        <div class="col-lg-6 c-border-l-green-1  c-padding-20 c-center c-border-grey">
+                            <div class="c-padding-20">
+                                <a href="#/promotion" class="btn btn-danger c-btn-square c-margin-t-5">兑换超值商品</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row c-margin-b-40">
+            <div class="col-md-12  ">
+                <div class="c-content-tab-1 c-theme ">
+                    <div class="nav-justified">
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <ul class="c-content-recent-posts-1">
+                                    <li style="padding-bottom: 0;">
+                                        <ul class="nav nav-tabs nav-justified">
+                                            <li class="active">
+                                                <p class="c-font-bold" data-toggle="tab">来源/用途</p>
+                                            </li>
+                                            <li></li>
+                                            <li>
+                                                <p class="c-center c-font-bold" data-toggle="tab">积分变化</p>
+                                            </li>
+                                            <li>
+                                                <p class="c-center c-font-bold"  data-toggle="tab">日期</p>
+                                            </li>
+                                            <li>
+                                                <p class="c-center c-font-bold" data-toggle="tab">备注</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="c-font-14" ng-repeat="point in points">
+                                        <div class="col-md-5">
+                                            <p class="c-date">{{point.source}}</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p class="c-center c-font-red c-font-bold">{{point.amount}}</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="c-center ">{{point.created_at}}</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p class="c-center">{{point.note}}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>

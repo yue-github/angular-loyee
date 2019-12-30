@@ -1,0 +1,192 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/seller.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/sales.css" />
+<style>
+	.u_right{
+		width: 100%;
+		background-color: #FFFFFF;
+		padding: 10px;
+	}
+.d_ul{
+	margin-top:20px;
+}
+	ul{
+		list-style: none;
+	}
+	.u_right li a{
+		display: block;
+		width: 50px;
+		height: 50px;
+		background-color: yellow;
+		text-align: center;
+		line-height: 50px;
+		color: black;
+	}
+	.await{
+		margin-top: 50px;
+		}
+</style>
+<!--S content-->
+	
+ <div class="content">
+ 	<div class="c_box">
+ 		<div class="u_left">
+ 			<div ng-include="'eshop/shopMenu.html'"></div>
+ 		</div>
+ 		<div class="c_right">
+ 			<div class="r_up">
+ 				<a href="#" >活动页面</a>
+ 			</div>
+ 			<div class="r_down">
+ 				<div class="d_detail">
+ 					<div class="d_ul">
+ 						<ul>
+ 							<li>
+ 								<a href="javascript:void(0);" data-toggle="modal" class="c-font-grey-1" data-target="#uploadForm" ng-click="uploadForm()">添加</a>
+ 								<!--<a href="javascript:void(0);" data-toggle="modal" class="c-font-grey-1" data-target="#addsalesForm2" ng-click="addForm2()">添加2</a>-->
+ 
+ 							</li>
+ 						</ul>
+ 						<div style="clear: both;"></div>
+ 					</div>
+ 					<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="many.length==0">抱歉，暂无数据</p>
+ 					<div class="d_tab" ng-show="many.length != 0">
+ 						<table border="0" cellspacing="0" class="table-hover">
+ 							<tr>
+ 								<th class="c-center">标题</th>
+ 								<th class="c-center">说明</th>
+ 								<th class="c-center">创建时间</th>
+ 								<th class="c-center">背景图</th>
+ 								<th class="c-center">操作</th>
+ 
+ 							</tr>
+ 							<tr ng-repeat="item in many">
+ 								<td>{{item.title}}</td>
+ 								<td>{{item.desc}}</td>
+ 								<td>{{item.startDate}}</td>
+ 								<td>{{item.endDate}}</td>
+ 								<td>
+ 									<button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#addsalesForm" ng-click="update(item.id)">修改</button>
+ 									<button class="btn c-btn-green c-btn-square" ng-click="delete(item.id,item.title)">删除</button>
+ 									<button class="btn c-btn-green c-btn-square" id="selectProduct" ng-click="saveProduct(item.id,item.baseOn)">促销明细</button>
+ 								</td>
+ 							</tr>
+							<tr>
+								<td>111</td>
+								<td>222</td>
+								<td>3333</td>
+								<td></td>
+								<td>
+									<button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#uploadForm" ng-click="uploadForm(item.id)">修改</button>
+									<button class="btn c-btn-green c-btn-square" ng-click="delete(item.id,item.title)">删除</button>
+								</td>
+							</tr>
+ 
+ 						</table>
+ 					</div>
+ 					<div class="row" ng-show="many.length != 0">
+ 						<div>
+ 							<div ng-include="'eshop/pages.html'"></div>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+	  
+	  
+   <!--E content-->
+<div class="modal fade c-content-login-form" id="uploadForm" role="dialog" ng-model="obj">
+	<div class="modal-dialog" style="width: 760px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+	
+				<span>{{formTitle}}{{pageTitle}}优惠活动 </span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row c-margin-b-30 c-margin-t-20">
+						<div class="col-md-3 label_biao">
+							标题<span style="margin-left:8px;color: red;">*</span>
+						</div>
+						<div class="col-md-9">
+							<input name="mj_title" ng-model="obj.title" class="form-control  c-square c-theme" type="text" placeholder="名称" />
+						</div>
+					</div>
+					<div class="row c-margin-b-30 c-margin-t-20 ">
+						<div class="col-md-3 label_biao line-height">
+							背景图 <span class="c-font-14">(1900*700)</span>
+						</div>
+						<div class="col-md-4 line-height">
+							<input ngf-select="upload($file,1)" class=" form-control c-square c-theme" type="file"  style="position: absolute;top: 40px;"/>
+						</div>
+						<div class="col-md-5">
+							<div id="img_hover">
+								<img ng-src="{{data.mainPic}}" style="max-width: 120px;"/>
+								<img ng-src="{{data.mainPic}}" id="img_hover_show"/>
+							</div>
+						</div>
+					</div>
+					<div class="row c-margin-b-30 c-margin-t-20">
+						<div class="col-md-3 label_biao">
+							创建时间<span style="margin-left:8px;color: red;">*</span>
+						</div>
+						<div class="col-md-9" data-ng-init="startTime()">
+							<input name="act_start_time"  type="text" class=" form-control c-square c-theme text-box" data-date-format="yyyy-mm-dd hh:ii" ng-model="obj.startDate" placeholder="活动开始时间" title="活动开始时间" readonly="readonly" style="cursor:pointer;background: white;" />
+						</div>
+					</div>
+				
+				
+		
+					<div class="row c-margin-b-30 c-margin-t-20">
+						<div class="col-md-3 label_biao">
+							活动说明
+						</div>
+						<div class="col-md-9">
+							<textarea id="mj_txt" class="form-control form-filter input-sm ng-pristine ng-valid ng-empty ng-touched" ng-model="obj.desc"></textarea>
+						</div>
+					</div>
+					<div class="row c-margin-b-30">
+						<div class="col-md-6 c-right">
+							<button class="btn c-btn-green c-btn-square" ng-click="submit(obj.id)">提交</button>
+						</div>
+						<div class="col-md-6">
+							<button class="btn c-btn-grey c-btn-square" ng-click="close('')">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    $("input[name='act_start_time']").datetimepicker({
+			language:'zh-CN',
+			format:'yyyy-mm-dd',
+	        weekStart: 1,
+			autoclose: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+	    }).on('changeDate', function(ev){
+	    	$("input[name='act_stop_time'").datetimepicker('setStartDate', ev.date);
+		});
+		
+	$("input[name='act_stop_time'").datetimepicker({
+			language:'zh-CN',
+			format:'yyyy-mm-dd',
+	        weekStart: 1,
+			autoclose: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+			
+	    }).on('changeDate', function(ev){
+	    	$("input[name='act_start_time'").datetimepicker('setEndDate', ev.date);
+		});
+
+</script>

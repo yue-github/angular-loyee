@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="css/express.css"/>
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<a href="javascript:void(0);" class="active">快递模块</a>
+	   		</div>
+	   		<div class="r_down">
+	   			<div class="d_detail">
+	   			 <button class="d_del c-font-grey-1" ng-click="add()">添加</button>
+	   			 <div style="clear: both;"></div>
+	   			 <div class="d_tab">
+				   <table border="0" cellspacing="0"  ng-repeat="item in logisticss">
+					   <thead>
+				   	<tr style="background: #E8F2FF">
+				   		<td colspan="5">{{item.name}}</td>
+						<td colspan="1">
+							<a class="c-font-blue" style="margin-right: 10px;cursor: pointer" ng-click="edit(item.id)">修改</a>
+							<a class="c-font-blue" style="cursor: pointer" ng-click="delete(item.id)">删除</a>
+						</td>
+				   	</tr>
+					   </thead>
+					   <tbody>
+					   <tr class="c-bg-grey-1 ">
+						   <th>运送方式</th>
+						   <th style="width: 32%;">运送到</th>
+						   <th>首重(kg)</th>
+						   <th>运费(元)</th>
+						   <th>续重(kg)</th>
+						   <th>运费(元)</th>
+					   </tr>
+					   <tr ng-repeat="list in item.details">
+						   <td>{{list.expressType}}</td>
+						   <td style="width: 50%;text-align: left"><span ng-repeat="p in list.provinceItem">{{p.provinceName}}</span></td>
+						   <td>{{list.firstUnit}}</td>
+						   <td>{{list.firstPay}}</td>
+						   <td>{{list.addUnit}}</td>
+						   <td>{{list.addPay}}</td>
+					   </tr>
+					   </tbody>
+				  </table>
+			     </div>
+				<div class="c_page">
+					<div class="p_ul" style="padding-right: 52px;">
+						<ul>
+							<li ng-click="setpages(-1,0)"><a href="javascript:void(0);"></a></li>
+							<li class="{{page==data.page?'active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages"><a href="javascript:void(0);">{{page}}</a></li>
+							<li ng-click="setpages(+1,0)"><a href="javascript:void(0);"></a></li>
+						</ul>
+						<div style="clear: both;"></div>
+					</div>
+			    </div>
+	   				</div>
+	   			 </div>
+	   		</div>
+	   	</div>
+   <!--E content-->
+   </div>

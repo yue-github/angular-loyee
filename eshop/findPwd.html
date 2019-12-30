@@ -1,0 +1,79 @@
+
+
+<!-- BEGIN: 页面内容-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-order-complete-1 c-content-bar-1 c-align-left c-bordered  c-border-grey c-border-2px">
+            <div class=" c-padding-20">
+                <div class="findPwd_bar_box">
+                    <div class="findPwd_bar"></div>
+                    <div class=" findPwd_bar_state2 " style="left: 20%">
+                        <div class="findPwd_bar_round_1" >1</div>
+                        <p>验证身份</p>
+                    </div>
+                    <div class=" findPwd_bar_state2 " style="left: 47%">
+                        <div class="findPwd_bar_round_2" >2</div>
+                        <p>设置新密码</p>
+                    </div>
+                    <div class="state4 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >3</div>
+                        <p>完成</p>
+                    </div>
+                </div>
+            </div>
+            <div class="findPwd_form ">
+                <div class="c-content-tab-1 c-theme c-margin-t-30 c-margin-b-30">
+                    <div class="clearfix">
+                        <ul class="nav nav-tabs c-font-uppercase c-font-bold">
+                            <li class="col-md-6 c-center {{hide}}" style="cursor: pointer" ng-click="selecttype(1)">
+                                <a data-toggle="tab">手机找回</a>
+                            </li>
+                            <li class="col-md-6 c-center {{show}}"  style="cursor: pointer" ng-click="selecttype(2)">
+                                <a  data-toggle="tab">邮箱找回</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="data.type===1">
+                    <p>请点击获取验证码，并在手机：查看短信，并填写验证码。</p>
+                </div>
+                <div class="form-group" ng-if="data.type===2">
+                    <p>请输入您注册的邮箱账号，并点击发送链接到邮箱进行验证，按提示完成找回密码。</p>
+                </div>
+                <div class="form-group" ng-if="data.type===1">
+                    <input ng-model="data.phone" type="text" class="form-control  c-square c-theme input-lg" onkeyup="value=value.replace(/[^0-9]/g,'')"  ng-Keyup="onkeydownNumber()"  placeholder="注册时的手机号码">
+                </div>
+                <div class="form-group"  ng-if="data.type===1">
+                    <div class="input-group input-group-lg c-square">
+                        <input type="text" class="col-md-8 col-sm-6 form-control c-square c-theme" ng-model="data.vcode" placeholder="图形验证码" style="border-radius:0px;" />
+                           <span class="input-group-btn">
+                           	<img id="imgObj" alt="验证码" width='130px' ng-src="{{vcodePath}}" ng-click="changeImg()"/>
+                           </span>
+                    </div>
+                </div>
+                <div class="form-group"  ng-if="data.type===1">
+                    <div class="input-group input-group-lg c-square">
+                        <input type="text" class="col-md-8 col-sm-6 form-control c-square c-theme" ng-model="data.code" placeholder="手机验证码" />
+                           <span class="input-group-btn">
+                                 <button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn c-bg-yellow-5 c-font-grey-1 c-btn-uppercase c-font-16" type="button" >获取手机验证码</button>
+                           </span>
+                    </div>
+                </div>
+                <div class="form-group"  ng-if="data.type===2">
+                    <div class="input-group input-group-lg c-square">
+                        <input ng-model="data.email" type="text" class="col-md-8 col-sm-6 form-control c-square c-theme" placeholder="注册时填写的邮箱" />
+                              <span class="input-group-btn">
+                                    <button class="btn c-font-grey-1 c-bg-yellow-5 c-font-16 " ng-click="validateEmail()" type="button">&nbsp;&nbsp;发送链接&nbsp;&nbsp;</button>
+                              </span>
+                    </div>
+                </div>
+                <div class="form-group"  ng-if="data.type===1">
+                    <div class="c-body">
+                        <button class="btn  c-bg-yellow-5 c-font-grey-1 c-btn-square btn-block c-btn-uppercase input-lg" type="button" ng-click="submit()">下一步</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END:页面内容 -->

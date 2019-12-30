@@ -1,0 +1,53 @@
+.ziti {
+	padding-left: 20px;
+}
+.zt-border {
+	display: inline-block;
+    border: 1px solid #FABA00;
+    padding: 2px;
+    font-size: 12px;
+    background-color: #FABA00;
+    color: #ffffff;
+    border-radius: 3px;
+}
+.zt-word {
+	color: #aaaaaa;
+    display: inline-block;
+    margin-left: 15px;
+}
+.zt-list {
+	margin-top: 15px;
+}
+.zt-item {
+	margin-bottom: 10px;
+	display: flex;
+    align-items: center;
+}
+.zt-shop {
+	display: inline-block;
+    border: 1px solid #aaaaaa;
+    padding: 5px;
+    font-size: 14px;
+    color: #444444;
+    cursor: pointer;
+    position: relative;
+    padding-right: 15px;
+    text-align: center;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+.zt-shop img {
+	position: absolute;
+    width: 20px;
+    bottom: 0px;
+    right: 0px;
+}
+.zt-address {
+	display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #444444;
+}

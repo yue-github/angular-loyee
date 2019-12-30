@@ -1,0 +1,354 @@
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="col-md-12">
+            <div class="col-md-4 c-center c-theme-bg">
+                <div class="c-margin-t-30" style="border-radius: 50%;width:150px;height:150px;display: inline-block;overflow: hidden">
+                    <img ng-src="{{info.headImg}}" style="max-width: 100%;"/>
+                </div>
+                <p class="c-font-white c-font-16 c-margin-t-20 c-margin-b-5">{{info.nickName}}</p>
+                <p class="c-font-white c-font-14  c-margin-b-5">大众会员</p>
+                <p class="c-margin-b-25">
+                    <a href="#/updateInfo">
+                        <span class="c-font-14 c-font-grey-1 ">修改个人信息1&nbsp;&nbsp;</span><img src="images/edit.png">
+                    </a>
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="c-content-panel">
+                    <div class="c-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="c-content-title-3 c-title-md c-theme-border">
+                                    <div class="c-font-16 c-font-bold" >我的钱包</div>
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td>账号余额</td>
+                                        <td><span class="c-font-red">￥{{toDecimal2(walletAmount)}}</span>
+                                            元</td>
+                                        <td colspan="2"  class="c-right"><button ng-click="applyCashOn()" data-toggle="modal" data-target="#CashOnform"  class="btn c-margin-r-20 c-theme-btn c-btn-square c-font-14">提现</button> <button ng-click="goshopback()"  class="btn c-theme-btn c-btn-square c-font-14">充值</button></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>我的银行卡</td>
+                                        <td><span class="c-font-red">{{info.bankNum}}</span>
+                                            张</td>
+                                        <td colspan="2" class="c-right"><a href="#/myBankcard" class="btn c-margin-r-20 c-theme-btn c-btn-square c-font-14">查看</a> <a href="#/addBankcard" class="btn c-theme-btn c-btn-square c-font-14">添加</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>我的金币</td>
+                                        <td><span class="c-font-red ">{{info.golds}}</span>
+                                            个</td>
+                                        <td colspan="2" class="c-right"><a href="#/myGold" class="btn c-theme-btn c-btn-square c-font-14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看使用明细&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>我的优惠券</td>
+                                        <td><span class="c-font-red ">{{info.couponAmount}}</span>
+                                            个</td>
+                                        <td colspan="2" class="c-right"><a href="#/myCoupons" class="btn c-theme-btn c-btn-square c-font-14">&nbsp;&nbsp;&nbsp;&nbsp;查看我的优惠券&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12  ">
+            <div class="c-content-tab-1 c-theme c-margin-t-30">
+                <div class="nav-justified">
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <ul class="c-content-recent-posts-1">
+                                <li style="padding-bottom: 0;">
+                                    <ul class="nav nav-tabs nav-justified">
+                                        <li class="active">
+                                            <a  class="col-md-4" data-toggle="tab">最近订单</a>
+                                        </li>
+                                        <li>
+                                            <p ng-click="tomyorder()" class="col-md-12 c-right cursor-pointer" style="cursor: pointer" data-toggle="tab">全部订单></p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="c-font-14">
+                                    <!-- BEGIN: 订单list-->
+                                    <div class="center-block" ng-repeat="item in orders">
+                                        <!-- BEGIN: 订单item-->
+                                        <div class="col-md-12 c-cart-table-title c-margin-b-10 c-margin-t-10 c-bg-grey-1">
+                                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 ">
+                                                订单号：{{item.order_code}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                              <span>{{item.created_at}}</span>
+                                            </h2>
+                                        </div>
+                                        <div class="row c-cart-table-row c-font-14 c-border-bottom c-margin-t-10" ng-repeat="detail in item.details">
+                                            <div class="col-md-2 col-sm-3 col-xs-5">
+                                                <img class="cbp-l-project-img" ng-src="{{detail.mainPic}}" />
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-5">
+                                                <p class="c-cart-price c-font-bold c-font-16">{{detail.name}}</p>
+                                                <p>规格：250-350g/个</p>
+                                                <p >包装：箱装</p>
+                                            </div>
+                                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                                <p class="c-cart-price c-font-red"><span class="c-font-12">￥</span><span ng-model="suggestedRetailUnitPrice">{{detail.suggestedRetailUnitPrice}}</span></p>
+                                            </div>
+                                            <div class="col-md-1 col-sm-2 col-xs-6 c-cart-total">
+                                                <p class="c-cart-price " ng-model="amount">{{detail.unitOrdered}}</p>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-xs-6 c-cart-total">
+                                                <p class="c-cart-price c-font-bold c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(detail.unitOrdered*detail.suggestedRetailUnitPrice)}}</p>
+                                            </div>
+                                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-center">
+                                                <a class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==1" ng-click="payOrder(item.id)">确认付款</a>
+                                                <a href="#order_2?id={{item.id}}"   class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==2||item.status==3">确认收货</a>
+                                                <a href="#order_3?id={{detail.id}}"  class="btn c-btn-green c-btn-square c-font-14" ng-if="item.status==4">立即评价</a>
+                                                <a  class="btn c-btn-grey c-btn-square c-font-14" ng-if="detail.status==6">订单已取消</a>
+                                                <div ng-if="item.status==2||item.status==3"><a ng-click="back(detail.id)" class="btn c-font-14">申请售后</a></div>
+                                                <div><a href="#order?id={{item.id}}" class="btn c-font-14">订单详情</a></div>
+                                            </div>
+                                        </div>
+                                        <!-- END: 订单item -->
+                                    </div>
+                                    <!-- END: 订单list-->
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12  ">
+            <div class="c-content-tab-1 c-theme c-margin-t-30">
+                <div class="nav-justified">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="blog_recent_posts_2">
+                            <ul class="c-content-recent-posts-1">
+                                <li style="    padding-bottom: 0;">
+                                    <ul class="nav nav-tabs nav-justified">
+                                        <li class="active">
+                                            <a  class="col-md-2" data-toggle="tab">推荐商品</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="c-font-14">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 c-margin-b-20 " ng-repeat="re_item in recommentProducts">
+                                            <div class="c-content-product-2 c-bg-white c-border">
+                                                <div class="c-content-overlay">
+                                                    <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">热销</div>-->
+                                                    <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">特卖</div>-->
+                                                    <div class="c-overlay-wrapper" ng-click="toProductDetail(re_item.id)">
+                                                        <div class="c-overlay-content">
+                                                            <a href="" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看详情</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 230px; background-image: url({{re_item.mainPicPath}});"></div>
+                                                </div>
+                                                <div class="c-padding-10">
+                                                    <div class="c-title c-font-18 c-font-slim" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{re_item.name}}</div>
+                                                    <div class="c-price c-font-16 c-font-slim c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(re_item.suggestedRetailUnitPrice)}} &nbsp;
+                                                        <span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="re_item.originUnitPrice">￥</span>{{toDecimal2(re_item.originUnitPrice)}}</span>
+
+                                                    </div>
+                                                    <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==1">第三方运营</span>
+                                                    <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==2">O2O服务区</span>
+                                                    <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==3">自营</span>
+                                                </div>
+                                                <div class="btn-group btn-group-justified" role="group">
+                                                    <div class="btn-group c-border-top" role="group">
+                                                        <a href="#/product?id={{re_item.id}}" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">立即购买</a>
+                                                    </div>
+                                                    <div class="btn-group c-border-left c-border-top" role="group">
+                                                        <a href="#/product?id={{re_item.id}}" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">加入购物车</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="walletform" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>充值</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row c-margin-b-30 c-margin-t-20">
+                    <div class="col-md-12">
+                        <p>账户余额<span class="c-font-red">￥{{toDecimal2(walletAmount)}}</span></p>
+                    </div>
+                </div>
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">充值金额：</label>
+                                <div class="col-md-8">
+                                    <input ng-model="data3.money" class="form-control  c-square c-theme" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">充值方式：</label>
+                                <div class="col-md-8">
+                                    <select ng-model="data3.event"  class="form-control  c-square c-theme">
+                                        <option value="3">支付宝充值</option>
+                                        <option value="4">微信充值</option>
+                                        <option value="6">银联支付</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <label class="col-md-2 control-label c-font-14">充值备注：</label>
+                        <div class="col-md-10">
+                            <input ng-model="data3.note" class="form-control  c-square c-theme" type="text" />
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="recharge()" class="btn c-btn-green c-theme-btn c-btn-square" data-dismiss="modal">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="CashOnform" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>提现</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row c-margin-b-30 c-margin-t-20">
+                    <div class="col-md-12">
+                        <p>账户余额<span class="c-font-red">￥{{toDecimal2(walletAmount)}}</span></p>
+                    </div>
+                </div>
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">提现金额：</label>
+                                <div class="col-md-8">
+                                    <input ng-model="data1.money" class="form-control  c-square c-theme" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">账户类型：</label>
+                                <div class="col-md-8">
+                                    <select class="form-control  c-square c-theme" ng-model="data1.accountType">
+                                        <option value="1">支付宝账号</option>
+                                        <option value="2">微信账号</option>
+                                        <option value="3">银行卡账号</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6" ng-if="data1.accountType==1">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">支付宝账号：</label>
+                                <div class="col-md-8">
+                                    <input ng-model="data1.aplipayAccount" class="form-control  c-square c-theme" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 "  ng-if="data1.accountType==2">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">微信账号：</label>
+                                <div class="col-md-8">
+                                    <input ng-model="data1.weixinAccount" class="form-control  c-square c-theme" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 "  ng-if="data1.accountType==3">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">银行卡账户：</label>
+                                <div class="col-md-8">
+                                    <select class="form-control c-square c-theme" ng-model="data1.bankCard_id" ng-options="x.id as x.bankName for x in myBankCardList" ng-change="getbankCard(data1.bankCard_id)"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" ng-show="data1.bankCard_id">
+                            <div class="row">
+                                <label class="col-md-4 control-label c-font-14">银行卡号：</label>
+                                <div class="col-md-8">
+                                    {{bankCardNumber}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <label class="col-md-2 control-label c-font-14">提现备注：</label>
+                        <div class="col-md-10">
+                            <input ng-model="data1.note" class="form-control  c-square c-theme" type="text" />
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submitCashon()" class="btn c-btn-green c-theme-btn c-btn-square" >提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function()
+    {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/plugins/zoom-master/jquery.zoom.min.js" type="text/javascript"></script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>

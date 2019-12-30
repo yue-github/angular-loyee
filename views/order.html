@@ -1,0 +1,215 @@
+
+
+<!-- BEGIN: 页面内容-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-order-complete-1 c-content-bar-1 c-align-left c-bordered  c-border-grey c-border-2px" >
+
+            <div class=" c-padding-20">
+                <div class="findPwd_bar_box">
+                    <div class="findPwd_bar"></div>
+                    <div class="state1 " ng-class="{true:'findPwd_bar_state1',false:'findPwd_bar_state2'}[state1]">
+                        <div class="" ng-class="{true:'findPwd_bar_round_1',false:'findPwd_bar_round_2'}[state1]">1</div>
+                        <p>拍下商品</p>
+                    </div>
+                    <div class="state2  " ng-class="{true:'findPwd_bar_state1',false:'findPwd_bar_state2'}[state2]">
+                        <div class="" ng-class="{true:'findPwd_bar_round_1',false:'findPwd_bar_round_2'}[state2]">2</div>
+                        <p>已付款</p>
+                    </div>
+                    <div class="state3  "ng-class="{true:'findPwd_bar_state1',false:'findPwd_bar_state2'}[state3]">
+                        <div class="" ng-class="{true:'findPwd_bar_round_1',false:'findPwd_bar_round_2'}[state3]">3</div>
+                        <p>卖家已发货</p>
+                    </div>
+                    <div class="state4  "ng-class="{true:'findPwd_bar_state1',false:'findPwd_bar_state2'}[state4]">
+                        <div class="" ng-class="{true:'findPwd_bar_round_1',false:'findPwd_bar_round_2'}[state4]">4</div>
+                        <p>已确认收货</p>
+                    </div>
+                    <div class="state5  "ng-class="{true:'findPwd_bar_state1',false:'findPwd_bar_state2'}[state5]">
+                        <div class="" ng-class="{true:'findPwd_bar_round_1',false:'findPwd_bar_round_2'}[state5]" >5</div>
+                        <p>已评价</p>
+                    </div>
+                </div>
+            </div>
+            <!-- BEGIN: 订单开始 -->
+            <div class="c-content-box c-size-lg">
+                <div class="container">
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品信息</h3>
+                            </div>
+                            <div class="col-md-5 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                            <div class="col-md-1 c-cart-qty">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">单价</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-price">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">数量</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">总价</h3>
+                            </div>
+                        </div>
+                        <!-- BEGIN: 订单列表开始 -->
+                        <div class="row c-cart-table-row" ng-repeat="item in order.details">
+                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                                <img ng-src="{{item.mainPic}}" class="img-responsive" ng-click="toProduct(item.product_id)"/>
+                            </div>
+                            <div class="col-md-5 col-sm-9 col-xs-7 c-cart-desc">
+                                <p>
+                                    <a href="#/product?id={{item.product_id}}" class="c-font-bold c-theme-link c-font-dark">{{item.name}}</a>
+                                </p>
+                                <p>
+                                    <a href="#/product" class="c-theme-link c-font-dark">{{item.selectProterties}}</a>
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                                <p class="c-cart-price c-font-bold">￥<span>{{toDecimal2(item.actualUnitPrice)}}</span></p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                <p class="c-cart-price c-font-bold">{{item.unitOrdered}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Total</p>
+                                <p class="c-cart-price c-font-bold">￥{{toDecimal2(item.totalPrice)}}</p>
+                            </div>
+                        </div>
+                        <!-- END: 订单列表结束 -->
+                    </div>
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image c-margin-t-15 padding-0">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">下单用户信息</h3>
+                            </div>
+                            <div class="col-md-10 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                        </div>
+                        <div class="row c-cart-table-row">
+                            <p>手机号码：{{customer.mobilePhone}}</p>
+                            <p>昵称：{{customer.nickName}}</p>
+                        </div>
+                    </div>
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image c-margin-t-15 padding-0">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">订单信息</h3>
+                            </div>
+                            <div class="col-md-10 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                        </div>
+                        <div class="row c-cart-table-row">
+                            <p>订单号：{{order.order_code}}</p>
+                            <p>创建时间：{{order.created_at}}</p>
+                            <p ng-if="order.payTime">支付时间：{{order.payTime}}</p>
+                            <p ng-if="order.sendOutTime">发货时间：{{order.sendOutTime}}</p>
+                            <p ng-if="order.receiveTime">收货时间：{{order.receiveTime}}</p>
+                            <p>支付方式：{{order.payType}}<a ng-if="order.status==1&&!type" data-toggle="modal" data-target="#updatePay" class="btn btn-default c-margin-lr-20"><i class="fa fa-pencil"></i>修改</a></p>
+                            <p>支付状态：{{order.status}}</p>
+                            <p ng-if="order.couponTitle">使用优惠：{{order.couponTitle}}</p>
+                            <p>订单总额：￥{{toDecimal2(order.totalPayable)}}</p>
+                            <p>发票抬头：{{order.invoiceHead}}</p>
+                            <p>发票内容：订单明细</p>
+                            <p>备注信息：{{order.note}}</p>
+                        </div>
+                    </div>
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title ">
+                            <div class="col-md-2 c-cart-image c-margin-t-15 padding-0">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">物流信息</h3>
+                            </div>
+                            <div class="col-md-10 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>收货人：{{order.contacts}}</p>
+                            <p>电话号码：{{order.phone}}</p>
+                            <p>收货地址：{{order.province}} {{order.city}} {{order.district}} {{order.detailAddress}}</p>
+                            <p ng-if="dataDetail.logisticsName">快递公司：{{dataDetail.logisticsName}}</p>
+                            <p ng-if="dataDetail.expressCode">物流编号：{{dataDetail.expressCode}}</p>
+                            <div class="row" ng-show="emptyPage">
+                                <div class="col-md-12" ng-repeat="listitem in dataDetail.detail">
+                                   <img src="images/kuaidi.jpg" class="c-margin-r-20" ng-if="listitem.typenum==0">
+                                   <img src="images/kuaidi1.jpg" class="c-margin-r-20 " ng-if="listitem.typenum==1">
+                                   <img src="images/kuaidi1.jpg" class="c-margin-r-20 kuaidiImg-180" ng-if="listitem.typenum==2">
+                                    <span>{{listitem.time}}</span>
+                                    <span>{{listitem.title}}</span>
+                                </div>
+                            </div>
+                            <div class="row c-margin-t-20" ng-if="emptyPage==0&&orderState6!=1">
+                                <div class="col-md-12">
+                                    <p class="c-font-blue">正在备货中...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END: 订单结束 -->
+        </div>
+    </div>
+</div>
+<!-- END:页面内容 -->
+
+
+<div class="modal fade c-content-login-form" id="updatePay" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>修改支付方式</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30">
+                        <label class="col-md-2 control-label c-font-14">充值方式：</label>
+                        <div class="col-md-10 simplelineicons-demo customline-demo">
+                            <div class="item-box" ng-click="paytype(4)" style="cursor: pointer">
+                                <div class="item" style="position: relative">
+                                    <a class="c-order-date c-font-14 c-font-thin ">余额支付</a>
+                                    <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1||data.payType==2||data.payType==3"/>
+                                    <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==4"/>
+                                </div>
+                            </div>
+                            <div class="item-box" ng-click="paytype(1)" style="cursor: pointer">
+                                <div class="item" style="position: relative">
+                                    <a class="c-order-date c-font-14 c-font-thin ">微信支付</a>
+                                    <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==2||data.payType==3||data.payType==4"/>
+                                    <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1"/>
+                                </div>
+                            </div>
+                            <div class="item-box"  ng-click="paytype(2)" style="cursor: pointer">
+                                <div class="item" style="position: relative">
+                                    <a class="c-order-date c-font-14 c-font-thin ">支付宝支付</a>
+                                    <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1||data.payType==3||data.payType==4"/>
+                                    <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==2"/>
+                                </div>
+                            </div>
+                            <div class="item-box"  ng-click="paytype(3)" style="cursor: pointer">
+                                <div class="item" style="position: relative">
+                                    <a class="c-order-date c-font-14 c-font-thin ">银联支付</a>
+                                    <img src="images/def.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==1||data.payType==2||data.payType==4"/>
+                                    <img src="images/sel.png" style="position: absolute;right: 0;bottom:0;" ng-if="data.payType==3"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submit()" class="btn c-btn-green c-theme-btn c-btn-square">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="clean()">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

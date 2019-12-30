@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" href="css/seller.css"/>
+
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<img src="img/add.png" alt="" />
+	   			<a href="#/addProduct">添加商品</a>
+	   		</div>
+	   		<div class="r_down">
+	   			<div class="d_detail">
+	   				<div class="d_pic">
+	   				 <img src="img/seller.png" ng-src="{{data.logoPic}}" alt="" />
+	   				</div>
+	   				<div class="d_name">
+	   					<table border="0" cellspacing="0">
+	   						<tr>
+	   							<td>店家名称:<span>{{data.name}}</span></td>
+	   						</tr>
+	   						<tr>
+	   							<td>联系人：<span>{{data.contacts}}</span></td>
+	   						</tr>
+
+	   						<tr>
+	   							<td>联系电话：<span>{{data.phone}}</span></td>
+	   						</tr>
+	   					</table>
+	   				</div>
+	   			</div>
+	   			<div class="d_icon">
+	   				<!--1-->
+	   				<div class="i_a">
+	   					<div class="i_pic"><img src="img/sales.png" alt="" /></div>
+	   					<div class="i_txt"><p>销量</p><p>{{data.sales}}</p></div>
+	   				</div>
+	   				<!--2-->
+	   				<div class="i_a">
+	   					<div class="i_pic"><img src="img/collect.png" alt="" /></div>
+	   					<div class="i_txt"><p>收藏</p><p>{{data.collect}}</p></div>
+	   				</div>
+	   				<!--3-->
+	   				<div class="i_a">
+	   					<div class="i_pic"><img src="img/return.png" alt="" /></div>
+	   					<div class="i_txt"><p>退货/退款</p><p>{{data.backs}}</p></div>
+	   				</div>
+	   			</div>
+	   			<a href="#/updateShop" class="d_btn c-font-grey-1">修改店铺信息</a>
+	   		</div>
+	   	</div>
+   	</div>
+   	
+   </div>
+   <!--E content-->
+   
+

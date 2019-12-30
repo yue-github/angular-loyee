@@ -1,0 +1,795 @@
+<!-- BEGIN: 页面内容-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 c-border-bottom c-border-green-4 c-border-2px"></div>
+            <div class="col-md-12 padding-0">
+                <div class="col-md-3 c-border padding-0">
+                    <div class="col-md-3 c-bg-green-4" style="height: 400px;">
+                        <div class="row">
+                            <div ng-click="selcategory(1)" class="c-center c-margin-t-15 col-md-12"
+                                 style="cursor: pointer">
+                                <img src="images/config-icon-1.png"/>
+                                <p class="c-font-grey">模块</p>
+                                <img ng-if="moduletype==1" style="position: absolute;top: 15px;right: 0"
+                                     src="images/sel-icon.png"/>
+                            </div>
+                            <div ng-click="selcategory(2)" class="c-center c-margin-t-15 col-md-12"
+                                 style="cursor: pointer">
+                                <img src="images/config-icon-2.png"/>
+                                <p class="c-font-grey">配色</p>
+                                <img ng-if="moduletype==2" style="position: absolute;top: 15px;right: 0"
+                                     src="images/sel-icon.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row" ng-if="moduletype==1">
+                            <div class="col-md-12">
+                                <p class="c-font-12 c-margin-t-15" style="height: 50px;line-height: 50px">
+                                    选择所需模块，并拖动至相应页面</p>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="c-bg-grey-1 c-padding-10 c-font-14">所有模块</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 c-padding-5">
+                                        <div class="col-md-4 c-padding-5" ng-repeat="mo in modules"
+                                             ng-click="selmodule(mo.type)">
+                                            <div class="c-bg-grey-1 c-center c-border c-cursor-pointer">
+                                                <img class="c-margin-t-5" ng-src="{{mo.icon}}"/>
+                                                <div class="c-font-12" style="padding-bottom: 5px;">{{mo.name}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="moduletype==2">
+                            <div class="col-md-12 c-padding-5 c-margin-t-15 c-font-12">
+                                当前模板可以选择的整体配色方案
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12 c-padding-5 c-font-12" style="color: #999">
+                                        修改将应用所有页面
+                                    </div>
+                                    <div class="col-md-12 c-padding-5">
+                                        <div class="col-md-4 c-padding-5">
+                                            <div class="c-center">
+                                                <img class="c-border img-max-100 c-cursor-pointer"
+                                                     src="images/color-icon-1.jpg"/>
+                                                <div class="c-font-12 c-margin-t-10" style="padding: 5px 0;">天蓝色</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 c-padding-5 ">
+                                            <div class="c-center">
+                                                <img class="c-border img-max-100 c-cursor-pointer"
+                                                     src="images/color-icon-2.jpg"/>
+                                                <div class="c-font-12 c-margin-t-10" style="padding: 5px 0;">草绿色</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 c-padding-5">
+                                            <div class="c-center">
+                                                <img class="c-border img-max-100 c-cursor-pointer"
+                                                     src="images/color-icon-3.jpg"/>
+                                                <div class="c-font-12 c-margin-t-10" style="padding: 5px 0;">粉红色</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 c-padding-5">
+                                            <div class="c-center">
+                                                <img class="c-border img-max-100 c-cursor-pointer"
+                                                     src="images/color-icon-4.jpg"/>
+                                                <div class="c-font-12 c-margin-t-10" style="padding: 5px 0;">黑白色</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 c-padding-5">
+                                            <div class="c-center">
+                                                <img class="c-border img-max-100 c-cursor-pointer"
+                                                     src="images/color-icon-5.jpg"/>
+                                                <div class="c-font-12 c-margin-t-10" style="padding: 5px 0;">鹅黄色</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 padding-0">
+                    <!--begin 右侧工具栏-->
+                    <div class="shopnav c-bg-grey ">
+                        <div class="col-md-3 ">
+                            <div class="input-group c-square c-margin-t-10 c-border-grey-4">
+                                <span class="input-group-addon c-bg-white c-border-white"><i
+                                        class="fa fa-bars c-font-18"></i></span>
+                                <select ng-change="selpageType()" ng-model="pageType"
+                                        ng-options="x.value as x.name for x in pageTypevalue"
+                                        class="form-control c-border-white c-square">
+                                    <option value="">请选择要编辑的页面</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="shop_nav_but">
+                                <button class="btn c-btn-uppercase c-btn-square {{sellayouttype==1?'c-bg-white c-border-grey-4':''}}"
+                                        ng-click="sellayout(1)">
+                                    页面编辑
+                                </button>
+                            </div>
+                            <div class="shop_nav_but">
+                                <button class="btn c-btn-uppercase c-btn-square {{sellayouttype==2?'c-bg-white c-border-grey-4':''}} "
+                                        ng-click="sellayout(2)">
+                                    布局管理
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3  c-right c-padding-10">
+                            <botton class="btn c-btn-uppercase c-btn-square c-bg-white c-border-grey-4">预览</botton>
+                            <botton class="btn c-btn-uppercase c-btn-square c-theme-bg c-font-grey" ng-click="submit()">
+                                发布
+                            </botton>
+                        </div>
+                    </div>
+                    <!--end 右侧工具栏-->
+
+                    <!--begin 首页-->
+                    <div ng-if="pageType==1">
+                        <!--begin 右侧编辑区域布局板块-->
+                        <div ng-if="sellayouttype==2" class="c-border">
+                            <div class="row c-padding-20 c-margin-lr-20 c-margin-t-20 c-margin-b-20">
+                                <div class="col-md-12 c-border c-margin-b-15">
+                                    <div class="col-md-12 c-center c-padding-10">店铺页头</div>
+                                    <div class="col-md-12 c-padding-10 c-bg-grey-6 c-border c-border-green-3 c-margin-b-15 c-cursor-pointer">
+                                        店铺招牌
+                                    </div>
+                                    <div class="col-md-12 c-padding-10 c-bg-grey-6 c-border c-border-green-3 c-margin-b-15 c-cursor-pointer">
+                                        导航
+                                    </div>
+                                </div>
+                                <div class="col-md-12 c-border" style="padding-top: 15px;">
+                                    <div ng-repeat="mode in selModules2"
+                                         class="col-md-12 c-padding-10 c-bg-grey-6 c-border c-border-green-3 c-margin-b-15 c-cursor-pointer">
+                                        <span>{{mode.name}}</span> <a
+                                            style="  cursor: pointer  ;position: absolute;top: 10px; right: 0px;"
+                                            ng-click="delModule($index)"><i class="icon-close"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end 右侧编辑区域布局板块-->
+                        <!--begin 右侧页面编辑操作模块-->
+                        <div ng-if="sellayouttype==1" class="row c-padding-0 c-margin-0">
+                            <div ng-repeat="selmo in data">
+                                <div ng-if="selmo.type=='1'" class="row  c-margin-0" ng-click="showeditbox('a')">
+                                    <div class="col-md-12 padding-0">
+                                        <img class="img-max-100" ng-src="{{selmo.brand[0].path}}"/>
+
+                                        <div class="shopcifg-shade c-border c-border-green-1" ng-show="showView==='a'">
+                                            <div class="row">
+                                                <div class="col-md-12 c-right">
+                                                    <button data-toggle="modal" data-target="#headform"
+                                                            class="btn c-btn-green-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="fa fa-edit"></i>
+                                                        编辑
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="selmo.type=='2'" class="row c-margin-0">
+                                    <div class="col-md-12 padding-0 ">
+                                        <div class="row c-padding-10 c-bg-dark c-margin-0 ">
+                                            <a class="col-md-2 c-center c-font-grey c-active">首页</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="selmo.type=='3'" class="row c-margin-0" ng-click="showeditbox($index+1)">
+                                    <div class="col-md-12 padding-0">
+                                        <img class="img-max-100" ng-src="{{bannerPath}}"
+                                             src="images/shopbannerdemo.jpg"/>
+                                        <div class="shopcifg-shade c-border c-border-green-1"
+                                             ng-show="showView===$index+1">
+                                            <div class="row">
+                                                <div class="col-md-12 c-right c-margin-t-15">
+                                                    <button data-toggle="modal" data-target="#bannerform"
+                                                            ng-click="editbanner(selmo.sort_num)"
+                                                            class="btn c-btn-green-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="fa fa-edit"></i>
+                                                        编辑
+                                                    </button>
+                                                    <button ng-click="delModule(selmo.sort_num)"
+                                                            class="btn c-btn-grey-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="icon-close"></i>
+                                                        删除
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div ng-if="selmo.type=='4'" class="row c-margin-0 ">
+                                    <div class="col-md-12 padding-0" ng-click="showeditbox($index+1)">
+                                        <div class="row c-margin-0">
+                                            <div class="c-content-title-4 c-margin-t-60">
+                                                <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                                                    <span class="c-bg-white">{{selmo.title}}</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="row c-border-grey-1" style="margin: 0 -5px">
+                                            <div class="col-md-3 col-sm-6 c-margin-b-20 c-bg-white"
+                                                 style="padding: 0 5px;"
+                                                 ng-repeat="p in selmo.recommand.products">
+                                                <div class="c-content-product-2 c-bg-white">
+                                                    <div class="c-content-overlay">
+                                                        <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">Sale</div>-->
+                                                        <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">New</div>-->
+                                                        <div class="c-overlay-wrapper">
+                                                            <div class="c-overlay-content">
+                                                                <a href="index.html#/product?id={{p.id}}"
+                                                                   class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="c-bg-img-center c-overlay-object"
+                                                             data-height="height"
+                                                             style="height: 270px; background-image: url({{p.mainPic}});"></div>
+                                                    </div>
+                                                    <div class="c-info">
+                                                        <p class="c-title c-font-18 c-font-slim">{{p.name}}</p>
+                                                        <p class="c-price c-font-16 c-font-slim">
+                                                            ￥{{toDecimal2(p.suggestedRetailUnitPrice)}} &nbsp;
+                                                            <!--<span class="c-font-16 c-font-line-through c-font-red">￥369</span>-->
+                                                        </p>
+                                                    </div>
+                                                    <div class="btn-group btn-group-justified" role="group">
+                                                        <div class="btn-group c-border-top" role="group">
+                                                            <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                               ng-click="comfirmOrder(item.id)">立即购买</a>
+                                                        </div>
+                                                        <div class="btn-group c-border-left c-border-top" role="group">
+                                                            <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                               ng-click="shoppingCart(item.id)">加入购物车</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shopcifg-shade c-border c-border-green-1"
+                                             ng-show="showView===$index+1">
+                                            <div class="row">
+                                                <div class="col-md-12 c-right c-margin-t-15">
+                                                    <button data-toggle="modal" data-target="#productform"
+                                                            ng-click="editproduct(selmo.sort_num)"
+                                                            class="btn c-btn-green-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="fa fa-edit"></i>
+                                                        编辑
+                                                    </button>
+                                                    <button ng-click="delModule(selmo.sort_num)"
+                                                            class="btn c-btn-grey-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="icon-close"></i>
+                                                        删除
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div ng-if="selmo.type=='5'" class="row c-margin-0 ">
+                                    <div class="col-md-12 padding-0" ng-click="showeditbox($index+1)">
+                                        <div class="row c-margin-0">
+                                            <div class="c-content-title-4 c-margin-t-60">
+                                                <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                                                    <span class="c-bg-white">{{selmo.title}}</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="row c-border-grey-1" style="margin: 0 -5px">
+                                            <div class="col-md-3 col-sm-6 c-margin-b-20 c-bg-white"
+                                                 style="padding: 0 5px;"
+                                                 ng-repeat="p in selmo.recommand.products">
+                                                <div class="c-content-product-2 c-bg-white">
+                                                    <div class="c-content-overlay">
+                                                        <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">Sale</div>-->
+                                                        <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">New</div>-->
+                                                        <div class="c-overlay-wrapper">
+                                                            <div class="c-overlay-content">
+                                                                <a href="index.html#/product?id={{p.id}}"
+                                                                   class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="c-bg-img-center c-overlay-object"
+                                                             data-height="height"
+                                                             style="height: 270px; background-image: url({{p.mainPic}});"></div>
+                                                    </div>
+                                                    <div class="c-info">
+                                                        <p class="c-title c-font-18 c-font-slim">{{p.name}}</p>
+                                                        <p class="c-price c-font-16 c-font-slim">
+                                                            ￥{{toDecimal2(p.suggestedRetailUnitPrice)}} &nbsp;
+                                                            <!--<span class="c-font-16 c-font-line-through c-font-red">￥369</span>-->
+                                                        </p>
+                                                    </div>
+                                                    <div class="btn-group btn-group-justified" role="group">
+                                                        <div class="btn-group c-border-top" role="group">
+                                                            <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                               ng-click="comfirmOrder(item.id)">立即购买</a>
+                                                        </div>
+                                                        <div class="btn-group c-border-left c-border-top" role="group">
+                                                            <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                               ng-click="shoppingCart(item.id)">加入购物车</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shopcifg-shade c-border c-border-green-1"
+                                             ng-show="showView===$index+1">
+                                            <div class="row">
+                                                <div class="col-md-12 c-right c-margin-t-15">
+                                                    <button data-toggle="modal" data-target="#productform"
+                                                            ng-click="editproduct(selmo.sort_num)"
+                                                            class="btn c-btn-green-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="fa fa-edit"></i>
+                                                        编辑
+                                                    </button>
+                                                    <button ng-click="delModule(selmo.sort_num)"
+                                                            class="btn c-btn-grey-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                        <i class="icon-close"></i>
+                                                        删除
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end 右侧页面编辑操作模块-->
+                    </div>
+                    <!--end首页-->
+                    <!--begin商品详情-->
+                    <div ng-if="pageType==2">
+                        <div class="row c-margin-0 ">
+                            <div class="col-md-12 padding-0" ng-click="showeditbox(1)">
+                                <div class="row c-margin-0">
+                                    <div class="c-content-title-4 c-margin-t-60">
+                                        <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                                            <span class="c-bg-white">{{ProductDetails.title}}</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="row c-border-grey-1" style="margin: 0 -5px">
+                                    <div class="col-md-3 col-sm-6 c-margin-b-20 c-bg-white" style="padding: 0 5px;"
+                                         ng-repeat="p in ProductDetails.products">
+                                        <div class="c-content-product-2 c-bg-white">
+                                            <div class="c-content-overlay">
+                                                <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">Sale</div>-->
+                                                <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">New</div>-->
+                                                <div class="c-overlay-wrapper">
+                                                    <div class="c-overlay-content">
+                                                        <a href="index.html#/product?id={{p.id}}"
+                                                           class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>
+                                                    </div>
+                                                </div>
+                                                <div class="c-bg-img-center c-overlay-object" data-height="height"
+                                                     style="height: 270px; background-image: url({{p.mainPic}});"></div>
+                                            </div>
+                                            <div class="c-info">
+                                                <p class="c-title c-font-18 c-font-slim">{{p.name}}</p>
+                                                <p class="c-price c-font-16 c-font-slim">
+                                                    ￥{{toDecimal2(p.suggestedRetailUnitPrice)}} &nbsp;
+                                                    <!--<span class="c-font-16 c-font-line-through c-font-red">￥369</span>-->
+                                                </p>
+                                            </div>
+                                            <div class="btn-group btn-group-justified" role="group">
+                                                <div class="btn-group c-border-top" role="group">
+                                                    <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                       ng-click="comfirmOrder(item.id)">立即购买</a>
+                                                </div>
+                                                <div class="btn-group c-border-left c-border-top" role="group">
+                                                    <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product"
+                                                       ng-click="shoppingCart(item.id)">加入购物车</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shopcifg-shade c-border c-border-green-1" ng-show="showView===1">
+                                    <div class="row">
+                                        <div class="col-md-12 c-right c-margin-t-15">
+                                            <button data-toggle="modal" data-target="#productdetailform"
+                                                    ng-click="editproduct(selmo.sort_num)"
+                                                    class="btn c-btn-green-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                <i class="fa fa-edit"></i>
+                                                编辑
+                                            </button>
+                                            <button ng-click="delModule(selmo.sort_num)"
+                                                    class="btn c-btn-grey-2 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">
+                                                <i class="icon-close"></i>
+                                                删除
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--end商品详情-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--being 编辑商品详情的弹出层-->
+<div class="modal fade c-content-login-form" id="productdetailform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>编辑全部商品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">标题：</div>
+                                <div class="col-md-3">
+                                    <input ng-model="recommand.title" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">展示方式：</div>
+                                <div class="col-md-10">
+                                    <div class="col-md-6 c-center">
+                                        <div class="c-border  {{proName==4?'c-border-red':''}}"
+                                             ng-click="selProductNum(4)"
+                                             style="width: 142px;height: 95px;display: inline-block">
+                                            <img class="img-max-100" style="vertical-align:middle;"
+                                                 src="images/four-ps.jpg"/>
+                                        </div>
+                                        <div class="c-center c-font-14 c-margin-t-15">一行展示4个商品</div>
+                                    </div>
+
+                                    <div class="col-md-6 c-center">
+                                        <div class="c-border {{proName==3?'c-border-red':''}}"
+                                             ng-click="selProductNum(3)"
+                                             style="width: 142px;height: 95px;display: inline-block">
+                                            <img class="img-max-100" src="images/Three-ps.jpg"/>
+                                        </div>
+                                        <div class="c-center c-font-14 c-margin-t-15">一行展示3个商品</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">商品：
+                                    <label>
+                                        <input type="checkbox" ng-model="allproduct" ng-true-value="1"
+                                               ng-false-value="0" ng-change="allSelProduct(allproduct)"/></label></div>
+                                <div class="col-md-10 c-font-14">
+                                    <div class="row">
+                                        <div class="col-md-4 c-margin-b-15" ng-repeat="product in products">
+                                            <lable style="cursor: pointer"><input ng-model="product.is_sel"
+                                                                                  ng-true-value="1" ng-false-value="0"
+                                                                                  ng-change="selproduct(product.is_sel,$index)"
+                                                                                  type="checkbox"/>{{product.name}}
+                                            </lable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submitProductdetail('productdetailform')"
+                                    class="btn c-btn-green c-theme-btn c-btn-square">保存
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="clean('productdetailform')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 编辑商品详情的弹出层-->
+<!--being 编辑商品的弹出层-->
+<div class="modal fade c-content-login-form" id="productform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>编辑全部商品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">标题：</div>
+                                <div class="col-md-3">
+                                    <input ng-model="recommand.title" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">展示方式：</div>
+                                <div class="col-md-10">
+                                    <div class="col-md-6 c-center">
+                                        <div class="c-border  {{proName==4?'c-border-red':''}}"
+                                             ng-click="selProductNum(4)"
+                                             style="width: 142px;height: 95px;display: inline-block">
+                                            <img class="img-max-100" style="vertical-align:middle;"
+                                                 src="images/four-ps.jpg"/>
+                                        </div>
+                                        <div class="c-center c-font-14 c-margin-t-15">一行展示4个商品</div>
+                                    </div>
+
+                                    <div class="col-md-6 c-center">
+                                        <div class="c-border {{proName==3?'c-border-red':''}}"
+                                             ng-click="selProductNum(3)"
+                                             style="width: 142px;height: 95px;display: inline-block">
+                                            <img class="img-max-100" src="images/Three-ps.jpg"/>
+                                        </div>
+                                        <div class="c-center c-font-14 c-margin-t-15">一行展示3个商品</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 control-label">商品：
+                                    <label>
+                                        <input type="checkbox" ng-model="allproduct" ng-true-value="1"
+                                               ng-false-value="0" ng-change="allSelProduct(allproduct)"/></label></div>
+                                <div class="col-md-10 c-font-14">
+                                    <div class="row">
+                                        <div class="col-md-4 c-margin-b-15" ng-repeat="product in products">
+                                            <lable style="cursor: pointer"><input ng-model="product.is_sel"
+                                                                                  ng-true-value="1" ng-false-value="0"
+                                                                                  ng-change="selproduct(product.is_sel,$index)"
+                                                                                  type="checkbox"/>{{product.name}}
+                                            </lable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submitProduct('productform')"
+                                    class="btn c-btn-green c-theme-btn c-btn-square">保存
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="clean('productform')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 编辑商品的弹出层-->
+
+<!--begin 编辑头部的弹出层-->
+<div class="modal fade c-content-login-form" id="headform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>编辑分栏广告</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row c-margin-b-10">
+                                <div class="col-md-12 control-label c-font-14 c-margin-b-10">广告图片：</div>
+                                <div class="col-md-12" style="cursor: pointer" ng-click="uploadbrand()">
+                                    <img ng-src="{{brand.brand[0].path}}" class="img-max-100"/>
+                                </div>
+                                <div class="col-md-6 c-hide">
+                                    <input type="file" ngf-select="upload($file, $index,1)" id="brand" class=""/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 control-label c-font-14 ">广告链接：</div>
+                                <div class="col-md-4 control-label c-font-14"><input ng-model="data.brand.url"
+                                                                                     class="form-control  c-square c-theme"
+                                                                                     type="text"/></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submitbrand('headform')"
+                                    class="btn c-btn-green c-theme-btn c-btn-square">保存
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="clean('headform')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 编辑头部的弹出层-->
+<!--begin 编辑图片轮播的弹出层-->
+<div class="modal fade c-content-login-form" id="bannerform" role="dialog">
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>图片轮播内容设置</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6"><label class=" control-label c-font-14">图片地址：</label></div>
+                                <div class="col-md-4"><label class=" control-label c-font-14">链接地址：</label></div>
+                                <div class="col-md-2"><label class=" control-label c-font-14">操作：</label></div>
+                            </div>
+                            <div class="row c-margin-t-15" ng-repeat="b in banners">
+                                <div class="col-md-6">
+                                    <div class="input-group c-square">
+                                        <input ng-model="b.path" class="form-control  c-square c-theme"
+                                               type="text"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" ng-click="selbanner($index)" type="button">
+                                                <i class="fa fa-file-image-o"></i></button>
+                                        </span>
+                                        <input type="file" id="bannerfile{{$index}}"
+                                               ngf-select="upload($file, $index,2)" style="display: none"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group c-square">
+                                        <input ng-model="b.url" class="form-control  c-square c-theme" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <a ng-click="deleteBanner($index)" class="c-center cursor-pointer"
+                                       style="width: 50px;cursor: pointer;display: inline-block;">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-12 c-right">
+                            <button ng-click="addbanner(1)" class="btn c-btn-green c-theme-btn c-btn-square">添加
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button ng-click="submitBanner('bannerform')"
+                                    class="btn c-btn-green c-theme-btn c-btn-square">保存
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="clean('bannerform')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 编辑图片轮播的弹出层-->
+<!--&lt;!&ndash;begin 编辑导航栏的弹出层&ndash;&gt;-->
+<!--<div class="modal fade c-content-login-form" id="navform" role="dialog" >-->
+<!--<div class="modal-dialog" style="width: 760px">-->
+<!--<div class="modal-content c-square">-->
+<!--<div class="modal-header c-no-border c-bg-grey-1">-->
+<!--<span>导航栏设置</span>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+
+<!--<form>-->
+<!--<div class="row c-margin-b-30 c-margin-t-20">-->
+<!--<div class="col-md-12">-->
+<!--<div class="c-border c-font-14 c-padding-10">首页</div>-->
+<!--</div>-->
+<!--<div class="col-md-12">-->
+<!--<div class="c-border c-font-14 c-padding-10">首页</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row c-margin-b-30 c-margin-t-20">-->
+<!--<div class="col-md-12 c-right">-->
+<!--<button class="btn c-btn-green c-theme-btn c-btn-square" data-toggle="modal" data-target="#addnavform">添加</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row c-margin-b-30">-->
+<!--<div class="col-md-6 c-right">-->
+<!--<button ng-click="submitProduct()" class="btn c-btn-green c-theme-btn c-btn-square">保存</button>-->
+<!--</div>-->
+<!--<div class="col-md-6">-->
+<!--<button class="btn c-btn-grey c-btn-square" ng-click="clean('navform')">取消</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="modal fade c-content-login-form" id="addnavform" role="dialog" >-->
+<!--<div class="modal-dialog" style="width: 760px">-->
+<!--<div class="modal-content c-square">-->
+<!--<div class="modal-header c-no-border c-bg-grey-1">-->
+<!--<span>添加导航栏内容</span>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+
+<!--<form>-->
+<!--<div class="row c-margin-b-30 c-margin-t-20">-->
+<!--<div class="col-md-12">-->
+<!--<label class="checkbox-inline" ng-repeat="cat in category">-->
+<!--<input ng-click="selnavcategory(cat.id)" name="title" type="radio"/>-->
+<!--{{cat.name}}-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row c-margin-b-30">-->
+<!--<div class="col-md-6 c-right">-->
+<!--<button ng-click="submitaddnav()" class="btn c-btn-green c-theme-btn c-btn-square">保存</button>-->
+<!--</div>-->
+<!--<div class="col-md-6">-->
+<!--<button class="btn c-btn-grey c-btn-square" ng-click="clean('addnavform')">取消</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;end 编辑导航栏的弹出层&ndash;&gt;-->

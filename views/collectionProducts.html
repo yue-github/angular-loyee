@@ -1,0 +1,100 @@
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-20 c-margin-b-15 ">商品收藏</div>
+        </div>
+        <div class="row c-margin-b-40">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+                    <div class="row c-padding-10 c-border-bottom c-border-grey">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="c-checkbox">
+                                    <input ng-model="chkall" ng-click="chkAll(chkall)" type="checkbox" id="checkbox6-444" class="c-check">
+                                    <label for="checkbox6-444">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>全选</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="JavaScript:" ng-click="cancleproduct()" class="c-border-bottom c-theme-border-bottom" style="border-style: none none dashed ">取消收藏</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+                        <div class="col-md-1 c-cart-image">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center"></h3>
+                        </div>
+                        <div class="col-md-7 c-cart-image">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品信息</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">价格</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-qty">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">操作</h3>
+                        </div>
+                    </div>
+                    <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+                    <div class="row c-cart-table-row c-padding-20 c-border-bottom c-border-grey" ng-repeat="item in products">
+                        <div class="col-md-1 col-xs-6 c-cart-ref c-center">
+                            <div class="c-checkbox">
+                                <input ng-model="item.checked" ng-checked="item.checked" type="checkbox" id="{{$index}}" class="c-check">
+                                <label for="{{$index}}">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-sm-3 col-xs-5 c-cart-image" style="clear: none; cursor: pointer">
+                            <img  ng-click="toproduct(item.relate_Id)" ng-src="{{item.mainPic}}" class="img-responsive"/>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-6 c-cart-desc">
+                            <p>
+                                <a  class="c-font-bold c-theme-link c-font-dark" ng-click="toproduct(item.relate_Id)">{{item.name}}</a>
+                            </p>
+                        </div>
+                        <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-price c-font-bold">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                            <p>
+                                <a href="JavaScript:" ng-click="cancleproduct(item.id)" class="c-border-bottom c-theme-border-bottom" style="border-style: none none dashed ">取消收藏</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END: ORDER HISTORY ITEM ROW -->
+                </div>
+            </div>
+        </div>
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+        <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <!-- END: PAGE CONTENT -->
+    </div>
+</div>

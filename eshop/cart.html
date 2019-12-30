@@ -1,0 +1,108 @@
+<link rel="stylesheet" type="text/css" href="css/cart.css" />
+<!--S content阿道夫撒打发斯蒂芬-->
+<div class="content">
+	<div class="c_up" style="clear: both;">
+		<ul class="ul_link">
+			
+			<li> <input type="checkbox" ng-model="ifAll"
+				ng-click="chkAll(ifAll)"  style="margin-top: -5px;"/> <label
+				for="">全选</label></li>
+			<li>商品信息</li>
+			<li>单价</li>
+			<li>数量</li>
+			<li>优惠</li>
+			<li>金额</li>
+		</ul>
+		<div style="clear: both;"></div>
+
+		<!--果果小铺-->
+		<div class="u_store" ng-repeat="cart in carts.shops">
+			<!--1-->
+			<div class="s_title">
+				<input type="checkbox" ng-model="isTrue" ng-click="shopAll($index,isTrue)" /> <span>{{cart.name}}</span>
+				<span ng-repeat="promotion in cart.promotions">{{promotion.title}} <span ng-if="promotion.type != 3">(优惠:{{promotion.discount}}元) </span></span>
+			</div>
+			<!-- <div ng-repeat="promotion in cart.promotions" class='aaa'> {{promotion.title}}2</div> -->
+			
+			<div class="s_detail" style="clear: both;"
+				ng-repeat="product in cart.products">
+				<ul >
+					<li>
+						<input ng-model="product.isSelected"
+						ng-change="isSelected($index,$parent.$index,product.isSelected)"
+						type="checkbox" ng-true-value="1" ng-false-value="0" />
+					</li>
+
+					<li class="l_pic">
+						<div>
+							<img ng-src="{{product.mainPic}}" alt="" />
+						</div> <span> <a href="#/product?id={{product.product_id}}"
+							target="_blank" class="c-theme-link c-font-18 c-font-dark">{{product.productName}}</a>
+							<p class="c-font-14">{{item.selectProterties}}</p>
+					</span>
+
+					</li>
+					<li>￥{{toDecimal2(product.suggestedRetailUnitPrice)}}</li>
+					   
+					<li>
+						<i ng-click="addCount(-1,$index,$parent.$index,0)"></i>
+						
+						<input style="line-height: normal;" type="text" value="1" 
+							ng-model="product.amount"
+						ng-change="addamount(product.amount,$index,$parent.$index)" />
+						<i ng-click="addCount(1,$index,$parent.$index,0)"></i>
+					</li>
+					
+					<li>无</li>
+					<li class="c_pic">￥{{toDecimal2(product.totalPrice)}}</li>
+					<li><img src="img/close-circled.png"
+						ng-click="remove(product.id)" /></li>
+				</ul>
+				<div style="clear: both;"></div>
+				<div style="clear: both;"></div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<div class='tishi'>此价格不包含运费</div>
+	<div class="c_mid" style="clear: both;">
+		<div class="m_txt">
+			<input type="checkbox" id="c_all" ng-model="ifAll"
+				ng-click="chkAll(ifAll)"  style="margin-top: -2px;" /> <label
+				for="c_all">全选</label>
+		</div>
+		<button class="m_btn" ng-click="submit()">结算</button>
+		<div class="m_sum" style='width:340px;'>
+			<span>已选<span class="m_j">{{carts.totalAmount}}</span>件
+			<span>已优惠<span class="m_j">{{carts.promDiscount}}</span>元
+			</span> <span>总计：<span class="m_q">￥{{(toDecimal2(carts.totalPrice))}}</span></span>
+		</div>
+		
+	</div>
+	
+	<div class="c_down">
+		<div class="d_title">
+			<span>猜你喜欢</span>
+			<button ng-click="athorGroup()">换一组</button>
+		</div>
+		<div class="d_detail">
+			<!--1-->
+			<div class="s_list" ng-repeat="re_item in recommentProducts"
+				ng-click="toProductDetail(re_item.id)">
+				<div class="s_con">
+					<a href="javascript:void(0);"> <img class="s_pic"
+						ng-src="{{re_item.mainPicPath}}" />
+					</a>
+					<p class="s_header">{{re_item.name}}</p>
+					<span class="s_price">￥{{toDecimal2(re_item.suggestedRetailUnitPrice)}}</span>
+					<span class="c-font-14 c-font-line-through c-font-grey-3"><span
+						class="c-font-12" ng-if="re_item.originUnitPrice">￥</span>{{toDecimal2(re_item.originUnitPrice)}}</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--E content-->
+</div>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/aboutUs.css" />
+	</head>
+	<body>
+		<div id="box">
+			<div class="box-left">
+				<div class="proble">常见问题</div>
+
+				<div class="navber" onclick="Show('left4')">支付方式</div>
+				<div id="left4">
+					<div class="left-1"><a href="pay.html">在线支付</a></div>
+					<div class="left-1"><a href="paymothed.html">其他支付方式</a></div>
+					<div class="left-1"><a href="Coupon.html">优惠券使用</a></div>
+					<div class="left-1"><a href="buy.html" class="active">企业团购</a></div>
+					<div class="left-1"><a href="car.html">礼金卡使用</a></div>
+				</div>
+
+
+				<div class="navber" onclick="Show('left6')">售后服务</div>
+				<div id="left6">
+					<div class="left-1"><a href="policy.html">退换货政策</a></div>
+					<div class="left-1"><a href="Technological process.html">退换货流程</a></div>
+					<div class="left-1"><a href="refund.html">退款流程</a></div>
+					<div class="left-1"><a href="invoice.html">发票制度</a></div>
+					<div class="left-1"><a href="contend.html">联系售后</a></div>
+				</div>
+				<div class="navber" onclick="Show('left7')">关于我们</div>
+				<div id="left7">
+					<div class="left-1"><a href="aboutUs.html" class="active">公司简介</a></div>
+				<!-- 	<div class="left-1"><a href="aboutUs.html">经营项目</a></div> -->
+				</div>
+				
+				<div class="navber" onclick="Show('left8')">购物指南</div>
+				<div id="left8">
+					<div class="left-1"><a href="ouers.html" class="active">关于我们</a></div>
+					<div class="left-1"><a href="Member.html">会员权益</a></div>
+					<div class="left-1"><a href="integral.html">积分政策</a></div>
+					<div class="left-1"><a href="Customerservice.html">联系客服</a></div>
+					<div class="left-1"><a href="Joinus.html">加入我们</a></div>
+				</div>
+				
+				<div class="navber" onclick="Show('left9')">配送方式</div>
+				<div id="left9">
+					<div class="left-1"><a href="Deliverytime.html">配送时间</a></div>
+					<div class="left-1"><a href="Distributioncharges.html">配送收费标准</a></div>
+					<div class="left-1"><a href="store.html">线下门店自提点</a></div>
+					<div class="left-1"><a href="CheckExpress.html">查快递</a></div>
+				</div>
+				
+			</div>
+			<div class="box-right">
+				<div class="box-img">
+					<img src="img/aboutUs1.jpg" />
+				</div>
+				<div class="right-mideo">
+					<div class="mideo-gs"><h2>公司成立</h2></div>
+					<div class="mideo-establish"><p>
+						广东通驿高速公路服务区有限公司成立于2000年9月7日，
+						是广东省交通集团授权在全省范围内对集团独资或控股的高速公路服务区，
+						实施规划、建设、经营管理一体化的连锁经营企业。
+						</p>
+					</div>
+					<div class="mideo-item">
+						<h2>经营项目</h2>
+					</div>
+					<div class="mideo-text">
+						<p>公司致力于满足高速公路顾客需求，
+						在高速公路服务区提供购物、餐饮、加油、汽修等多项服务，
+						并面向省内外招商，吸引品牌和特色商户入驻，不断提高服务品质。
+						目前，已有肯德基、麦当劳、真功夫、久久丫、
+						十八子等知名品牌进驻服务区。
+						截止2015年底，公司共有182个服务区（含停车区），员工3000余人，
+						公司总资产逾9亿元。
+						根据《广东省高速公路服务区规划》（2005-2030年），预计到
+						2030年，
+						广东省内服务区资源将达280余对，通驿公司即将迎来新的发展高峰期。
+						</p>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			// console.log('sdvsdv')
+			var a = document.getElementById("left8")
+			a.style.display = "block";
+		}
+
+		function Show(a) {
+			var a = document.getElementById(a);
+			if (a.style.display == "block") {
+				a.style.display = "none";
+			} else {
+				a.style.display = "block";
+			}
+		}
+	</script>
+</html>

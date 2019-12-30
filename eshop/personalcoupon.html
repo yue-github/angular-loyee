@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="css/personalcoupon.css"/>
+<style>
+	.c_page{padding-right: 0px!important;}
+</style>
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <ul>
+	   			  	<li><a href="javascript:void(0);"  class="active">我的优惠券</a></li>
+	   			  </ul>
+   				</div>
+   				<div class="b_detail">
+					<div class="b_detail_1">
+					  <ul>
+						<li-1  class="{{($index+1)%4==0?'c-no-margin-r '+ item.class:item.class}}" ng-repeat="item in coupons">
+						<div ng-if="item.type==2" class="b_detail_content_top">
+							<div class="b_detail_content_top_left" title="{{item.value}}" style="display:flex;justify-content: start;align-items: center;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;"><p style="margin:0;padding:0">￥</p>{{item.value}}</div>
+							<div class="b_detail_content_top_right"> {{item.title}}</div>
+							</div>
+							<div ng-if="item.type==1" class="b_detail_content_top">
+								<div class="b_detail_content_top_left" style="font-size:39px">{{item.value}}<span style="font-size:30px">折</span></div>
+								<div class="b_detail_content_top_right"> {{item.title}}</div>
+							</div>
+							<button type="button" name="button" ng-if="item.isUsed==0&&item.isTimeOut==0"> 可使用 </button>
+							<button type="button" name="button" ng-if="item.isUsed==1"> 已使用 </button>
+							<button type="button" name="button"  ng-if="item.isTimeOut==1&&item.isUsed==0"> 已过期 </button>
+							<div class="b_detail_content_bottom">
+								{{item.type==1?'折扣券':'现金券'}}有效期：
+								<span>{{item.startDate}}-{{item.endDate}}</span>
+
+							</div>
+						</li-1>
+						  <div style="clear: both;"></div>
+					  </ul>
+					</div>
+					<div style="clear: both;"></div>
+   					<div class="row">
+						<div class="col-md-12">
+							<div ng-include="'eshop/pages.html'"></div>
+						</div>
+					</div>
+   				</div>
+   			</div>
+   		</div>
+   		<div style="clear: both;"></div>
+   	</div>
+   </div>

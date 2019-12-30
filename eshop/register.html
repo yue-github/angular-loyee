@@ -1,0 +1,128 @@
+<link rel="stylesheet" type="text/css" href="css/register.css">
+	<div class="content">
+	 <div class="middle">
+	 	<div class="box">
+	 		<div class="register-top">
+				<a href="javascript:void(0);" class="active" ng-click="tabshide()">手机注册</a>
+				<a href="javascript:void(0);" ng-click="tabsshow()">邮箱注册</a>
+			</div>
+			<div class="register-tel" id="register-tel">
+				<label for="">手机号</label>
+				<input type="text" ng-model="data.mobilePhone" onkeyup="value=value.replace(/[^0-9]/g,'')" ng-Keyup="onkeydownNumber()" placeholder="输入手机号" />
+				
+				<label for="">图形验证码</label>
+				<input type="text" ng-model="data.vcode" placeholder="输入验证码" />
+				<img id="imgObj" alt="验证码" width='130px' ng-src="{{vcodePath}}" ng-click="changeImg()"/>
+				
+				<label for="">手机验证码</label>
+				<input type="text" ng-model="data.code" placeholder="输入手机验证码" />
+				<button class="b_tel" ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" >获取手机验证码</button>
+				<label for="">设置密码</label>
+				<input type="password" ng-model="data.password" placeholder="设置密码" />
+				<label for="">确认密码</label>
+				<input type="password" ng-model="data.passworded" placeholder="确认密码" />
+				
+				<div class="box_a">
+					<input type="checkbox"  ng-change="isLook()" ng-model="Look"  style="vertical-align: middle;" id="agree" />
+					<label for="agree">同意协议</label>
+					<a href="javascript:void(0);" class="deal">会员注册协议</a>
+					<a href="#/login">已有账号？立即登录</a>
+				</div>
+				<button class="b_register" ng-click="submit()">注册</button>
+			</div>
+			<div class="register-mail" id="register-mail">
+				<label for="">邮箱</label>
+				<input type="text" ng-model="data.email" placeholder="输入邮箱"  />
+				<label for="">设置密码</label>
+				<input type="password" ng-model="data.password" placeholder="设置密码" />
+				<label for="">确认密码</label>
+				<input type="password" ng-model="data.passworded" placeholder="确认密码" />
+				
+				<div class="box_a">
+					<input type="checkbox" ng-change="isLook()" ng-model="Look"  style="vertical-align: middle;" id="agree" />
+					<label for="agree">同意协议</label>
+					<a href="javascript:void(0);" class="deal">会员注册协议</a>
+					<a href="#/login">已有账号？立即登录</a>
+				</div>
+				<button class="b_register" ng-click="submit()">注册</button>
+			</div>
+	 	</div>
+	  </div>
+	 </div>
+	 <div class="fade"></div>
+	 <div class="tan">
+	 	<div class="text">
+	 	 <div class="title">
+		 	<h2>会员注册协议</h2>
+		 	<span>(注册服务条款)</span>	
+		 	<img src="img/close-circled.png"/>
+	 	 </div>
+	 	 <div class="txt">
+	 	 	<textarea name="" style="width: 100%;height: 400px;resize: none;border: none;">
+	尊敬的用户，欢迎您注册成为本网站用户。在注册前请您仔细阅读如下服务条款：
+本服务协议双方为本网站与本网站用户，本服务协议具有合同效力。
+　　当您确认本服务协议后，本服务协议即在您和本网站之间产生法律效力。请您务必在注册之前认真阅读全部服务协议内容，如有任何疑问，可向本网站咨询。
+　　无论您事实上是否在注册之前认真阅读了本服务协议，只要您点击协议正本下方的"注册"按钮并按照本网站注册程序成功注册为用户，您的行为仍然表示您同意并签署了本服务协议。
+1．本网站服务条款的确认和接纳
+本网站各项服务的所有权和运作权归本网站拥有。
+2．用户必须：
+(1)自行配备上网的所需设备， 包括个人电脑、调制解调器或其他必备上网装置。
+(2)自行负担个人上网所支付的与此服务有关的电话费用、网络费用。
+3．用户在本网站上交易平台上不得发布下列违法信息：
+(1).反对宪法所确定的基本原则的；
+(2).危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；
+(3).损害国家荣誉和利益的；
+(4).煽动民族仇恨、民族歧视，破坏民族团结的；
+(5).破坏国家宗教政策，宣扬邪教和封建迷信的；
+(6).散布谣言，扰乱社会秩序，破坏社会稳定的；
+(7).散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；
+(8).侮辱或者诽谤他人，侵害他人合法权益的；
+(9).含有法律、行政法规禁止的其他内容的。
+4．有关个人资料
+用户同意：
+(1) 提供及时、详尽及准确的个人资料。
+(2).同意接收来自本网站的信息。
+(3) 不断更新注册资料，符合及时、详尽准确的要求。所有原始键入的资料将引用为注册资料。
+(4)本网站不公开用户的姓名、地址、电子邮箱和笔名，以下情况除外：
+　（a）用户授权本网站透露这些信息。
+　　用户在注册时应当选择稳定性及安全性相对较好的电子邮箱，并且同意接受并阅读本网站发往用户的各类电子邮件。如用户未及时从自己的电子邮箱接受电子邮件或因用户电子邮箱或用户电子邮件接收及阅读程序本身的问题使电子邮件无法正常接收或阅读的，只要本网站成功发送了电子邮件，应当视为用户已经接收到相关的电子邮件。电子邮件在发信服务器上所记录的发出时间视为送达时间。
+	 	 	</textarea>
+	 	 </div>
+	 	 <button class="b_close">关闭</button>
+	 	</div>
+	 </div>
+	</div>
+
+<script type="text/javascript">
+	$(function(){
+		$(".register-top a:first-child").click(function(){
+			$(".register-top a:first-child").addClass("active");
+			$(".register-top a:last-child").removeClass("active");
+			$(".register-tel").css("display","block");
+			$(".register-mail").css("display","none");
+		})
+		$(".register-top a:last-child").click(function(){
+			$(".register-top a:first-child").removeClass("active");
+			$(".register-top a:last-child").addClass("active");
+			$(".register-mail").css("display","block");
+			$(".register-tel").css("display","none");
+		})
+		var c=$(".deal");
+		$(".deal").click(function(){
+			$(".fade").css("display","block");
+			$(".tan").css("display","block");
+			$("body").css("overflow-y","hidden");
+		})
+		$(".title img").click(function(){
+			$(".fade").css("display","none");
+			$(".tan").css("display","none");
+			$("body").css("overflow-y","auto");
+		})
+		$(".b_close").click(function(){
+			$(".fade").css("display","none");
+			$(".tan").css("display","none");
+			$("body").css("overflow-y","auto");
+		})
+	})
+
+</script>

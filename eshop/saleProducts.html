@@ -1,0 +1,40 @@
+<link rel="stylesheet" type="text/css" href="css/sale.css"/>
+   <!--S content-->
+   <div class="content">
+	   <div class="c_banner">
+		   <div class="c_pic">
+			   <a ng-click="topath(img.url)"  href="javascript:void(0);" ng-repeat="img in banners"><img alt="{{img.note}}" ng-src="{{img.path}}" /></a>
+		   </div>
+	   </div>
+      <div class="c_down" style="width:1200px;margin:auto;">
+	   		<div class="d_detail" style="justify-content: flex-start;">
+	   			<div class="c-content-title-4" style="width: 100%;margin-bottom: 10px;">
+						<h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+							<span class="c-bg-grey-1">{{promotion.title}}</span>
+						</h3>
+					</div>
+					<div style="margin-bottom:30px;">
+					<img style="width:1200px;" alt="" src="{{promotion.mainPic}}">
+					</div>
+					<div class="s_list" ng-repeat="item in products" style="margin-right:10px;">
+						<div class="s_con" ng-click="toProductDetail(item.id)" style="height:auto;">
+							<a href="javascript:void(0);">
+								<img class="s_pic" ng-src="{{item.mainPic}}" width="290" height="265"/>
+							</a>
+							<p class="s_header">{{item.name}}</p>
+							<span class="s_price">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+							<span style="text-decoration: line-through;" ng-if="item.originUnitPrice">￥{{toDecimal2(item.originUnitPrice)}}</span>
+						</div>
+						<div class="btn-group btn-group-justified" role="group">
+							<div class="btn-group c-border-top" role="group">
+								<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="toProductDetail(item.id)">立即购买</a>
+							</div>
+							<div class="btn-group c-border-left c-border-top" role="group">
+								<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="toProductDetail(item.id)">加入购物车</a>
+							</div>
+						</div>
+					</div>
+	   		</div>
+	   	</div>
+   </div>
+   <!--E content-->

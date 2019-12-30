@@ -1,0 +1,123 @@
+<div class="c-layout-sidebar-menu c-theme ">
+    <div class="c-theme-bg c-padding-10 c-font-white">
+        <a href="#/shopcenter" class="c-font-white">
+            <span class="icon-user"></span>
+            卖家中心
+        </a>
+    </div>
+    <ul class="c-sidebar-menu collapse " id="sidebar-menu-1">
+        <li class="c-dropdown {{menustate==0?'c-active':''}}">
+            <a href="#/addProduct">发布宝贝
+                <span class="c-arrow c-toggler"></span>
+            </a>
+        </li>
+        <li class="c-dropdown {{menustate==1?'c-active':''}}">
+            <a href="#/myProducts">我的宝贝
+                <span class="c-arrow c-toggler"></span>
+            </a>
+        </li>
+        <li class="c-dropdown {{menustate==2?'c-active':''}}">
+            <a href="#/outProducts">已下架宝贝
+                <span class="c-arrow c-toggler"></span>
+            </a>
+        </li>
+        <li class="c-dropdown {{menustate==10?'c-active':''}}">
+            <a href="#/recycleProducts">商品回收站
+                <span class="c-arrow c-toggler"></span>
+            </a>
+        </li>
+        <li class="c-dropdown {{menustate==3?'c-active c-open':''}}">
+            <a href="#/shopOrders" class="c-toggler">我的订单
+                <span class="c-arrow"></span>
+            </a>
+            <ul class="c-dropdown-menu">
+                <li class="{{state==0?'c-active':''}}">
+                    <a href="#/shopOrders">全部订单</a>
+                </li>
+                <li class="{{state==1?'c-active':''}}" >
+                    <a href="#/shopOrders1">待支付订单</a>
+                </li>
+                <li class="{{state==2?'c-active':''}}">
+                    <a href="#/shopOrders2">待发货订单</a>
+                </li>
+                <li class="{{state==3?'c-active':''}}">
+                    <a href="#/shopOrders3">待收货订单</a>
+                </li>
+                <li class="{{state==4?'c-active':''}}" >
+                    <a href="#/shopOrders4">已收货订单</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-dropdown {{menustate==4?'c-active':''}}">
+            <a href="#/shopCoupons">优惠券管理
+                <span class="c-arrow c-toggler"></span>
+            </a>
+        </li>
+        <!--<li class="c-dropdown {{menustate==5?'c-active':''}}">-->
+            <!--<a href="#/shopCash">现金券-->
+                <!--<span class="c-arrow c-toggler"></span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <li class="c-dropdown {{menustate==6?'c-active c-open':''}}">
+            <a href="#/salesPromotion1" class="c-toggler">促销活动
+                <span class="c-arrow"></span>
+            </a>
+            <ul class="c-dropdown-menu">
+                <li class="{{state==1?'c-active':''}}">
+                    <a href="#/salesPromotion1">满减</a>
+                </li>
+                <li class="{{state==2?'c-active':''}}" >
+                    <a href="#/salesPromotion2">折扣</a>
+                </li>
+                <li class="{{state==3?'c-active':''}}">
+                    <a href="#/salesPromotion3">秒杀</a>
+                </li>
+                <li class="{{state==4?'c-active':''}}">
+                    <a href="#/salesPromotion4">团购</a>
+                </li>
+                <li class="{{state==5?'c-active':''}}" >
+                    <a href="#/salesPromotion5">满送</a>
+                </li>
+                <li class="{{state==6?'c-active':''}}" >
+                    <a href="#/salesPromotion6">满包邮</a>
+                </li>
+                <li class="{{state==7?'c-active':''}}" >
+                    <a href="#/salesPromotion7">拼团</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-dropdown {{menustate==7?'c-active c-open':''}}">
+            <a href="#/refundmanage" class="c-toggler">售后管理
+                <span class="c-arrow"></span>
+            </a>
+            <ul class="c-dropdown-menu">
+                <li class="{{state==0?'c-active':''}}">
+                    <a href="#/refundmanage">退款管理</a>
+                </li>
+                <li class="{{state==1?'c-active':''}}">
+                    <a href="#/backmanage">退货管理</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-dropdown {{menustate==8?'c-active c-open':''}}">
+            <a href="#/shopExpress" class="c-toggler">物流服务
+                <span class="c-arrow"></span>
+            </a>
+            <ul class="c-dropdown-menu">
+                <li class="{{state==0?'c-active':''}}">
+                    <a href="#/shopExpress">快递模板</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-dropdown {{menustate==9?'c-active c-open':''}}">
+            <a href="#/shopConfig" class="c-toggler">店铺管理
+                <span class="c-arrow"></span>
+            </a>
+            <ul class="c-dropdown-menu">
+                <li class="{{state==0?'c-active':''}}">
+                    <a href="#/shopConfig">店铺装修</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

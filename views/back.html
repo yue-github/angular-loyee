@@ -1,0 +1,249 @@
+
+
+<!-- BEGIN: 页面内容-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-order-complete-1 c-content-bar-1 c-align-left c-bordered  c-border-grey c-border-2px">
+            <div class=" c-padding-20">
+                <div class="findPwd_bar_box">
+                    <div class="findPwd_bar"></div>
+                    <div class="state2 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >1</div>
+                        <p>买家申请退货</p>
+                    </div>
+                    <div class="state3 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >2</div>
+                        <p>卖家处理退货申请</p>
+                    </div>
+                    <div class="state4 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >3</div>
+                        <p>退货完成</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEGIN: 订单开始 -->
+            <div class="c-content-box c-size-lg">
+                <div class="container">
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品信息</h3>
+                            </div>
+                            <div class="col-md-3 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                            <div class="col-md-1 c-cart-qty">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">单价</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-price">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">数量</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">总价</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商家</h3>
+                            </div>
+                        </div>
+                        <!-- BEGIN: 订单列表开始 -->
+                        <div class="row c-cart-table-row">
+                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                                <img ng-src="{{productOrder.mainPic}}" class="img-responsive"/>
+                            </div>
+                            <div class="col-md-3 col-sm-9 col-xs-7 c-cart-desc">
+                                <p>
+                                    <a href="#/product" class="c-font-bold c-theme-link c-font-dark">{{productOrder.product_name}}</a>
+                                </p>
+                                <p>
+                                    <a href="#/product" class="c-theme-link c-font-dark">{{productOrder.selectProterties}}</a>
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                                <p class="c-cart-price c-font-bold c-font-red"><span class="c-font-14">￥</span>{{toDecimal2(productOrder.actualUnitPrice)}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                <p class="c-cart-price c-font-bold">{{productOrder.unitOrdered}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Total</p>
+                                <p class="c-cart-price c-font-bold c-font-red"><span class="c-font-14">￥</span>{{toDecimal2(productOrder.actualUnitPrice * productOrder.unitOrdered)}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Total</p>
+                                <p class="c-cart-price c-font-bold">{{productOrder.shopName}}</p>
+                            </div>
+                        </div>
+                        <!-- END: 订单列表结束 -->
+                        <div class="row c-cart-table-row">
+                           <div class="row c-border-bottom c-margin-0"><div class="col-md-12 c-margin-b-10 padding-0">订单信息：</div></div>
+                           <div class="row c-margin-t-25">
+                               <div class="col-md-12">
+                                   <p>订单号：{{order.order_code}}</p>
+                                   <p>收货信息：{{order.receiveProvince}}&nbsp;{{order.receiveCity}}&nbsp;{{order.receiveDistrict}}&nbsp;{{order.receiveDetailAddress}}</p>
+                                   <p>成交时间：{{order.orderTime}}</p>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="c-body">
+                            <div class="c-content-tab-1 c-theme c-margin-t-30">
+                                <div class="clearfix">
+                                    <ul class="nav nav-tabs c-font-uppercase c-font-bold">
+                                        <li class="{{hide}}">
+                                            <a ng-click="showback(1)">我要退货</a>
+                                        </li>
+                                        <li class="{{show}}">
+                                            <a ng-click="hideback(2)">我要退款</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content c-bordered c-padding-lg">
+                                    <div  ng-if="hide">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">是否收货： <span class="c-font-red">*</span></label>
+                                                    <div class="col-md-2">
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" ng-model="data.isGeted" ng-change="setisGeted(0)" value="0" name="state"/>
+                                                                未收到货
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" ng-model="data.isGeted"  ng-change="setisGeted(1)" value="1" name="state"/>
+                                                                已收到货
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退货原因： <span class="c-font-red">*</span></label>
+                                                <div class="col-md-4">
+                                                    <select ng-model="data.reason" ng-options="x.name for x in isGeteds" class="form-control  c-square c-theme">
+                                                        <option>收到商品少件/破损/污渍等</option>
+                                                        <option>假冒品牌</option>
+                                                        <option>商品及商品本身的外包装严重损坏</option>
+                                                        <option>商品已过期/已变质</option>
+                                                        <option>商品数量/重量不符</option>
+                                                        <option>卖家发错货</option>
+                                                        <option>退运费</option>
+                                                        <option>其他</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-10">请选择退货原因</label>
+                                            </div>
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-md-2 control-label">退货数量: <span class="c-font-red">*</span></label>-->
+
+                                                <!--<div class="col-md-4">-->
+                                                    <!--<input ng-model="data.refundAmount" ng-disabled="!data.isGeted" type="number" class="form-control  c-square c-theme"> </div>-->
+                                                <!--<label class="col-md-2 c-align-left c-font-14 c-margin-t-10">退货数量</label>-->
+                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退货金额: <span class="c-font-red">*</span></label>
+                                                <div class="col-md-4">
+                                                    <input type="text" ng-model="data.refundCash" class="form-control  c-square c-theme" > </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-10">最多退款￥{{toDecimal2(productOrder.allowApplyCash)}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退货说明： <span class="c-font-red">*</span></label>
+                                                <div class="col-md-6">
+                                                    <textarea class="form-control  c-square c-theme" rows="3" ng-model="data.note"></textarea>
+                                                </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-50">还可以输入200字</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">上传凭证： </label>
+                                                <div class="col-md-2 c-center" ng-repeat="pic in tpics">
+                                                    <a ng-click="deleteImg($index)" href="javascript:;" style="position: absolute;right: 3px;top: -10px;"><i class="fa fa-times-circle-o"></i></a>
+                                                    <img class="c-border" src="images/addimg.jpg" ng-src="{{pic}}" ng-click="imgcloak($index)" style="width: 112px; height: 112px;"/>
+                                                    <input id="imagefile{{$index}}" class="hide" ngf-select="upload($file, $index)" type="file"/>
+                                                </div>
+
+                                                <div class="col-md-2 c-center" ng-if="tpics.length < 5">
+                                                    <img class="c-border" src="images/addimg.jpg" ng-click="imgcloak('')" style="width: 112px; height: 112px;"/>
+                                                    <input id="imagefile" class="hide" ngf-select="upload($file, -1)" type="file"/>
+                                                </div>
+                                                <label class="col-md-8 c-align-left c-font-14 c-margin-t-10">每张图片大小不得超过5M，最多3张，支持GIF、JPG、PNG格式</label>
+                                            </div>
+                                            <div class="form-group c-margin-t-30">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-danger c-btn-square c-btn-uppercase c-btn-bold" ng-click="submitBack()">提交退货申请</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div  ng-if="show">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退款原因： <span class="c-font-red">*</span></label>
+                                                <div class="col-md-4">
+                                                    <select ng-model="refund.reason" class="form-control  c-square c-theme">
+                                                        <option>拍错了/不想要了</option>
+                                                        <option>商品错发/漏发</option>
+                                                        <option>信息填写错误，重新拍</option>
+                                                        <option>未按照约定时间发货</option>
+                                                        <option>退运费</option>
+                                                        <option>其他</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-10">请选择退款原因</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退款金额: <span class="c-font-red">*</span></label>
+                                                <div class="col-md-4">
+                                                    <input type="text" ng-model="refund.refundCash" class="form-control  c-square c-theme" placeholder="￥{{toDecimal2(productOrder.allowApplyCash)}}"> </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-10">最多退款￥{{toDecimal2(productOrder.allowApplyCash)}}</label>
+                                            </div>
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-md-2 control-label">退款数量: <span class="c-font-red">*</span></label>-->
+                                                <!--<div class="col-md-4">-->
+                                                    <!--<input type="text" ng-model="refund.refundAmount" class="form-control  c-square c-theme" placeholder="{{productOrder.unitOrdered}}"> </div>-->
+                                                <!--<label class="col-md-2 c-align-left c-font-14 c-margin-t-10">退款数量</label>-->
+                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">退款说明：<span class="c-font-red">*</span> </label>
+                                                <div class="col-md-6">
+                                                    <textarea class="form-control  c-square c-theme" rows="3" ng-model="refund.note"></textarea>
+                                                </div>
+                                                <label class="col-md-2 c-align-left c-font-14 c-margin-t-50">还可以输入200字</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">上传凭证： </label>
+                                                <div class="col-md-2 c-center" ng-repeat="pic in tpics">
+                                                    <a ng-click="deleteImg($index)" href="javascript:;" style="position: absolute;right: 3px;top: -10px;"><i class="fa fa-times-circle-o"></i></a>
+                                                    <img class="c-border" src="images/addimg.jpg" ng-src="{{pic}}" ng-click="imgcloaka($index)" style="width: 112px; height: 112px;"/>
+                                                    <input id="imagefilea{{$index}}" class="hide" ngf-select="upload($file, $index)" type="file"/>
+                                                </div>
+
+                                                <div class="col-md-2 c-center" ng-if="tpics.length < 5">
+                                                    <img class="c-border" src="images/addimg.jpg" ng-click="imgcloaka('')" style="width: 112px; height: 112px;"/>
+                                                    <input id="imagefilea" class="hide" ngf-select="upload($file, -1)" type="file"/>
+                                                </div>
+                                                <label class="col-md-8 c-align-left c-font-14 c-margin-t-10">每张图片大小不得超过5M，最多3张，支持GIF、JPG、PNG格式</label>
+                                            </div>
+                                            <div class="form-group c-margin-t-30">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-danger c-btn-square c-btn-uppercase c-btn-bold" ng-click="submitRefund()">提交退款申请</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: 订单结束 -->
+        </div>
+    </div>
+</div>
+<!-- END:页面内容 -->

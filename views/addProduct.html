@@ -1,0 +1,25 @@
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">发布宝贝</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="row c-margin-b-40">
+            <div class="col-md-12 ">
+                <div class="col-md-3 c-margin-t-15" ng-repeat="item in catbox">
+                    <input class="form-control c-square c-theme" placeholder="输入分类名称"/>
+                    <select class="form-control c-square c-theme" multiple="multiple" style="height: 400px" ng-model="category" ng-options="x.id as x.name for x in item" ng-change="getcategories(category, $index)">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class=" c-right c-margin-t-20">
+            <a class="btn btn-success c-btn-square c-theme-btn" ng-click="next()">下一步</a>
+        </div>
+    </div>
+
+</div>

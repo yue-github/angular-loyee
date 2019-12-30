@@ -1,0 +1,81 @@
+
+<!--<link rel="stylesheet" type="text/css" href="css/travel.css"/>-->
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+   		<div class="u_a">
+   			<a href="index.html">首页</a>
+	   		<span>></span>
+	   		<a href="javascript:void(0);">周边游</a>
+   		</div>
+   		<div class="u_b">
+   			<div class="u_tab">
+   				<span>亲子游</span>
+			</div>
+			<div class="u_tab">
+				<span>XXXX</span>
+
+			</div>
+			<div class="u_tab">
+				<span>XXXX</span>
+
+			</div>
+			<div class="u_tab">
+				<span>XXXX</span>
+
+			</div>
+			<div style="clear: both;"></div>
+   		</div>
+
+		<div class="u_title">
+			<a href="javascript:void(0);" class="active">综合排序</a>
+			<a href="javascript:void(0);">销量</a>
+			<a href="javascript:void(0);">价格</a>
+			<a href="javascript:void(0);">评论</a>
+			<span class="u_s">
+				地区商品
+				<select name="">
+					<option value=""></option>
+				</select>省
+				<select name="">
+					<option value=""></option>
+				</select>市
+			</span>
+		</div>
+   	</div>
+   	<div class="c_down">
+   		<div class="d_detail">
+   		 <div class="s_list" ng-repeat="item in products">
+		    <div class="s_con">
+			   <a href="#/product?id={{item.id}}">
+			     <img class="s_pic" ng-src="{{item.mainPic}}" src="img/travel.png" />
+			   </a>
+		    </div>
+		   <p class="s_header">{{item.name}}</p>
+		   <span class="s_price">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+		   <span class="s_price_err">￥{{toDecimal2(item.originUnitPrice)}}</span>
+		   <span class="s_shopping" ng-click="toProductDetail(item.id)" >立即抢购</span>
+		 </div>
+
+
+   		</div>
+   	</div>
+   	<div class="c_page">
+   		<div class="p_ul">
+	   		<ul>
+	   			<li><a href="javascript:void(0);"></a></li>
+	   			<li class="active"><a href="javascript:void(0);">1</a></li>
+	   			<li><a href="javascript:void(0);">2</a></li>
+	   			<li><a href="javascript:void(0);">3</a></li>
+	   			<li><a href="javascript:void(0);">4</a></li>
+	   			<li><a href="javascript:void(0);">5</a></li>
+	   			<li><a href="javascript:void(0);">6</a></li>
+	   			<li><a href="javascript:void(0);"></a></li>
+	   		</ul>
+	   		<div style="clear: both;"></div>
+   		</div>
+
+
+   	</div>
+   </div>
+   <!--E content-->

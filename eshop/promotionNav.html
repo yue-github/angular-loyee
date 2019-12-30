@@ -1,0 +1,44 @@
+
+
+
+   <!--S content-->
+   <div class="content">
+   	<div class="c_down">
+   	<div ng-repeat="brand in list">
+   	
+   	<div class="c-content-title-4" style="margin: 30px;">
+		<h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+			<span class="c-bg-grey-1 ng-binding">{{brand.name}}</span>
+		</h3>
+   	</div>
+   		<div class="d_detail" style="justify-content: flex-start;">
+			<div class="s_list" ng-repeat="item in brand.products" style="margin-right:10px;">
+				<div class="s_con" ng-click="toProductDetail(item.id)" style="height:auto;">
+					<a href="javascript:void(0);">
+						<img class="s_pic" ng-src="{{item.mainPic}}" width="290" height="265"/>
+					</a>
+					<p class="s_header">{{item.name}}</p>
+					<span class="s_price">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+					<span style="text-decoration: line-through;" ng-if="item.originUnitPrice">￥{{toDecimal2(item.originUnitPrice)}}</span>
+				</div>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="toProductDetail(item.id)">立即购买</a>
+					</div>
+					<div class="btn-group c-border-left c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="toProductDetail(item.id)">加入购物车</a>
+					</div>
+				</div>
+			</div>
+   		</div>
+	</div>
+   	</div>
+	   <div class="row">
+		   <div ng-include="'eshop/pages.html'"></div>
+	   </div>
+   </div>
+   <!--E content-->
+
+
+
+

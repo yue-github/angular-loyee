@@ -1,0 +1,53 @@
+
+		/*S content*/
+		.content .c_box{width: 1200px;margin: auto;display: flex;flex-direction: row;}
+		.content .c_box .c_left{width: 200px;}		
+		.content .c_box .c_left ul li{list-style-type: none;width: 200px;height: 44px;border: 1px solid #F1F1F1;font-size: 20px;background: white;text-align: center;line-height: 44px;}
+		.content .c_box .c_left ul li.active{background: #FAFAFA;border-left: 2px solid #F29700;}
+		.content .c_box .c_left ul li~li{border-top: none;}
+		.content .c_box .c_left ul li:first-child{background: #F29700;color: white;}
+		.content .c_box .c_left ul li:first-child a{color: white;}
+		.content .c_box .c_left ul li a{color: #8D8D8D;}
+		
+		.content .c_box .c_right{flex: 1;margin-bottom: 120px;}
+		.content .c_box .c_right .r_up{background: white;height: 43px;line-height: 44px;border-bottom: 1px solid #F1F1F1;}
+		.content .c_box .c_right .r_up a{color: #696969;min-width: 60px;height: 100%;margin-left: 40px;display: inline-block;text-align: center;}
+		.content .c_box .c_right .r_up a.active{border-bottom: 3px solid #F29700;text-align: center;}
+		
+		.content .c_box .c_right .r_down{background: white;height: auto;width: 992px;margin: 7px 0 0 8px;padding-bottom: 80px;}
+		.content .c_box .c_right .r_down .d_detail{display: flex;flex-direction: row;padding: 22px 0 0 40px;}
+		.content .c_box .c_right .r_down .d_detail .row .n_search{width:100%;height:40px;}
+    	.content .c_box .c_right .r_down .d_detail .row .n_search .n_text .n_txt{width:100%;height:40px;border:1px solid #dfdfdf;line-height:38px;padding-left: 6px;font-size:14px;color:#333;outline:none;float:left;}
+    	.content .c_box .c_right .r_down .d_detail .row .list-group{margin-top: 20px;width: 900px;}
+    	.content .c_box .c_right .r_down .d_detail .row .list-group li:first-child .btn-group button{box-shadow: none;border: none;padding: 0;background: white;}
+    	.content .c_box .c_right .r_down .d_detail .row .list-group li input[type="datetime"]{width: 140px;height: 30px;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:last-child{float: right;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:last-child button{background: #FABD00;border: none;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:last-child button:first-child{width: 80px;height: 30px;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:last-child button:last-child{width: 120px;height: 30px;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item{padding: 0;border: none;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:nth-child(2){margin-left: 40px;}
+    	.content .c_box .c_right .r_down .d_detail .list-group-item:nth-child(2) button{box-shadow: none;width: 120px;height: 30px;border: 1px solid #E3E3E3;border-radius: 0;background: url(../img/caret_down.png) no-repeat;background-size: 20px 20px;background-position: right;}
+    	
+    	
+    	.d_detail .d_tab table{width: 900px;font-size: 14px;}
+    	.d_detail .d_tab table tr input[type="checkbox"]{width: 18px;height: 18px;}
+    	.d_detail .d_tab table tr th{height: 34px;font-size: 16px;font-weight: normal;background: #F5F5F5;text-align: center;}
+    	.d_detail .d_tab table tr td{height: 48px;text-align: center;}
+    	.d_detail .d_tab table tr td:last-child a{color: red;}
+    	.d_detail .d_tab table tr th,.d_detail .d_tab table tr td{border: 1px solid #E7E7E7;}
+    	.d_detail .d_tab table tr td:last-child{border-right: 1px solid #E7E7E7;}
+    	            
+		.content .c_page .p_ul{width: 900px;padding-top: 24px;}
+		.content .c_page .p_ul ul{float: right;}
+		.content .c_page .p_ul ul li{width:34px;height: 34px;list-style-type: none;float: left;background: white;border: 1px solid #DEDEDE;text-align: center;line-height: 34px;font-size: 14px;margin-left: 8px;}
+		.content .c_page .p_ul ul li a{color: #858585;}
+		.content .c_page .p_ul ul li.active{background: #F29700;}
+		.content .c_page .p_ul ul li.active a{color: white;}
+		.content .c_page .p_ul ul li:first-child a{width: 0px;height: 0px;border-top: 7px solid transparent;border-right: 8px solid #3F3F3F;border-bottom: 7px solid transparent;display: block;margin-left: 50%;margin-top: 50%;transform: translate(-50%,-50%);}
+		.content .c_page .p_ul ul li:last-child a{width: 0px;height: 0px;border-top: 7px solid transparent;border-left: 8px solid #3F3F3F;border-bottom: 7px solid transparent;display: block;margin-left: 50%;margin-top: 50%;transform: translate(-50%,-50%);}
+		/*E content*/
+		/******* 后期修改UI  *******/
+		.height-40{height: 40px;}
+		.height-34{height: 34px;line-height: 34px;}
+		

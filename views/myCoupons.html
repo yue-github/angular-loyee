@@ -1,0 +1,83 @@
+<style>
+    .c-bg-grey-9a{
+        background: #9a9a9a;
+    }
+    .c-font-9a{
+        color: #9a9a9a;
+    }
+</style>
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 c-content-title-1">
+                    <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">我的优惠券</div>
+                    <div class="c-line-left c-theme-bg"></div>
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN: 页面内容 -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 c-margin-b-30" ng-repeat="item in coupons">
+                <div class="col-md-9 c-bg-white" style="height: 145px;padding: 20px 0 20px 20px;border-bottom: 1px solid #eee;border-top: 1px solid #eee;border-left: 1px solid #eee;">
+                    <div style="padding:0;margin: 0">
+                        <div class="{{item.isTimeOut==0?'c-hide':''}}" style="width:57px;height:57px;overflow: hidden;position: absolute;left: 0px;top:0px;background: url('images/quan-state.png');background-position: -184px -65px;background-repeat: no-repeat;"></div>
+                    </div>
+                    <div class="c-margin-b-10" style="height: 40px;">
+                        <span ng-if="item.type==2" class="{{item.isTimeOut==0?'c-font-green-1':'c-font-9a'}}" style="float: left;">￥</span>
+                        <strong ng-if="item.type==2" class="c-font-40 {{item.isTimeOut==0?'c-font-green-1':'c-font-9a'}}" style="float: left;line-height: 40px;margin-left: 10px;">
+                            {{item.value}}
+                        </strong>
+                        <strong ng-if="item.type==1" class="c-font-40 {{item.isTimeOut==0?'c-font-green-1':'c-font-9a'}}" style="float: left;line-height: 40px;margin-left: 10px;">
+                            {{item.value/10}}
+                        </strong>
+                        <span ng-if="item.type==1" class="{{item.isTimeOut==0?'c-font-green-1':'c-font-9a'}}" style="float: left;margin-top: 14px;">折</span>
+                        <div style="float: left;margin-left: 10px;">
+                            <p class="c-margin-t-15 c-font-14">
+                                {{item.title}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="c-font-14 c-margin-b-10" style="width: 100%;height: 20px;overflow: hidden">
+                        {{item.description}}
+                    </div>
+                    <p class="c-font-14">
+                        <span>{{item.startDate}}</span>
+                        -
+                        <span>{{item.endDate}}</span>
+                    </p>
+                </div>
+                <div class="col-md-3 {{item.isTimeOut==0?'c-bg-green-1':'c-bg-grey-9a'}}" >
+                    <b style="display: block;position: absolute;left: 0;top: 0;width: 3px;height: 145px;background: url('images/semi-circle.png')  repeat-y"></b>
+                    <div class="c-center" style="width: 30px;height: 145px;margin:0 auto;padding-top:20px">
+                        <a ng-if="item.isTimeOut==0" class="c-font-white" href="#/home"  target="_blank">立即使用</a>
+                        <a  ng-if="item.isTimeOut" class="c-font-grey"  target="_blank">立即使用</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: 页面内容-->
+
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>

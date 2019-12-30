@@ -1,0 +1,153 @@
+
+
+<!-- BEGIN: CONTENT/SHOPS/SHOP-3-1 -->
+<div class="c-content-box c-overflow-hide c-bg-grey">
+    <div ng-repeat="position in PositionOne">
+        <div ng-if="$index%2==0" class="c-content-product-3 c-bs-grid-reset-space">
+            <div class="row">
+                <div class="col-md-8 col-sm-6">
+                    <div class="c-content-overlay">
+                        <div class="c-overlay-wrapper">
+                            <div class="c-overlay-content">
+                                <a href="#/product?id={{position.id}}" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 550px; background-image: url({{position.recommendPic}});"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="c-wrapper c-theme-bg" style="height: 550px;">
+                        <div class="c-content c-border c-border-padding c-border-padding-right">
+                            <h3 class="c-title c-font-25 c-font-white c-font-uppercase c-font-bold">{{position.name}}</h3>
+                            <p class="c-description c-font-17 c-font-white">{{position.summary}}</p>
+                            <p class="c-price c-font-55 c-font-white c-font-thin"><span class="c-font-16">￥</span>{{toDecimal2(position.suggestedRetailUnitPrice)}}<span class="c-font-16">{{position.pricingUnit}}</span></p>
+                            <a href="#/product?id={{position.id}}" target="_blank" class="btn btn-lg c-btn-white c-font-uppercase c-btn-square c-btn-border-1x">立即抢购</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="$index%2==1" class="c-content-product-3 c-bs-grid-reset-space">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="c-wrapper" style="height: 550px;background: #90B74C">
+                        <div class="c-content c-border c-border-padding c-border-padding-left">
+                            <h3 class="c-title c-font-25 c-font-white c-font-uppercase c-font-bold" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis"  ng-click="toProductDetail(position.id)" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{position.name}}</h3>
+                            <p class="c-description c-font-17 c-font-white">{{position.summary}}</p>
+                            <p class="c-price c-font-55 c-font-white c-font-thin"><span class="c-font-16">￥</span>{{toDecimal2(position.suggestedRetailUnitPrice)}}<span class="c-font-16">{{position.pricingUnit}}</span>
+                            </p>
+                            <a href="#/product?id={{position.id}}" target="_blank" class="btn btn-lg c-btn-white c-font-uppercase c-btn-square c-btn-border-1x">立即抢购</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6">
+                    <div class="c-content-overlay">
+                        <div class="c-overlay-wrapper" ng-click="toProductDetail(position.id)">
+                            <div class="c-overlay-content">
+                                <a href="#/product?id={{position.id}}" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 550px; background-image: url({{position.recommendPic}});"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space c-bg-grey-1">
+    <div class="container" ng-repeat="p in PositionTwo">
+        <div class="c-content-title-4">
+            <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                <span class="c-bg-grey-1">{{p.positionName}}</span>
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 c-margin-b-20" ng-repeat="item in p.productList">
+                <div class="c-content-product-2 c-bg-white">
+                    <div class="c-content-overlay">
+                        <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">特卖</div>-->
+                        <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">上新</div>-->
+                        <div class="c-overlay-wrapper">
+                            <div class="c-overlay-content">
+                                <a href="#/product?id={{item.id}}" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">探索详情</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url({{item.recommendPic}});"></div>
+                    </div>
+                    <div class="c-info">
+                        <p class="c-title c-font-18 c-font-slim" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{item.name}}</p>
+                        <p class="c-price c-font-16 c-font-slim"><span class="c-font-14 c-font-red">￥</span><span class="c-font-red">{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+                            &nbsp;
+                            <span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="item.originUnitPrice">￥</span>{{toDecimal2(item.originUnitPrice)}}</span>
+                        </p>
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group c-border-top" role="group">
+                            <a href="#/product?id={{item.id}}" target="_blank" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">探索详情</a>
+                        </div>
+                        <div class="btn-group c-border-left c-border-top" role="group">
+                            <a href="javascript:;" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" ng-click="collection(item.id)">加入收藏</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN: CONTENT/SHOPS/SHOP-1-8 -->
+<div class="c-content-box c-size-md c-overflow-hide c-bg-grey-1" ng-repeat="p in PositionThree">
+    <div class="c-content-title-4 c-theme">
+        <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+            <span class="c-bg-grey-1">{{p.positionName}}</span>
+        </h3>
+    </div>
+    <div class="row">
+        <div data-slider="owl" data-items="4">
+            <div class="owl-carousel c-theme owl-reset-space" id="owl-demo">
+                <div class="item" ng-repeat="i in p.productList">
+                    <div class="c-content c-content-overlay">
+                        <div class="c-overlay-wrapper c-overlay-padding" ng-click="toProductDetail(i.id)">
+                            <div class="c-overlay-content">
+                                <a href="#/product?id={{i.id}}" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">去看看</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url({{i.recommendPic}});"></div>
+                        <div class="c-overlay-border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+<script src="assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+<script src="assets/base/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+<!-- END: CORE PLUGINS -->
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.slideanims.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.layeranimation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.navigation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.video.min.js" type="text/javascript"></script>
+<script src="assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
+<!-- END: THEME SCRIPTS -->
+
+

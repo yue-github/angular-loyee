@@ -1,0 +1,43 @@
+<link rel="stylesheet" type="text/css" href="css/login.css">
+	<div class="content">
+	 <div class="middle">
+	  <div class="box">
+		<div class="form">
+			<h2>会员登录</h2>
+			<input type="text" ng-model="data.phone" placeholder="{{isPhoneLogin?'手机号':'账号'}}"/>
+			<input ng-if="!isPhoneLogin" type="password"  ng-model="data.password" placeholder="密码" ng-keyup="myKeyup($event)"/>
+			
+			<div ng-if="isPhoneLogin">
+				<input class="tel_code" style="width: 220px" type="text" ng-model="data.code" placeholder="输入手机验证码" />
+				<button class="b_tel" ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" >获取手机验证码</button>
+			</div>
+			
+			<div>
+				<input class="tel_code" type="text" ng-model="data.vcode" style="width: 215px;" placeholder="输入验证码" />
+				<img id="imgObj" alt="验证码" width='130px' ng-src="{{vcodePath}}" ng-click="changeImg()"/>
+			</div>
+			
+			
+			<div class="f_l">
+			<a href="#/findPwd">忘记密码?</a>
+				<!-- <input type="checkbox" style="vertical-align: middle;" id="check" />
+				<label for="check" ng-model="data.remember">记住密码</label> -->
+			 <a class="a_type" href="javascript:void(0);" ng-click="isPhoneLogin = !isPhoneLogin">{{isPhoneLogin == false ? '短信快捷登录': '账号登录'}}</a>
+			</div>
+			<a href="javascript:void(0);"><button type="submit" class="f_btn" ng-click="submit()">登录</button></a>
+			<div class="f_a">
+				<!-- <a href="javascript:void(0);" ng-click="QQLogin()">
+					<img src="img/QQ.png" style="width: 25px;height: 25px;"  />
+					<span>QQ</span>
+				</a>
+				<a href="javascript:void(0);" ng-click="weixinLogin()">
+					<img src="img/weixin (1).png" style="width: 25px;height: 25px;"/>
+					<span>微信</span>
+				</a> -->
+				<a href="javascript:void(0);" ng-click="goback()">立即注册</a>
+			</div>
+		</div>
+
+	  </div>
+	 </div>
+	</div>

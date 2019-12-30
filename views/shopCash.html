@@ -1,0 +1,397 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                <div class="col-md-4">优惠劵</div>
+                <div class="col-md-8">
+                    <div class="row">
+
+                        <div class="col-md-7 c-padding-10">
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                        </div>
+                        <div class="col-md-3 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" data-toggle="modal" data-target="#coupon-form" ng-click="add()">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-line-left c-theme-bg"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+                    <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+                        <div class="col-md-2 c-cart-image c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">标题</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 c-right">开始</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">结束</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">值</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">满</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">明细</h3>
+                        </div>
+                        <div class="col-md-3 c-cart-qty c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                        </div>
+                    </div>
+
+                    <div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in coupons">
+
+                        <div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+                            <p class="c-cart-price c-font-14 c-margin-t-5">{{item.cashTitle}}</p>
+                        </div>
+                        <div class="col-md-1 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-right">
+                            <p class="c-cart-price c-font-14 c-margin-t-5">{{item.depositTime}}</p>
+                        </div>
+                        <div class="clearfix col-md-1 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">
+                            <p class="c-cart-price c-font-14 c-margin-t-5">{{item.expirationTime}}</p>
+                        </div>
+                        <div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-14 c-margin-t-5">{{item.cashDiscount}}</p>
+                        </div>
+                        <div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-14 c-margin-t-5">{{item.minPurchaseAmount}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10 c-center">
+                            <button class="btn c-btn-green c-btn-square" style="padding: 4px 9px 4px 9px;" data-toggle="modal" data-target="#data-form" ng-click="details(item.id)">明细</button>
+                        </div>
+                        <div class="col-md-4 col-sm-3 col-xs-6 c-cart-qty c-padding-10">
+                            <button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#product-form" style="padding: 4px 9px 4px 9px;" ng-click="check(item.id)">商品</button>
+                            <button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#coupon-form" style="padding: 4px 9px 4px 9px;" ng-click="get(item.id)">修改</button>
+                            <button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#send-form" style="padding: 4px 9px 4px 9px;" ng-click="sendCash(item.id)">生产优惠券</button>
+                            <button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;margin-top:10px;margin-left:0px;" ng-click="delete(item.id)">删除</button>
+                        </div>
+                    </div>
+                    <!-- END: 优惠劵item-->
+                </div>
+            </div>
+
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-40"></div>
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.page?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页 -->
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="coupon-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>现金券信息</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            现金券名称<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control c-square c-theme" placeholder="现金券名称" name="couponTitle" ng-model="data.cashTitle">
+                        </div>
+                        <div class="col-md-3">
+                            现金券适用范围<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <select ng-model="data.basedOn" class="form-control c-square c-theme" name="basedOn" ng-options="x.id as x.name for x in basedOnName">
+                                <option value="">请选择现金券适用范围</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-3">
+                            现金券适用条件<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <select ng-model="data.conditions" class="form-control c-square c-theme" name="conditions" ng-options="x.id as x.name for x in conditionsName">
+                                <option value="">请选择现金券适用条件</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3" ng-hide="data.conditions == 1">
+                            低购买金额：
+                        </div>
+                        <div class="col-md-3" ng-hide="data.conditions == 1">
+                            <input type="number" ng-model="data.minPurchaseAmount" name="minPurchaseAmount" class="form-control c-square c-theme" placeholder="享有优惠的最低购买金额">
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-3">
+                            优惠金额<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" ng-model="data.cashDiscount" name="cashDiscount" class="form-control c-square c-theme" placeholder="优惠金额">
+                        </div>
+                        <div class="col-md-3">
+                            现金券存入时间<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" class="form-control c-square c-theme" name="depositTime" ng-model="data.depositTime" placeholder="现金券存入时间">
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-3">
+                            现金券失效时间<span class="c-font-red">*</span>：
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" class="form-control c-square c-theme" name="expirationTime" ng-model="data.expirationTime" placeholder="现金券失效时间">
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square" ng-click="save()">提交</button>
+                        </div>
+                        <div class="col-md-6" data-dismiss="modal" aria-label="Close">
+                            <button class="btn c-btn-grey c-btn-square">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="send-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>生成优惠券</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <input type="text" ng-model="cashTitle" name="couponTitle" readonly class="form-control c-square c-theme" placeholder="现金券名称">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" ng-model="cash.amount" name="amount" class="form-control c-square c-theme" placeholder="现金券数量">
+                        </div>
+                    </div>
+
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square" ng-click="cashs_save()">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="data-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>优惠券明细</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                            </div>
+                            <div class="c-border col-md-12">
+                                <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+                                    <div class="col-md-2 c-cart-image c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">用户名</h3>
+                                    </div>
+                                    <div class="col-md-2 c-cart-price c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 c-right">优惠券名称</h3>
+                                    </div>
+                                    <div class="col-md-2 c-cart-price c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">是否使用</h3>
+                                    </div>
+                                    <div class="col-md-2 c-cart-price c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">使用时间</h3>
+                                    </div>
+                                    <div class="col-md-2 c-cart-qty c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                                    </div>
+                                </div>
+
+                                <!-- BEGIN: 优惠劵item-->
+
+                                <div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in customerCoupons">
+
+                                    <div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.customerName}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-right">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.cashName}}</p>
+                                    </div>
+                                    <div class="clearfix col-md-2 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.is_used}}</p>
+                                    </div>
+                                    <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.use_time}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10">
+                                        <button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;margin: 0 auto;" ng-click="delete(item.id)">删除</button>
+                                    </div>
+                                </div>
+                                <!-- END: 优惠劵item-->
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="product-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>优惠商品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="c-content-title-1">
+                <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <div class="row">
+
+                            <div class="col-md-7 c-padding-10">
+                            </div>
+                            <div class="col-md-2 c-padding-10">
+                            </div>
+                            <div class="col-md-3 c-padding-10">
+                                <button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#add-product-form" ng-click="getprodus()">添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                            </div>
+                            <div class="c-border col-md-12">
+                                <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+                                    <div class="col-md-4 c-cart-image c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">产品名称</h3>
+                                    </div>
+                                    <div class="col-md-4 c-cart-price c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 c-right">优惠券名称</h3>
+                                    </div>
+                                    <div class="col-md-2 c-cart-qty c-padding-10">
+                                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                                    </div>
+                                </div>
+
+                                <!-- BEGIN: 优惠劵item-->
+
+                                <div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in product.product_list">
+
+                                    <div class="col-md-4 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.name}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-right">
+                                        <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.cashName}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10">
+                                        <button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;margin: 0 auto;" ng-click="delete_product(item.cid)">删除</button>
+                                    </div>
+                                </div>
+                                <!-- END: 优惠劵item-->
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="add-product-form" role="dialog" >
+    <div class="modal-dialog" style="width: 600px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>添加产品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <select ng-model="shop.product_id" class="form-control c-square c-theme" name="conditions" ng-options="x.id as x.name for x in productName">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square" ng-click="shopProduct()">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,445 @@
+<link rel="stylesheet" type="text/css" href="css/discount.css"/>
+
+<!--S content-->
+   <div class="content">
+		<div class="c_box">
+			<div class="u_left">
+				<div ng-include="'eshop/shopMenu.html'"></div>
+			</div>
+			<div class="c_right">
+				<div class="r_up">
+					<a href="javascript:void(0);" class="active">优惠券</a>
+				</div>
+				<div class="r_down">
+					<div class="d_detail">
+						<div class="d_ul">
+							<ul style="margin-bottom:0px;">
+							<li><a href="javascript:void(0);" class="c-font-grey-1" data-toggle="modal" data-target="#coupon-form" ng-click="add()">添加</a></li>
+						 </ul>
+						 <div style="clear: both;"></div>
+						</div>
+						<div class="d_tab">
+							<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="coupons.length==0">抱歉，暂无数据</p>
+							<table border="0" cellspacing="0" ng-show="coupons.length != 0">
+								<tr >
+									<th class="c-center c-border">标题</th>
+									<th class="c-center c-border">类型</th>
+									<th class="c-center c-border">结束时间</th>
+									<th class="c-center c-border">面值</th>
+									<th class="c-center c-border">明细</th>
+									<th class="c-center c-border">操作</th>
+								</tr>
+								<tr ng-repeat="item in coupons">
+									<td class="c-border c-padding-10" style="width: 320px;word-wrap: break-word;word-break: break-all;">{{item.title}}</td>
+									<td class="c-border c-padding-10" style="text-align: center;">{{item.type}}</td>
+									<td class="c-border c-padding-10"><p>{{item.endDate}}</p></td>
+									<td class="c-border c-padding-10">{{item.value}}{{item.unit}}</td>
+									<td class="c-border c-center">
+										<button class="btn c-bg-green-4 c-font-grey-1" style="padding: 4px 9px 4px 9px;" data-toggle="modal" data-target="#data-form" ng-click="details(item.id)">明细</button> 
+										<button class="btn c-bg-green-4 c-font-grey-1" data-toggle="modal" data-target="#product-form" style="padding: 4px 9px 4px 9px;" ng-click="check(item.id,1)">商品</button>
+									</td>
+									<td class="c-border c-center">
+										<button class="btn c-bg-yellow-5 c-font-grey-1" data-toggle="modal" data-target="#coupon-form" style="padding: 4px 9px 4px 9px;" ng-click="get(item.id)">编辑</button>
+										<button class="btn c-font-grey-1 c-bg-red" data-dismiss="modal" style="padding: 4px 9px 4px 9px;margin-left:10px;" ng-click="deleteCoupon(item.id)">删除</button>
+									</td>
+								</tr>
+
+							</table>
+						</div>
+						<div ng-show="coupons.length != 0">
+							<div class="c_page" style="padding-right:40px;">
+								<div class="p_ul">
+									<ul>
+										<li ng-click="setpages(-1,0)"><a href="javascript:void(0);"></a></li>
+										<li class="{{page==data.page?'active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages"><a href="javascript:void(0);">{{page}}</a></li>
+										<li ng-click="setpages(+1,0)"><a href="javascript:void(0);"></a></li>
+									</ul>
+									<div style="clear: both;"></div>
+								</div>
+							</div>
+						</div>
+						</div>
+				</div>
+			</div>
+		</div>
+   </div>
+
+
+
+<div class="modal fade c-content-login-form" id="coupon-form" role="dialog" >
+	<div class="modal-dialog" style="width: 1000px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>优惠券信息</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row c-margin-b-30 c-margin-t-20 add-linheight-34">
+						<div class="col-md-2">
+							优惠券名称<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control c-square c-theme" placeholder="优惠券名称" name="couponTitle" ng-model="data.title">
+						</div>
+
+						<div class="col-md-2">
+							优惠券类型<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<select ng-model="data.type" class="form-control c-square c-theme" name="basedOn" ng-options="x.id as x.name for x in typeName">
+								<option value="">请选择优惠券类型</option>
+							</select>
+						</div>
+					</div>
+					<div class="row c-margin-b-30 c-margin-t-20 add-linheight-34">
+						<div class="col-md-2">
+							产品适用范围<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<select ng-model="data.baseOn" class="form-control c-square c-theme" name="basedOn" ng-options="x.id as x.name for x in basedOnName">
+								<option value="">请选择优惠券适用范围</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							可用范围<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<select ng-model="data.scope" class="form-control c-square c-theme" name="conditions" ng-options="x.id as x.name for x in scopeName">
+								<option value="">请选择优惠券适用范围</option>
+							</select>
+						</div>
+					</div>
+					<div class="row c-margin-b-30 add-linheight-34">
+
+						<div class="col-md-2" ng-hide="data.conditions == 1">
+							最低购买金额：
+						</div>
+						<div class="col-md-4" ng-hide="data.conditions == 1">
+							<input type="number" ng-model="data.full" name="minPurchaseAmount" class="form-control c-square c-theme" placeholder="享有折扣的最低购买金额">
+						</div>
+						<div class="col-md-2" ng-if="data.type==1">
+							折扣优惠(%)：<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-2" ng-if="data.type==2">
+							优惠金额(元)：<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4" ng-if="data.type">
+							<input type="number" ng-model="data.value" name="percentageDiscount" class="form-control c-square c-theme" placeholder="优惠折扣">
+						</div>
+					</div>
+					<div class="row c-margin-b-30 add-linheight-34">
+						<div class="col-md-2">
+							优惠券开始时间<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<!--<input type="text" class="form-control"  uib-datepicker-popup  ng-model="data.startDate" is-open="startPopupOpened" min-date="minStartDate" max-date="maxStartDate" datepicker-options="dateOptions" ng-required="true" close-text="关闭" current-text="今天"/>-->
+							<!--<input type="text" value="" class="form-control c-square c-theme" id="datetimepicker" ng-model="data.startDate">-->
+							<input name="act_start_time" type="text" class="form-control c-square c-theme text-box" value=""  ng-model="data.startDate" placeholder="优惠券开始时间" title="优惠券开始时间" readonly="readonly" style="cursor:pointer;background: white;"/>
+						</div>
+						<div class="col-md-2">
+							优惠券失效时间<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<!--<input type="date" class="form-control c-square c-theme" name="expirationTime" ng-model="data.endDate " placeholder="优惠券失效时间">-->
+							<input name="act_stop_time" type="text" class=" form-control c-square c-theme text-box" value="" ng-model="data.endDate " placeholder="优惠券失效时间" title="优惠券失效时间" readonly="readonly" style="cursor:pointer;background: white;"/>
+
+						</div>
+					</div>
+					<div class="row c-margin-b-30 add-linheight-34">
+						<div class="col-md-2">
+							PC端领取链接：
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control c-square c-theme" name="amount" ng-model="data.receiveConfig " placeholder="优惠券领取链接">
+						</div>
+						<div class="col-md-2">
+							微信端领取链接：
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control c-square c-theme" name="amount" ng-model="data.webappReceiveConfig " placeholder="优惠券领取链接">
+						</div>
+					</div>
+					<div class="row c-margin-b-30 add-linheight-34">
+						<div class="col-md-2">
+							优惠券数量<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-4">
+							<input type="number" class="form-control c-square c-theme" name="amount" ng-model="data.amount " placeholder="优惠券数量">
+						</div>
+					</div>
+					<div class="row c-margin-b-30">
+						<div class="col-md-2 add-linheight-34">
+							优惠券描述：
+						</div>
+						<div class="col-md-10">
+							<textarea class="form-control c-square c-theme" name="description " style="resize:none" ng-model="data.description" placeholder="优惠券描述"></textarea>
+						</div>
+					</div>
+					<div class="row c-margin-b-30">
+						<div class="col-md-6 c-right">
+							<button class="btn c-btn-green c-btn-square" ng-click="save()">提交</button>
+						</div>
+						<div class="col-md-6" data-dismiss="modal"  aria-label="Close">
+							<button class="btn c-btn-grey c-btn-square">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade c-content-login-form" id="send-form" role="dialog" >
+	<div class="modal-dialog" style="width: 760px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>生成优惠券</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row c-margin-b-30 c-margin-t-20">
+						<div class="col-md-6">
+							<input type="text" ng-model="coupon.couponTitle" name="couponTitle" readonly class="form-control c-square c-theme" placeholder="优惠券名称">
+						</div>
+						<div class="col-md-6">
+							<input type="number" ng-model="coupon.amount" name="amount" class="form-control c-square c-theme" placeholder="优惠券数量">
+						</div>
+					</div>
+
+					<div class="row c-margin-b-30">
+						<div class="col-md-6 c-right">
+							<button class="btn c-btn-green c-btn-square" data-dismiss="modal" ng-click="coupons_save()">提交</button>
+						</div>
+						<div class="col-md-6" >
+							<button class="btn c-btn-grey c-btn-square" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade c-content-login-form" id="data-form" role="dialog" >
+	<div class="modal-dialog" style="width: 760px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>优惠券明细</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="c-border-bottom c-theme-border-bottom c-border-2px">
+							</div>
+							<div class="c-border col-md-12">
+								<div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+									<div class="col-md-2 c-cart-image c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">用户名</h3>
+									</div>
+									<div class="col-md-3 c-cart-price c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 ">优惠券名称</h3>
+									</div>
+									<div class="col-md-2 c-cart-price c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">是否使用</h3>
+									</div>
+									<div class="col-md-3 c-cart-price c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">使用时间</h3>
+									</div>
+									<div class="col-md-2 c-cart-qty c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+									</div>
+								</div>
+
+								<!-- BEGIN: 优惠劵item-->
+
+								<div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in customerCoupons">
+
+									<div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+										<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.name}}</p>
+									</div>
+									<div class="col-md-3 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding">
+										<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.title}}</p>
+									</div>
+									<div class="clearfix col-md-2 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">
+										<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.isUsed}}</p>
+									</div>
+									<div class="clearfix col-md-3 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+										<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.useTime}}</p>
+									</div>
+									<div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10 c-center">
+										<button class="btn c-btn-grey c-btn-square" data-dismiss="modal" style="padding: 4px 9px 4px 9px;margin: 0 auto;" ng-click="deleteCustomerCoupon(item.id,item.couponId)">删除</button>
+									</div>
+								</div>
+								<!-- END: 优惠劵item-->
+							</div>
+							<!--<div class="c-right" style="margin-top: 20px;width: 100%;display: inline-block;">
+								<button class="btn c-btn-green c-btn-circle" ng-click="getPageCustomerCoupons()">加载更多</button>
+							</div>-->
+							<div class="row" id="fenye">
+								<div ng-include="'eshop/selectProductPages.html'"></div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade c-content-login-form" id="product-form" role="dialog" >
+	<div class="modal-dialog" style="width: 760px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>优惠商品</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="c-content-title-1">
+				<div class="row c-font-uppercase c-font-bold c-font-18 ">
+					<div class="col-md-4"></div>
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-7 c-padding-10">
+							</div>
+							<div class="col-md-2 c-padding-10">
+							</div>
+							<div class="col-md-3 c-padding-10">
+								<button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#add-product-form" ng-click="getshopProducts()">添加</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="c-border-bottom c-theme-border-bottom c-border-2px">
+							</div>
+							<div class="c-border col-md-12">
+								<div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+									<div class="col-md-3 c-cart-image c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">产品图片</h3>
+									</div>
+									<div class="col-md-5 c-cart-price c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2">产品名称</h3>
+									</div>
+									<div class="col-md-2 c-cart-qty c-padding-10">
+										<h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+									</div>
+								</div>
+
+								<!-- BEGIN: 优惠劵item-->
+
+								<div class="row c-cart-table-row  c-border-bottom c-border-grey" style="height: 75px;" ng-repeat="item in product.product_list">
+
+									<div class="col-md-3 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10 tab-linheight-75" style="clear: none;height: 75px;">
+										<img style="max-height: 50px;max-width:100%;padding-left: 10px;" ng-src="{{item.mainPic}}">
+									</div>
+									<div class="col-md-5 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding tab-linheight-75">
+										<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.name}}</p>
+									</div>
+									<div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10 c-center tab-linheight-75">
+										<button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;margin: 0 auto;" ng-click="delete_product(item.id)">删除</button>
+									</div>
+								</div>
+								<!-- END: 优惠劵item-->
+							</div>
+							<div class="row  c-right" id="fenye2">
+								<!--<button class="btn btn-loagding" ng-click="getmanyCouponProduct()">加载更多</button>-->
+								<div id="addSelectProductPages" ng-include="'eshop/addSelectProductPages.html'"></div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade c-content-login-form" id="add-product-form" role="dialog" >
+	<div class="modal-dialog" style="width: 600px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>添加产品</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div style="text-align:right;">
+					<span><input type="text" placeholder="请输入产品名称关键字" ng-model="shopProductName" style="width:180px;height:30px;" /></span>
+					<span><button style="width:60px;height:30px;" ng-click="getshopProducts()">搜索</button></span>
+				</div>
+				<form>
+					<div class="row c-margin-b-15 c-margin-t-10">
+						<div class="col-md-12 c-margin-b-15">
+							选择商品：<span class="c-font-red">*</span>：
+						</div>
+						<div class="col-md-6 c-margin-b-15" style="overflow: hidden;height: 50px;" ng-repeat="product in products">
+							<lable ng-click="selProductId($index)"><input type="checkbox" value="{{product.id}}" /><img style="width: 50px;max-height: 50px;margin: 0 5px;" ng-src="{{product.mainPic}}"/>{{product.name}}</lable>
+						</div>
+					</div>
+					<div class="row c-margin-b-30 c-right">
+						<button class="btn c-btn-green c-btn-circle" ng-click="getPageProducts()">加载更多</button>
+					</div>
+					<div class="row c-margin-b-30">
+						<div class="col-md-6 c-right">
+							<button class="btn c-btn-green c-btn-square" data-dismiss="modal" ng-click="shopProduct()">提交</button>
+						</div>
+						<div class="col-md-6">
+							<button class="btn c-btn-grey c-btn-square" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+   <!--E content-->
+<script type="text/javascript">
+    $("input[name='act_start_time']").datetimepicker({
+			language:'zh-CN',
+			format:'yyyy-mm-dd',
+	        weekStart: 1,
+			autoclose: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+	    }).on('changeDate', function(ev){
+	    	$("input[name='act_stop_time'").datetimepicker('setStartDate', ev.date);
+		});
+		
+	$("input[name='act_stop_time'").datetimepicker({
+			language:'zh-CN',
+			format:'yyyy-mm-dd',
+	        weekStart: 1,
+			autoclose: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+			
+	    }).on('changeDate', function(ev){
+	    	$("input[name='act_start_time'").datetimepicker('setEndDate', ev.date);
+		});
+
+</script>

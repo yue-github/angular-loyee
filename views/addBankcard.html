@@ -1,0 +1,65 @@
+
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">{{title}}银行卡</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="row c-margin-b-10">
+                <div class="form-group">
+                    <input type="text" ng-model="data.accountNumber" class="form-control c-square c-theme" placeholder="卡号">
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="form-group">
+                    <input type="text" ng-model="data.bankName" class="form-control c-square c-theme" placeholder="开户银行名称">
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="form-group">
+                    <input type="text" ng-model="data.bankBranch" class="form-control c-square c-theme" placeholder="开户支行名称">
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="form-group">
+                    <input type="text" ng-model="data.accountName"  class="form-control c-square c-theme" placeholder="持卡人姓名">
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="form-group">
+                    <input type="text" ng-model="data.contactNumber"  class="form-control c-square c-theme" placeholder="手机号">
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" ng-model="data.code" class="form-control c-square c-theme" placeholder="验证码">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="row c-right">
+                        <button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-theme-border c-btn-square c-btn-uppercase c-font-16" type="button" >获取手机验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="col-md-10">
+
+                </div>
+                <div class="col-md-2 c-right">
+                    <div class="row c-right">
+                        <button class="btn c-btn-green c-theme-btn c-btn-square" ng-click="submit()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

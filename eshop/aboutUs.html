@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="css/personalintegral.css" />
+
+<style>
+	.u_left{display: inline-block;}
+	.u_left ul li~li{border-top: none;}
+	.u_left ul li a{color: #696969;}
+	.u_left ul li.active{border-left: 4px solid #F29700;background: #F5F5F5;width: 217px;}
+	.content .c_page .p_ul{
+		width: auto;
+	}
+	 .u_left ul li{list-style-type: none;width: 220px;height: 50px;background: white;border: 1px solid #DFDFDF;text-align: left;line-height: 50px;font-size: 20px;padding-left:20px }
+
+</style>
+
+<!--S content-->
+<div class="content">
+	<div class="c_up">
+		<div class="u_left">
+		<div>
+			<ul>
+				<li class="{{menu==0?'active':''}}" ng-repeat="item in list"><a ng-click="clickMenu(item.id);" >{{item.title}}</a></li>
+			</ul></div>
+		</div>
+		<div class="u_right">
+			<div class="r_box">
+				<div class="b_box">
+					<div class="btns">
+						<form>
+							<div class="form-group">
+								<div style="overflow-y:auto; overflow-x:auto; height:399px;” class="form-control" id="content" ng-bind-html='content'></div>
+							</div>
+						</form>
+						<!-- <div ng-include="'eshop/pages.html'"></div> -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>

@@ -1,0 +1,498 @@
+
+<link rel="stylesheet" type="text/css" href="css/travelgoods.css"/>
+<link rel="stylesheet" type="text/css" href="css/plugins.css"/>
+   <!--S content-->
+   <div class="content_top">
+   	<div class="c_up" style="height: 50px;line-height: 50px;">
+   		<div class="u_a">
+   			<a href="index.html">首页</a>
+			<dd ng-repeat="ProC in ProCategory" style="display: inline-block">
+				<span>></span>
+				<span>{{ProC.name}}</span>
+			</dd>
+   		</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="content_left">
+			<a href="#" onclick="javascript:history.back(-1);"><div class="content_left_box">
+				<img src="img/back.png" alt="">
+				<div class="content_left_box_top">
+					返回上级 
+				</div>
+				</div>
+			</a>
+		</div>
+		<div class="content_mid" style="height: auto">
+			<div class="content_mid_top">
+				<div class="pc-product-h">
+					<div class="pc-product-top" >
+						<img ng-repeat="item in product.pics" class="{{showIndex==$index?'s-opacity':''}}"  id="big_img" ng-src="{{getAbsolutePath(item)}}">
+					</div>
+						<div class="pc-product-bop clearfix" id="pro_detail">
+							<ul>
+								<li ng-repeat="item in product.pics" ng-click="selshow($index)" ng-mouseover="selshow($index)"><a href="javascript:void(0);" simg="{{getAbsolutePath(item)}}"><img ng-src="{{getAbsolutePath(item)}}" width="50"></a> </li>
+							</ul>
+						</div>
+					<div class="row">
+						<div class="col-md-3">
+							<a style="cursor:pointer;float: right" ng-click="collectionProduct()"
+							   class="c-font-14 c-font-dark-1 c-margin-t-15 c-font-green-hover"><i
+									class="fa fa-star" id="star"></i>&nbsp;&nbsp;收藏</a>
+						</div>
+						<div class="col-md-9">
+							<div class="jiathis_style c-margin-t-15">
+								<!--<span class="jiathis_txt c-font-dark-1" style="font-size: 14px">分享到：</span>
+								<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>-->
+							</div>
+							<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+						</div>
+					</div>
+				</div>
+
+				<div class="content_mid_top_right">
+					<div class="content_mid_top_right_1">
+
+						<div class="content_mid_top_right_logo" ng-if="product.shopType==3">乐驿自营</div>
+							<div class="content_mid_top_right_logo" ng-if="product.shopType==1">第三方运营</div>
+								<div class="content_mid_top_right_logo" ng-if="product.shopType==2">O2O服务区</div>
+						<p>{{product.name}}
+							<span style="border: 1px solid red;font-size: 14px;padding: 2px;color: red;" ng-if='product.pre_sale_status == "预售中"'>预售</span>
+							<span style="border: 1px solid red;font-size: 14px;padding: 2px;color: red;" ng-if='product.is_seckill == 1'>秒杀</span>
+						</p>
+					</div>
+					<!-- <img src="img/love.png" ng-click="collectionProduct()" class="content_mid_top_right-img" alt=""> -->
+					<div class="c-margin-t-8" ng-if="product.prod_type != 1">
+						{{product.summary}}
+					</div>
+					<div class="content_mid_top_right_2" ng-if="product.prod_type == 1">
+						<div ng-if="originUnitPrice" class="jiage_box"><span class="j_txt">价格</span><span class="jiage">￥{{toDecimal2(originUnitPrice)}}</span></div>
+						<div class="cuxiaojia_box"><span class="j_txt">促销价</span><span class="cuxiao">￥{{toDecimal2(price)}}</span><span class="jg_tag">抢购价</span></div> 
+					</div>
+					<div class="content_mid_top_right_2" ng-if="product.prod_type != 1">
+						<div ng-if="product.originUnitPrice" class="jiage_box"><span class="j_txt">价格</span><span class="jiage">￥{{toDecimal2(product.originUnitPrice)}}</span></div>
+						<div ng-if="isPointProduct != true" class="cuxiaojia_box"><span class="j_txt">促销价</span><span class="cuxiao">￥{{toDecimal2(product.suggestedRetailUnitPrice)}}</span><span class="jg_tag">抢购价</span></div> 
+						<div ng-if="vip_is" class="cuxiaojia_box"><span class="j_txt">会员价</span><span class="cuxiao">￥{{toDecimal2(product.suggestedRetailUnitPrice*yue_discount)}}</div> 
+						<div ng-if="isPointProduct == true" class="cuxiaojia_box"><span class="j_txt">积分</span><span class="cuxiao">{{pointProduct.need_point}}</span></div>
+					</div>
+					
+					<div class="row" style="height: 30px;line-height: 30px;" ng-hide="Promotion">
+						<div class="col-md-2"><span> 促销活动:</span></div>
+						<div class="col-md-10">
+							<a ng-repeat="obj in PromotionList" href="#/specialtyOffer?id={{obj.id}}">		
+								<span >{{obj.title}}/</span>
+							</a>
+								<span ng-show="Promotion">暂无活动</span>
+						</div>
+					</div>
+					<div class="row" style="height: 30px;line-height: 30px;" ng-id="product.is_seckill == 1" ng-if='product.is_seckill == 1'>
+						<div class="col-md-2"><span> 秒杀时间:</span></div>
+						<div class="col-md-10">
+							<span>{{product.sec_start_time}} 至 {{product.sec_end_time}}</span>
+						</div>
+					</div>
+					<div class="row" style="height: 30px;line-height: 30px;">
+						<div class="col-md-2"><span>优惠券:</span></div>
+						<div class="col-md-10"> 
+							<a ng-repeat="obj in couponList" href="#/getMyCoupons?id={{obj.id}}&productId={{productId}}&couponList={{couponList}}">		
+								<span >{{obj.title}}/</span>
+							</a>
+							<!-- <a ng-repeat="obj in couponList" ng-click="goCouponProduct(obj.id,getAbsolutePath(product.pics[0]))">		
+								<span>{{obj.title}}/</span>
+							</a>
+							<a ng-repeat="obj in couponList">		
+								<span>{{obj.title}}/</span>
+							</a> -->
+							<span ng-show="coupon">暂无优惠券</span>
+						</div>
+					</div>
+					<div class="c-product-add-cart">
+						<div class="row c-margin-t-20">
+							<div class="c-input-group c-spinner col-md-12">
+								<div class="col-md-2 padding-0">
+									运费:
+								</div>
+								<div class="simplelineicons-demo col-md-10 padding-0">
+									<div class="c-product-size c-margin-t-5">
+                                                    <span class="c-padding-5 c-border" ng-click="showAddress(showType)"  style="cursor: pointer">
+                                                        {{address.provinceName}}{{address.cityName}}<i ng-hide="showType" class="fa fa-angle-down" style="margin-left: 10px;"></i><i style="margin-left: 10px;" ng-show="showType" class="fa fa-angle-up"></i>
+                                                    </span>&nbsp;&nbsp;
+										快递方式：{{express[0].expressType}}&nbsp;&nbsp;运费：￥{{toDecimal2(express[0].freight)}}
+									</div>
+									<div ng-show="showType" class="c-product-size c-border c-bg-white" style="position: absolute;top: 35px;left: 0;z-index: 10;min-height: 250px;width: 480px">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-12 c-padding-5">
+													<span>配送地址：</span>
+													<span style="float: right" ng-click="showAddress(showType)">
+                                                                    <img src="images/offForm.png" style="width: 20px;"/>
+                                                                </span>
+												</div>
+											</div>
+										</div>
+										<div class="row c-margin-0">
+											<div class="col-md-12 c-border-bottom padding-0">
+												<div class="col-md-4" style="padding: 0 5px;cursor: pointer;bottom: -1px;"  ng-click="selActive(1)" >
+													<div class="c-border c-center"  ng-style="{{showflog==1?showstyle : 'hidestyle'}}">{{address.provinceName}}&nbsp;<i class="fa fa-angle-down"></i></div>
+												</div>
+												<div class="col-md-4" style="padding: 0 5px;cursor: pointer;bottom: -1px;" ng-click="selActive(0)">
+													<div class="c-border c-center" ng-style="{{showflog==0?showstyle : 'hidestyle'}}" ng-show="address.cityName">{{address.cityName}}&nbsp;<i class="fa fa-angle-down"></i></div>
+													<div class="c-border c-center" ng-style="{{showflog==0?showstyle : 'hidestyle'}}" ng-hide="address.cityName">选择城市&nbsp;<i class="fa fa-angle-down"></i></div>
+												</div>
+											</div>
+											<div class="col-md-12 padding-0" ng-show="showflog">
+												<span class="col-md-3 c-padding-10 c-center" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; "  ng-repeat="item in provinces1"  ng-click="getCity(item.id,item.name)">{{item.name}}</span>
+											</div>
+											<div class="col-md-12" ng-hide="showflog">
+												<span class="col-md-3 c-padding-10 c-center" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis" ng-repeat="city in cities" ng-click="getTemplate(city.id,city.name)">{{city.name}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!--酒店入住时间开始-->
+						<div class="row c-margin-t-20" ng-if="product.prod_type == 1||product.prod_type == 2">
+							<div class="col-md-2 padding-0" style="margin: 10px 0 0 16px">
+								时间:
+							</div>
+							<div class="col-md-4 padding-0">
+								<div class="col-md-3 padding-0 checkIn" >{{product.prod_type==1?'入住时间':'开始时间'}}</div>
+								<input id="startHour" ng-model="startAt" class="col-md-2 padding-0 form-control c-square c-theme" 
+									type="text"  data-ng-init="startimepicker()" placeholder="" readonly="readonly" 
+									style="width: 180px;cursor:pointer;background: white;"  data-date-format="yyyy-mm-dd"  data-link-format="yyyy-mm-dd">
+							</div>
+							<div class="col-md-4 padding-0">
+								<div class="col-md-3 padding-0 checkIn" >{{product.prod_type==1?'退房时间':'结束时间'}}</div>
+								<input id="endHour"  class="col-md-2 form-control c-square c-theme" 
+									type="text" data-ng-init="endtimepicker()" placeholder="" readonly="readonly" 
+									style="width: 180px;cursor:pointer;background: white;" data-date-format="yyyy-mm-dd"  data-link-format="yyyy-mm-dd">
+						
+							</div>
+						</div>
+						<!--酒店入住时间结束-->
+						<!-- 属性 -->
+						<div class="row c-margin-t-20"
+							 ng-repeat="attr in saleAttrs">
+							<div class="c-input-group c-spinner  col-md-12">
+								<div class="col-md-2 padding-0">
+									{{attr.propertyName}}:
+								</div>
+								<div class="simplelineicons-demo col-md-10 padding-0">
+									<div class="item-box padding-0" style="cursor: pointer ; width: 100%">
+										<div class="item" style="position: relative;min-width: 65px;padding:5px;width: auto;margin-right: 10px;" ng-model="attrSelecteds[$index]" ng-repeat="propertyValue in attr.propertyValueList" ng-click="selectAttr($parent.$index, propertyValue.propertyValueId)">
+											<a class="c-order-date c-font-14 c-font-thin">{{propertyValue.propertyValueName}}</a>
+											<img ng-if="attrSelecteds[$parent.$index] != propertyValue.propertyValueId" src="images/def.png" style="position: absolute;right: 0;bottom:0;width: 20px;"/>
+											<img ng-if="attrSelecteds[$parent.$index] == propertyValue.propertyValueId" src="images/sel.png" style="position: absolute;right: 0;bottom:0;width: 20px;"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row c-hide c-margin-t-20">
+							<div class="col-md-12">
+								<p>
+									<span class="c-font-14">距离结束</span>
+									<span class="hour c-font-16">{{hours}}</span>
+									时
+									<span class="minutes c-font-16">{{minutes}}</span>
+									分
+									<span class="seconds c-font-16">{{seconds}}</span>
+									秒
+								</p>
+								<div class="c-font-16">
+									<img src="images/sidai_bg.png">
+									<div style="position: absolute;top:35px;left: 0;z-index: 5">
+										<div class="btn-group btn-group-justified">
+											<div class="btn-group">
+												<p style="padding-left: 30px;" class="c-margin-t-15 c-font-30 c-font-white c-font-bold"> ￥1000.00</p>
+											</div>
+											<div class="btn-group c-center">
+												<button class="btn c-font-red c-font-20" style="left: 70px;top:5px;width:128px;padding: 4px 0;background:#fee97d;border-radius:5px;">去抢购</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row c-margin-t-20">
+							<div class="c-input-group c-spinner col-md-12">
+								<div class="col-md-2 padding-0">
+									数量:
+								</div>
+								<div class="simplelineicons-demo col-md-10 padding-0">
+									<input ng-model="amount" type="text" ng-change="changeAmount()" class="form-control c-item-1">
+									<div class="c-input-group-btn-vertical" style="width: 10%">
+										<button class="btn btn-default" type="button" ng-click="setamount(1)">
+											<i class="fa fa-caret-up"></i>
+										</button>
+										<button class="btn btn-default" type="button" ng-click="setamount(-1)">
+											<i class="fa fa-caret-down"></i>
+										</button>
+									</div>
+									<div class="c-input-group-btn-vertical c-font-14">
+										件(库存{{product.storeAmount}}件)
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="row c-margin-t-60 ">
+							<div class="col-md-12" ng-if='product.prod_type != 4 && isPointProduct == false'>
+								<button ng-style="lijiGouMai" class="btn btn-lg  c-btn-square c-btn-uppercase c-btn-bold "
+										ng-click="comfirmOrder()">立即购买
+								</button>
+								<button ng-style="gouWuChe" class="btn btn-lg c-bg-yellow-5 c-font-white c-btn-square c-btn-uppercase c-btn-bold c-margin-r-20"
+										ng-show="product.prod_type != 1 && product.prod_type != 2 && product.is_seckill == 0 && isPointProduct == false" ng-click="shoppingCart()">加入购物车
+								</button>
+							</div>
+							<div class="col-md-12" ng-if='isPointProduct == true'>
+								<button ng-click='toExchange()' style="padding: 12px 50px;" class="btn btn-lg c-bg-yellow-5 c-font-white c-btn-square c-btn-uppercase c-btn-bold c-margin-r-20">
+									立即兑换
+								</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="content_mid_content">
+				<div class="pc-overall">
+						<ul id="H-table1" class="brand-tab H-table1 H-table-shop clearfix ">
+							<li class="cur"><a href="javascript:void(0);">商品介绍</a></li>
+							<li><a href="javascript:void(0);">商品评价(<em class="reds">{{reviews_num}}</em>)</a></li>
+						</ul>
+						<div class="pc-term clearfix">
+								<div class="H-over1 pc-text-title c-margin-b-20" ng-bind-html="trustHtml">
+
+								</div>
+								<div class="H-over1 pc-text-title c-margin-b-20" style="display:none">
+									<div class="row c-border-bottom" style="margin: 0"></div>
+									<!--BEGIN：好评、差评等有统计显示-->
+									<div class="row c-border-bottom c-padding-20" style="margin: 0">
+										<div class="col-md-5">
+											<div class="col-md-4">
+												<div class="c-margin-b-40 c-margin-t-40 c-center">
+													<strong class="c-font-40 c-font-red">
+														{{ratings.r1}}%
+													</strong>
+													<p>好评率</p>
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="row">
+													<div class="col-md-4" style="padding-right:0;padding-left:0; ">
+														<p class="c-margin-t-10">
+															好评({{ratings.r1}}%)
+														</p>
+													</div>
+													<div class="col-md-8">
+														<div class="progress c-margin-t-15" style="height: 14px">
+															<div class="progress-bar progress-bar-danger" role="progressbar"
+																 aria-valuenow="{{ratings.r1}}" aria-valuemin="0" aria-valuemax="100"
+																 style="width: {{ratings.r1}}%">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4" style="padding-right:0;padding-left:0; ">
+														<p class="c-margin-t-10">
+															中评({{ratings.r2}}%)
+														</p>
+													</div>
+													<div class="col-md-8">
+														<div class="progress c-margin-t-15" style="height: 14px">
+															<div class="progress-bar progress-bar-danger" role="progressbar"
+																 aria-valuenow="{{ratings.r2}}" aria-valuemin="0" aria-valuemax="100"
+																 style="width: {{ratings.r2}}%">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4" style="padding-right:0;padding-left:0; ">
+														<p class="c-margin-t-10">
+															差评({{ratings.r3}}%)
+														</p>
+													</div>
+													<div class="col-md-8">
+														<div class="progress c-margin-t-15" style="height: 14px">
+															<div class="progress-bar progress-bar-danger" role="progressbar"
+																 aria-valuenow="{{ratings.r3}}" aria-valuemin="0" aria-valuemax="100"
+																 style="width: {{ratings.r3}}%">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-5" ng-hide="reviews_num!=0">
+											<div class="col-md-12">
+												<div class="c-margin-b-40 c-margin-t-40 c-center">
+													<p style="height: 76px;line-height: 76px;">此商品暂时还没有买家印象哦~</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--END：好评、差评等有统计显示-->
+
+									<!--BEGIN：评论列表-->
+									<div class="c-padding-20 c-border-bottom" ng-repeat="review in reviews">
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="c-product-review-name c-margin-b-20" >
+                                                    <img ng-src="{{getAbsolutePath(review.headImg)}}"  style="width: 50px;height: 50px;border-radius: 50%;"/>
+													<span class="c-font-bold c-font-24 c-margin-b-5">{{review.nickName}}</span>
+												</div>
+											</div>
+											<div class="col-xs-6">
+												<div class="c-product-rating c-right">
+													<i class="fa fa-star c-font-red" style="font-size: 16px" ng-if="review.ratings>=1"></i>
+													<i class="fa fa-star c-font-red" style="font-size: 16px" ng-if="review.ratings>=2"></i>
+													<i class="fa fa-star c-font-red" style="font-size: 16px" ng-if="review.ratings>=3"></i>
+													<i class="fa fa-star c-font-red" style="font-size: 16px" ng-if="review.ratings>=4"></i>
+													<i class="fa fa-star c-font-red" style="font-size: 16px" ng-if="review.ratings>=5"></i>
+												</div>
+											</div>
+										</div>
+										<div class="c-product-review-content">
+											<p style="font-size: 17px;">{{review.comments}}</p>
+										</div>
+										<div class="c-product-review-content css-margin">
+											<div id="img_hover" ng-repeat="img in review.pics">
+												<img  ng-src="{{getAbsolutePath(img)}}" class="img_hover_img1" />
+												<img  ng-src="{{getAbsolutePath(img)}}" id="img_hover_show"/>
+											</div>
+											<!--<img  ng-repeat="img in review.pics"  ng-src="{{img}}"/>-->
+										</div>
+										<div  style="padding-left: 0px;">
+											<p>发表于: {{review.created_at}}</p>
+										</div>
+									</div>
+									<!--END：评论列表-->
+                                    <div class="c-margin-t-20"></div>
+                                    <!-- BEGIN: 分页页码 -->
+                                    <div class="row" style="margin: 0" ng-hide="reviews_num==0">
+                                        <div class="col-md-12 c-bg-white">
+                                            <div class="c_page">
+                                                <div class="p_ul" style="width: auto">
+                                                    <ul>
+                                                        <li ng-click="setpages(-1,0)"><a href="javascript:void(0);"></a></li>
+                                                        <li class="{{page==productReviewData.page?'active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages"><a href="javascript:void(0);">{{page}}</a></li>
+                                                        <li ng-click="setpages(+1,0)"><a href="javascript:void(0);"></a></li>
+                                                    </ul>
+                                                    <div style="clear: both;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--暂无评价时-->
+                                    <div class="row" style="margin: 0" ng-hide="reviews_num!=0">
+                                        <div class="col-md-12 c-bg-white">
+                                            <div class="c_page">
+                                                <div class="p_ul" style="width: auto">
+                                                    <P>「暂无评价」</P>
+                                                    <div style="clear: both;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END: 分页页码 -->
+								</div>
+						</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="content_right_box">
+				<img style="width: 100px; height: 100px;" ng-src="{{shop.mainPic}}" alt="" style="border: 1px #efefef solid">
+				<div class="content_right_title"><img ng-src="img/bingo.png" alt=""> <p>{{shop.name}}</p> </div>
+				<div class="content_right_box_content">
+					<p>联系人：<p-1>{{shop.contacts}}</p-1></p>
+
+					<p>地址：<p-1> {{shop.address}}</p-1></p>
+					</div>
+					<div class="content_right_box_bottom">
+						<a ng-click="toshop(shop.id,shop.shopType)" href="javascript:void(0);">进入店铺</a>
+					</div>
+			</div>
+			<div class="content_right_box2">
+				<div class="content_right_box2_content" style="cursor: pointer" ng-repeat="product in recommentProducts" ng-click="toProductDetail(product.id)">
+					<img ng-src="{{product.mainPicPath}}" alt="">
+					<h2 class="c-title c-font-16 c-font-slim" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{product.name}}</h2>
+					<p>{{toDecimal2(product.suggestedRetailUnitPrice)}}<span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="product.originUnitPrice">￥</span>{{toDecimal2(product.originUnitPrice)}}</span></p>
+				</div>
+
+			</div>
+			<div class="content_right_bottom"style="position: fixed;right: 50px;bottom: 150px;" ng-click="gotoTop()">
+					<a href="javascript:void(0);"><img src="img/top.png" alt=""></a>
+			</div>
+		</div>
+	</div>
+
+   <!--E content-->
+<style>
+	.selectPic{
+		opacity: 1;
+	}
+</style>
+<script type="text/javascript">
+    $(function(){
+        $("#pro_detail a").click(function(){
+            $("#pro_detail a").removeClass("cur");
+            $(this).addClass("cur");
+            $("#big_img").attr("src",$(this).attr("simg"));
+        });
+
+        $(".attrdiv a").click(function(){
+            $(".attrdiv a").removeClass("cur");
+            $(this).addClass("cur");
+        });
+
+        $('.amount2').click(function(){
+            var num_input = $("#subnum");
+            var buy_num = (num_input.val()-1)>0?(num_input.val()-1):1;
+            num_input.val(buy_num);
+        });
+
+        $('.amount1').click(function(){
+            var num_input = $("#subnum");
+            var buy_num = Number(num_input.val())+1;
+            num_input.val(buy_num);
+        });
+
+        $("#H-table li").each(function(i){
+            $(this).click((function(k){
+                var _index = k;
+                return function(){
+                    $(this).addClass("cur").siblings().removeClass("cur");
+                    $(".H-over").hide();
+                    $(".H-over:eq(" + _index + ")").show();
+                }
+            })(i));
+        });
+        $("#H-table1 li").each(function(i){
+            $(this).click((function(k){
+                var _index = k;
+                return function(){
+                    $(this).addClass("cur").siblings().removeClass("cur");
+                    $(".H-over1").hide();
+                    $(".H-over1:eq(" + _index + ")").show();
+                }
+            })(i));
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+	
+$(function(){
+	
+})
+</script>

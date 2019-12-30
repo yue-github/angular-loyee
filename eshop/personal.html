@@ -1,0 +1,112 @@
+<link rel="stylesheet" type="text/css" href="css/personal.css"/>
+<style>
+	img{
+		display: inline-block;
+	}
+	p{
+		margin: 0px;
+	}
+	body{
+		font: normal 12px "黑体";
+		color: rgb(102, 102, 102);
+	}
+</style>
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+   		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+   		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <span>欢迎你,<span>{{info.nickName}}</span></span>
+	   			  <a  href="#/updateInfo">修改个人信息</a>
+   				</div>
+   				<div class="b_box">
+   					<div class="i_left"> 
+	   					<div class="b_img">
+	   						<img ng-src="{{info.headImg}}" src="img/c03.png" alt="" />
+	   					</div> 
+	   					<p>{{info.nickName}}</p>
+	   					<p>{{info.grade || "大众会员"}}</p>
+   					</div>
+   					<div class="i_right">
+   						<ul>
+   							<li>
+   								<div class="r_img" ng-click="skipPage('#/shoppingCart','1')">
+   									<img src="img/c04.png" alt="" />
+   								</div>
+   								<p>购物车</p>
+   								<p><strong>{{shopCount}}</strong>件</p>
+   							</li>
+   							<li>
+   								<div class="r_img" ng-click="skipPage('#/myGold','1')">
+   									<img src="img/c05.png" alt="" />
+   								</div>
+   								<p>金币</p>
+   								<p><strong>{{info.golds}}</strong>个</p>
+   							</li>
+   							<li>
+   								<div class="r_img" ng-click="skipPage('#/myCoupons','1')">
+   									<img src="img/c06.png" alt="" />
+   								</div>
+   								<p>优惠券</p>
+   								<p><strong>{{info.couponAmount || 0}}</strong>张</p>
+   							</li>
+   						</ul>
+   						<div style="clear: both;"></div>
+   					</div>
+   				</div>
+   				<div class="r_icon">
+   					<p>订单信息</p>
+   					<ul>
+   						<li ng-click="skipPage('#/myOrders?page=1','1')">
+   							<img src="img/c07.png"/>
+   							<span>待支付</span>
+   						</li>
+   						<li ng-click="skipPage('#/myOrders?page=2','1')">
+   							<img src="img/c08.png"/>
+   							<span>待发货</span>
+   						</li>
+   						<li ng-click="skipPage('#/myOrders?page=3','1')">
+   							<img src="img/c10.png"/>
+   							<span>待收货</span>
+   						</li>
+   						<li ng-click="skipPage('#/myOrders?page=4','1')">
+   							<img src="img/c12.png"/>
+   							<span>待评价</span>
+   						</li>
+   						<li ng-click="skipPage('#/myOrders?page=6','1')">
+   							<img src="img/c11.png"/>
+   							<span>退货/退款</span>
+   						</li>
+   					</ul>
+   					<!--<div style="clear: both;"></div>-->
+   				</div>
+   			</div>
+   		</div>
+		<div style="clear: both;"></div>
+   	</div>
+	   <div style="clear: both;"></div>
+   	<div class="c_down">
+   	 <div class="d_title">
+		<span>猜你喜欢</span>
+		<button ng-click="changeALot()">换一组</button>
+	 </div>
+	 <div class="d_detail">
+	 	<!--1-->
+	  <div class="s_list" ng-repeat="re_item in recommentProducts">
+	    <div class="s_con" ng-click="toProductDetail(re_item.id)">
+		   <a href="javascript:void(0);">
+		     <img class="s_pic" ng-src="{{re_item.mainPicPath}}" />
+		   </a>
+	   	  <p class="s_header">{{re_item.name}}</p>
+	      <span class="s_price">￥{{toDecimal2(re_item.suggestedRetailUnitPrice)}}</span>
+		</div>
+	  </div>
+
+	 </div>
+   </div>
+	   <!--E content-->
+   </div>

@@ -1,0 +1,75 @@
+
+
+
+<!--S content-->
+<div class="content">
+	<div class="c_up">
+		<div class="u_a">
+			<a href="index.html">首页</a>
+			<span>></span>
+			<a href="specialty.html">地方特产</a>
+		</div>
+		<div class="u_b">
+			<div class="u_tab" ng-repeat="cat in categorylist">
+				<span  ng-click="selcategory(cat.id,0,cat.name)" ng-mouseenter="currentparent_id=cat.id" ng-mouseleave="currentparent_id=0">{{cat.name}}</span>
+				<div class="u_ul {{currentparent_id==cat.id?'uactive':''}}" ng-mouseenter="currentparent_id=cat.id" ng-mouseleave="currentparent_id=0">
+					<div class="u_lis">
+						<ul ng-repeat="subcat in cat.subcategories">
+							<li><a href="javascript:void(0);" ng-click="selcategory(subcat.id,subcat.parent_id,subcat.name,cat.name)"><img ng-src="{{subcat.image}}" />{{subcat.name}}</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+
+		<div class="u_title">
+			<a href="javascript:void(0);">综合排序</a>
+			<a href="javascript:void(0);" class="active"><img src="img/arrows.png"/>销量</a>
+			<a href="javascript:void(0);">价格</a>
+			<a href="javascript:void(0);">评论</a>
+			<span class="u_s">共<span class="u_sum">{{totalRow}}</span>件商品</span>
+		</div>
+	</div>
+	<div class="c_down">
+		<div class="d_detail">
+			<div class="s_list" ng-repeat="item in products">
+				<div class="s_con" ng-click="toProductDetail(item.id)" style="height:auto;">
+					<a href="javascript:void(0);">
+						<img class="s_pic" ng-src="{{item.mainPic}}" width="290" height="265"/>
+					</a>
+					<p class="s_header">{{item.name}}</p>
+					<span class="s_price">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+					<span style="text-decoration: line-through;" ng-if="item.originUnitPrice">￥{{toDecimal2(item.originUnitPrice)}}</span>
+				</div>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="comfirmOrder(item.id)">立即购买</a>
+					</div>
+					<div class="btn-group c-border-left c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="shoppingCart(item.id)">加入购物车</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="c_page">
+		<div class="p_ul">
+			<ul>
+				<li ng-click="setpages(-1,0)"><a href="JavaScript:"></a></li>
+				<li class="{{page==data.pageNumber?'active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages"><a href="JavaScript:">{{page}}</a></li>
+				<li ng-click="setpages(+1,0)"><a href="JavaScript:" ></a></li>
+			</ul>
+			<div style="clear: both;"></div>
+		</div>
+
+
+	</div>
+</div>
+<!--E content-->
+
+
+
+

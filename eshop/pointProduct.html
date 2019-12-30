@@ -1,0 +1,58 @@
+<div class="middle">
+	<!--S star-->
+	<div style="clear: both;"></div>
+	<div class="star" style="height: auto">
+	<div class="c-content-title-4" style="margin: 30px 0;">
+		<h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+			<span class="c-bg-grey-1 ng-binding">积分商城</span>
+		</h3>
+   	</div>
+		
+		<div class="s_goods" style="height: auto">
+			<div class="s_list" ng-repeat="item in list">
+				<div class="s_con" ng-click="toDetail(item.productId, item.id)">
+					<a href="javascript:void(0);"> <img class="s_pic"
+						ng-src="{{item.mainPic}}" width="290" height="265" />
+					</a>
+					<p class="s_header">{{item.product_name}}</p>
+					<span class="s_price">{{item.need_point}}积分</span>
+					<span style="text-decoration: line-through;">
+						￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+				</div>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group c-border-top" role="group">
+						<a
+							class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product"
+							ng-click="toDetail(item.productId, item.id)">详情</a>
+					</div>
+					<!-- <div class="btn-group c-border-left c-border-top" role="group">
+						<a
+							class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product"
+							ng-click="comfirmOrder(item.expire_status, item.id)">立即购买</a>
+					</div> -->
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	<!--E star-->
+</div>
+
+<style>
+.p-star-name-st {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	z-index: 10000;
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 32px;
+	font-weight: 500;
+	color: #ffffff;
+	cursor: pointer;
+}
+</style>
+
+

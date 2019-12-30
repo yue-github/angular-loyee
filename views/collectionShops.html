@@ -1,0 +1,65 @@
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-20 c-margin-b-15 ">店铺收藏</div>
+        </div>
+        <div class="row c-margin-b-40">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+
+                    <div class="row c-padding-20">
+                        <div class="col-md-4 col-sm-6 c-margin-b-20" ng-repeat="shop in shops">
+                            <div class="c-content-product-2 c-bg-white c-border">
+                                <div class="c-content-overlay">
+                                    <div class="c-overlay-wrapper">
+                                        <div class="c-overlay-content">
+                                            <a href="javascript:" ng-click="toshopindex(shop.relate_Id)" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">进入店铺</a>
+                                        </div>
+                                    </div>
+                                    <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 210px; background-image: url({{shop.logoPic}});"></div>
+                                </div>
+                                <div class="c-padding-10">
+                                    <div class="c-title c-font-16 c-font-slim c-center">{{shop.name}}</div>
+
+                                </div>
+                                <div class="btn-group btn-group-justified" role="group">
+                                    <div class="btn-group c-border-top" role="group">
+                                        <a href="javascript:" ng-click="toshopindex(shop.relate_Id)" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">进入店铺</a>
+                                    </div>
+                                    <div class="btn-group c-border-left c-border-top" role="group">
+                                        <a href="JavaScript:" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" ng-click="cancleShop(shop.id)">取消收藏</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>

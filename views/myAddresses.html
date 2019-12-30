@@ -1,0 +1,62 @@
+
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">我的地址</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group" ng-repeat="item in addresses">
+                    <div class="c-content-panel">
+                        <div class="c-border c-border-green-1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-1 c-theme-bg c-padding-20 c-font-white c-center">
+                                        <p ng-if="item.is_default">默认地址</p>
+                                        <p ng-if="item.is_default==false"> 常用地址</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="c-font-16 c-font-bold c-margin-t-20">{{item.contacts}}<span class="c-font-14"> &nbsp;&nbsp;收</span></p>
+                                        <p>
+                                            <span class="c-font-16 c-font-bold ">{{item.province}}</span>
+                                            <span class="c-font-16 c-font-bold ">{{item.city}}</span>
+                                            <span class="c-font-16 c-font-bold ">{{item.district}}</span>
+                                            <span class="c-font-16  ">{{item.detailedAddress}}</span>
+                                        </p>
+                                        <p>{{item.phone}}</p>
+                                    </div>
+                                    <div class="col-lg-3 c-border-l-green-1 c-padding-20 c-center">
+                                        <i class="fa fa-trash-o c-posAbsolute-tr-5 fa-2x" ng-click="remove(item.id)"></i>
+                                        <a href="#/updateAddress?id={{item.id}}" class="btn btn-lg c-btn-green c-font-uppercase c-btn-square" >编辑</a>
+                                        <div class="c-margin-t-8 c-margin-b-10 c-padding-10 ">
+                                            <a class="c-theme-font cursor-pointer" style="cursor: pointer" ng-click="setDefault(item.id)">一键设为默认地址</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"  ng-click="addAddress()">
+                    <div class="control-label c-margin-b-10"></div>
+                    <div class="c-content-panel">
+                        <div class="c-border c-border-green-1" style="border-style:dashed;">
+                            <div class="row">
+                                <div class="col-md-12 c-center c-padding-20" >
+                                    <div class="c-padding-10">
+                                        <a class="c-font-16"><span class="icon-plus c-font-24 c-theme-font"></span>&nbsp;&nbsp;添加新地址</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

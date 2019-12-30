@@ -1,0 +1,73 @@
+<link rel="stylesheet" type="text/css" href="css/edit.css"/>
+
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<img style="margin-left: 30px;width: 20px;height: 20px;" src="images/icon_edit.png" />
+	   			<a >修改店铺信息</a>
+	   		</div>
+	   		<div class="r_down">
+	   			<div class="d_detail">
+	   			 <form action="" role="form" class="form-horizontal form">
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">店铺名称：</label>
+	   			 		<div class="col-md-8">
+	   			 			<input type="text" class="form-control" ng-model="data.name" />
+	   			 		</div>
+	   			 	</div>
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">联系人：</label>
+	   			 		<div class="col-md-8">
+	   			 			<input type="text" class="form-control"  ng-model="data.contacts"/>
+	   			 		</div>
+	   			 	</div>
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">性别：</label>
+	   			 		<div class="col-md-2">
+	   			 			<select class="form-control" ng-model="data.gender">
+								<option value="">请选择</option>
+								<option ng-selected="data.gender == 0" value="0">女</option>
+								<option ng-selected="data.gender == 1" value="1">男</option>
+	   			 			</select>
+	   			 		</div>
+	   			 	</div>
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">联系电话：</label>
+	   			 		<div class="col-md-8">
+	   			 			<input type="text" class="form-control" onkeyup="value=value.replace(/[^0-9]/g,'')" ng-Keyup="onkeydownNumber()" ng-model="data.phone"/>
+	   			 		</div>
+	   			 	</div>
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">店铺地址：</label>
+	   			 		<div class="col-md-8">
+	   			 			<input type="text" class="form-control" ng-model="data.address"/>
+	   			 		</div>
+	   			 	</div>
+	   			 	<div class="form-group">
+	   			 		<label for="" class="col-md-3 control-label">店铺logo：</label>
+	   			 		<div class="col-md-3">
+	   			 			<img ng-src="{{data.logoPic}}" alt="" class="img-responsive" ng-click="updateImg()"/>
+							<input id="logoPic" ngf-select="upload($file)" class="hide" type="file"/>
+	   			 		</div>
+	   			 	</div>
+					 <div class="btn btn-group f_b" style="margin-left:80px;">
+						 <!-- <a href="javascript:void(0);" class="btn btn-color" ng-click="clean()">重置信息</a> -->
+						 <a href="javascript:void(0);" class="btn btn-color" ng-click="submit()">保存更改</a>
+					 </div>
+	   			 </form>
+
+	   			</div>
+	   			<!--<a href="javascript:void(0);" class="d_btn">修改店铺信息</a>-->
+	   		</div>
+	   	</div>
+   	</div>
+   	
+   </div>
+   <!--E content-->
+   

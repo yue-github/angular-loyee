@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="css/goods.css"/>
+
+<!--S content-->
+<div class="content">
+	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+		<div class="c_right">
+			<div class="r_down">
+				<div class="d_detail">
+					<div class="container">
+						<div class="row">
+							<ul class="list-group">
+								<li class="list-group-item">
+									<div class="n_search" style="width:520px;">
+										<div class="n_text">
+											<input type="text" class="n_txt" ng-model="title" placeholder="名称"/>
+										</div>
+										<div class="n_text">
+											<button style="width:60px;margin-left:10px;" ng-click="search()">搜索</button>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item" style="margin-left:260px;"><a href="#/pickupAddressForm"><button class="c-font-grey-1">添加</button></a></li>
+							</ul>
+						</div>
+						<div class="row">
+							 <p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="products.length==0">抱歉，暂无数据</p>
+							 <table class="table table-bordered" ng-show="products.length != 0">
+								<tr>
+									<th>名称</th>
+									<th>省</th>
+									<th>市</th>
+									<th>区</th>
+									<th>地址</th>
+									<th>操作</th>
+								</tr>
+								<tr ng-repeat="item in list">
+									<td>{{item.title}}</td>
+									<td>{{item.province}}</td>
+									<td>{{item.city}}</td>
+									<td>{{item.district}}</td>
+									<td><p>{{item.detail_address}}</p></td>
+									<td>
+										<a href="#/pickupAddressForm?id={{item.id}}" >编辑</a>
+										<a href="javascript:void(0)" ng-click='delete(item.id)'>删除</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="row" ng-show="total > 0">
+							<div ng-include="'eshop/pages.html'"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--E content-->
+   
+

@@ -1,0 +1,105 @@
+<style>
+    .c-bg-img-center{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+    }
+    .crumbs-first {
+	    color: #999;
+	    font-family: "Helvetica Neue","Hiragino Sans GB",SimSun,serif;
+	    font-size: 16px;
+	}
+	.keyName{
+		font-size: 15px;
+		color: black;
+	}
+	.position{
+		float: right;
+		
+	}
+	.c-bg-color-2-hover:hover{
+		background-color: #F29700;
+	}
+	.c-overlay-content a{color: #CCCCCC;font-size: 16px;font-weight: 700;font-family: "黑体";}
+	.c-overlay-content a:hover{color: white;}
+	 .add-click{background-color: #e6e6e6;!important;}
+</style>
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+      <div class="c-page-title c-pull-left">
+            <span class="crumbs-first">搜索结果&nbsp;>&nbsp;<sapn>
+            <span class="keyName" ng-if="data.keyName">{{data.keyName}}</span>
+        </div>
+        <div class="c-page-title position">
+           <!-- <select style="width: 130px;font-size: 16px;" ng-change="getproducts()" ng-model="data.priceSort" >
+                <option value="desc">价格由高到低</option>
+                <option value="asc">价格由低到高</option>
+           </select>-->
+           	 <button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isPrice]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isPrice,'isPrice')">
+			  <span aria-hidden="true"></span> 价格
+            </button>
+			 <button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isSell]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isSell,'isSell')">
+			  <span  aria-hidden="true"></span> 销量
+			</button>
+			<button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isComment]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isComment,'isComment')">
+			  <span  aria-hidden="true"></span> 评论数
+            </button>
+            <button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isRank]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isRank,'isRank')">
+                <span  aria-hidden="true"></span> 商家排名
+              </button>
+              <button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isClassify]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isClassify,'isClassify')">
+                <span  aria-hidden="true"></span> 产品分类
+              </button>
+              <button ng-class="{1: 'glyphicon glyphicon-arrow-down add-click', 2: 'glyphicon glyphicon-arrow-up'}[isHeat]" type="button" class="btn btn-default btn-mini " ng-click="searchTop(data.keyName,isHeat,'isHeat')">
+                <span  aria-hidden="true"></span> 产品品牌热度
+              </button>
+			
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-2-7 -->
+        <div class="c-bs-grid-small-space">
+            <div class="row">
+            	<p style="text-align: center;font-size: 20px;color: #696969;margin-top: 20px;" ng-if="products.length ==0">抱歉，暂时无数据</p>
+            	<p style="text-align: center;" ng-if="products.length ==0"><img src="img/noResult.png"></p>
+                <div class="col-md-3 col-sm-6 c-margin-b-20" ng-repeat="item in products">
+                    <div class="c-content-product-2 c-bg-white c-border">
+                        <div class="c-content-overlay">
+                            <div class="c-overlay-wrapper" ng-click="toProductDetail(item.id)">
+                                <div class="c-overlay-content">
+                                    <a   class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>
+                                </div>
+                            </div>
+                            <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 230px; background-image: url({{item.mainPic}});"></div>
+                        </div>
+                        <div class="c-info">
+                            <h2 class="c-title c-font-16 c-font-slim" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{item.name}}</h2>
+                            <p class="c-price c-font-14 c-font-slim c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(item.suggestedRetailUnitPrice)}} &nbsp;
+                                <span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="item.originUnitPrice">￥</span>{{toDecimal2(item.originUnitPrice)}}</span>
+                            </p>
+                            <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="item.shopType==1">第三方运营</span>
+                            <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="item.shopType==2">O2O服务区</span>
+                            <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="item.shopType==3">自营</span>
+                        </div>
+                        <div class="btn-group btn-group-justified" role="group">
+                            <div class="btn-group c-border-top" role="group">
+                                <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-color-2-hover c-btn-product" ng-click="comfirmOrder(item.id)">立即购买</a>
+                            </div>
+                            <div class="btn-group c-border-left c-border-top" role="group">
+                                <a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-color-2-hover c-btn-product" ng-click="shoppingCart(item.id)">加入购物车</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-20"></div>
+          <div class="row">
+              <div ng-include="'eshop/pages.html'"></div>
+          </div>
+        <!-- END: 分页 -->
+    </div>
+</div>

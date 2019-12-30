@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="css/personalcollection.css"/>
+   <!--S content-->
+   <div class="content">
+	   <div class="c_up">
+		   <div class="u_left">
+			   <div ng-include="'eshop/menu.html'"></div>
+		   </div>
+		   <div class="u_right">
+			   <div class="r_box">
+				   <div class="b_title">
+					   <ul>
+						   <li ><a href="#/collectionProducts" class="active">宝贝收藏</a></li>
+						   <li><a href="#/collectionShops"   >店铺收藏</a></li>
+					   </ul>
+					   <div class="b_title_table">
+						   <input class="b_title_text" ng-model="data.name" type="text" name="" value="" > <input ng-click="search()" class="b_title_button" type="button" name="" value="搜索">
+					   </div>
+				   </div>
+				   <div class="b_detail">
+					   <div class="b_detail_div">
+					   		<label>
+					   		   <span>全选</span> 
+							   <input ng-model="chkall" ng-click="chkAll(chkall)" type="checkbox" name="" value="" >
+							   <div class="checkboxShow-box"></div>
+					   		</label>
+						    <img src="img/delect.png" ng-click="cancleproduct()"/>
+						    
+					   </div>
+					   <p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;" ng-show="products.length == 0">暂无数据</p>
+					   <div class="b_detail_content">
+						   <div class="b_detail_content_box"  ng-repeat="item in products" ng-show="products.length != 0">
+								<label>
+									<input ng-model="item.checked" ng-checked="item.checked" class="checkbox" type="checkbox" name="" value="" >
+									<div class="checkboxShow-box"></div>
+								</label>
+							   <a href="javascript:void(0);"><div class="b_detail_content_top" >
+								   <img ng-click="toproduct(item.relate_Id)" ng-src="{{item.mainPic}}" alt="">
+							   </div></a>
+							   <div class="b_detail_content_bottom" ng-click="toproduct(item.relate_Id)">
+								   <span class="b_detail_content_bottom_title">{{item.name}}</span>
+								   <!--<br>-->
+								   <span class="c-font-red">￥{{toDecimal2(item.suggestedRetailUnitPrice)}} </span>
+								   <a class="c-border-bottom c-theme-border-bottom" href="javascript:void(0);" ng-click="cancleproduct(item.id)" style="float: right;    margin-right: 5px;">取消收藏</a>
+							   </div>
+						   </div>
+						   <div style="clear: both;"></div>
+						   <div ng-include="'eshop/pages.html'" ng-show="products.length!=0"></div>
+					   </div>
+				   </div>
+			   </div>
+			   <div style="clear: both;"></div>
+		   </div>
+	   </div>
+   </div>

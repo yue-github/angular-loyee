@@ -1,0 +1,31 @@
+		
+
+		/*S content*/
+		.content .c_box{width: 1200px;margin: auto;display: flex;flex-direction: row;}
+		.content .c_box .c_left{width: 200px;}		
+		.content .c_box .c_left ul li{list-style-type: none;width: 200px;height: 44px;border: 1px solid #F1F1F1;font-size: 20px;background: white;text-align: center;line-height: 44px;}
+		.content .c_box .c_left ul li~li{border-top: none;}
+		.content .c_box .c_left ul li:first-child{background: #F29700;color: white;}
+		.content .c_box .c_left ul li:first-child a{color: white;}
+		.content .c_box .c_left ul li a{color: #8D8D8D;}
+		
+		.content .c_box .c_right{flex: 1;margin-bottom: 120px;}
+		.content .c_box .c_right .r_up{background: white;height: 43px;line-height: 44px;border-bottom: 1px solid #F1F1F1;}
+		.content .c_box .c_right .r_up img{width: 30px;height: 28px;vertical-align: middle;margin-left: 20px;}
+		.content .c_box .c_right .r_up a{color: #B2B2B2;}
+		.form{width: 100%}
+		.content .c_box .c_right .r_down{background: white;height: auto;width: 992px;margin: 7px 0 0 8px;padding-bottom: 80px;}
+		.content .c_box .c_right .r_down .d_detail{display: flex;flex-direction: row;padding: 22px 0 0 40px;}
+		.content .c_box .c_right .r_down .d_detail .d_pic img{width: 110px;height: 110px;}
+		.content .c_box .c_right .r_down .d_detail .form select{width: 40px;height: 28px;border-radius: 0px;padding: 0px;}
+		.content .c_box .c_right .r_down .d_detail .form label{color: #939393;font-size: 18px;font-weight: 500;}
+		.content .c_box .c_right .r_down .d_detail .form .f_pic{width: 110px;height: 110px;}
+		.content .c_box .c_right .r_down .d_detail .btn .btn{width: 160px;height: 40px;line-height: 40px;border-radius: 0;padding: 0;border: none;margin-left: 20px;border: 1px solid #e6e6e6;;}
+		.content .c_box .c_right .r_down .d_detail .f_b{margin-top: 30px;}
+		
+		/*E content*/
+		/******** 后期修改样式 **********/
+		.back-color{background-color:#F29700 ;}
+		.back-color:hover{background-color: #FABD00;}
+		.btn-color{color: #696969;}
+		.btn-color:hover{color: #555;}

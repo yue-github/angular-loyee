@@ -1,0 +1,332 @@
+<link rel="stylesheet" type="text/css" href="css/order.css"/>
+
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<a href="#/shopOrders?status=-1" class="{{data.status=='-1'?'active':data.status}}">全部订单</a>
+	   			<a href="#/shopOrders?status=1" class="{{data.status=='1'?'active':''}}">待支付</a>
+	   			<a href="#/shopOrders?status=2" class="{{data.status=='2'?'active':''}}">待发货</a>
+	   			<a href="#/shopOrders?status=3" class="{{data.status=='3'?'active':''}}">待收货</a>
+	   			<a href="#/shopOrders?status=4" class="{{data.status=='4'?'active':''}}">已收货</a>
+	   		</div>
+	   		<div class="r_down">
+	   			<div class="d_detail">
+	   				<div class="container">
+	   					<div class="row">
+							<div class="col-md-3 padding-0 ">
+								从
+								<input class="form-control  c-square c-theme active c-font-14" style="width: 90%;display: inline-block;" type="date" ng-model="data.startTime "/>
+							</div>
+							<div class="col-md-3 padding-0 c-font-14">
+								到
+								<input class="form-control  c-square c-theme active c-font-14" style="width: 85%;display: inline-block;"  type="date" ng-model="data.endTime "/>
+							</div>
+							<div class="col-md-3 padding-0">
+								<div class="input-group c-square">
+									<input class="form-control c-font-14 c-square c-theme active"  placeholder="订单号" type="text" ng-model="data.order_code"/>
+									<span class="input-group-btn">
+                                        <button class="btn c-bg-yellow-5 c-font-grey-1" ng-click="search()">搜索</button>
+                                    </span>
+								</div>
+							</div>
+							<div class="col-md-1 padding-0" style="margin-left: 10px;">
+								<button class="btn c-bg-yellow-5 c-font-grey-1" ng-click="export()">导出</button>
+							</div>
+	   					</div>
+	   					<div class="row c-margin-t-20">
+	   						<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="orders.length==0">抱歉，暂无数据</p>
+	   						<table class="table table-bordered" ng-show="orders.length != 0">
+	   							<tr>
+	   								<th>商品</th>
+	   								<th>价格</th>
+	   								<th>数量</th>
+	   								<th>金额</th>
+	   								<th>操作</th>
+	   							</tr>
+	   						</table>
+	   						<table class="table table-bordered" ng-repeat="item in orders">
+	   							<tr>
+	   								<th colspan="4">
+										<span class="c-font-uppercase c-font-16 c-font-grey-2" style="margin-right:10px;">下单时间：{{item.created_at}}</span>
+										<span class="c-font-uppercase c-font-16 c-font-grey-2" style="margin-right:10px;">订单号：{{item.order_code}}</span>
+										<span class="c-font-red c-font-uppercase c-font-16" style="margin-right:10px;">总价：{{item.totalPayable}}</span>
+										<span class="c-font-red c-font-uppercase c-font-16" style="margin-right:10px;">运费：{{item.deliveryPrice}}</span>
+	   								</th>
+	   								<th><span style="font-size:12px;">{{item.status}}</span></th>
+	   							</tr>
+								<tr ng-repeat="detail in item.details">
+									<td>
+										<div class="media">
+											<div class="media-left">
+												<img src="img/g_1.png" ng-src="{{getAbsolutePath(detail.mainPic)}}"   class="media-object" />
+											</div>
+
+											<div class="media-body">
+												<a href="#/product?id={{detail.product_id}}" class="c-cart-price c-font-grey-3 c-font-16">{{detail.product_name}}</a>
+												<p class="c-font-14">{{detail.selectProterties}}</p>
+											</div>
+										</div>
+									</td>
+									<td>￥<span class="c-font-red">{{toDecimal2(detail.actualUnitPrice)}}</span></td>
+									<td>{{detail.unitOrdered}}</td>
+									<td rowspan="{{item.details.length+1}}" ng-if="$index==0"><span class="c-font-red">{{toDecimal2(item.totalPayable - item.deliveryPrice)}}</span></td>
+									<td rowspan="{{item.details.length+1}}" ng-if="$index==0">
+										<a href="#order?id={{item.id}}&type=1">订单详情</a>
+										<button data-toggle="modal" data-target="#show-form" class="btn btn-default" ng-if="item.status=='待发货'&&detail.status==1" ng-click="setorderId(item.id)">发货</button>
+										<button data-toggle="modal" data-target="#OrderInvoiceForm" class="btn btn-default" ng-click="getOrderInvoiceRecords(item.id)" class="btn c-btn-green c-btn-square c-font-14" ng-if="detail.status==1&&item.status=='已收货'">开发票</button>
+										<p class="c-font-14" ng-if="detail.status==2">已申请退款</p>
+										<p class="c-font-14" ng-if="item.status=='已收货'&&detail.status==5">退款成功</p>
+									</td>
+								</tr>
+	   						</table>
+	   					</div>
+	   					<div class="row" ng-show="orders.length != 0">
+	   						<div>
+								<div ng-include="'eshop/pages.html'"></div>
+							</div>
+	   					</div>
+	   				</div>
+	   			 </div>
+	   		</div>
+	   	</div>
+	   	<div class="modal fade" id="OrderInvoiceForm" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">订单发票信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">发票类型</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.type" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">单位名称</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.companyName" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">纳税人识别码</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.companyCode" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">单位注册地址</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.companyAddress" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">单位注册电话</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.companyPhone" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">开户银行</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.bankName" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">银行账户</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.bankAccount" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">收票人姓名</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.name" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type!='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">发票抬头</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.invoiceHead" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type!='增值发票'&&InvoiceInfo.invoiceHead!='个人'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">纳税人识别码</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.companyCode" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type!='普通纸质发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">收票人电话</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.phone" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='电子发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">收票人邮箱</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.email" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">收票人省份</label>
+                                            <div class="col-md-9">
+                                                <div class="col-md-12" style="padding: 0">
+                                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                                        <input readonly type="text" ng-model="InvoiceInfo.province" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                                        <input readonly type="text" ng-model="InvoiceInfo.city" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 0px;padding-right: 0px;">
+                                                        <input readonly type="text" ng-model="InvoiceInfo.district" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-if="InvoiceInfo.type=='增值发票'">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">详细地址</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.addressDetail" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">订单总金额</label>
+                                            <div class="col-md-9">
+                                                <input readonly type="text" ng-model="InvoiceInfo.totalPayable" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-5">
+                                                发票编号
+                                            </div>
+                                            <div class="col-md-5">
+                                                发票金额
+                                            </div>
+                                            <div class="col-md-2">
+                                                操作
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-repeat="item in OrderInvoice">
+                                        <div class="form-group">
+                                            <div class="col-md-5">
+                                                <input  type="text" ng-model="item.invoiceCode" class="form-control">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input  type="text" ng-model="item.money" class="form-control">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn dark btn-outline" ng-click="DeleteOrderInvoice($index)">删除</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn c-btn-green c-btn-square c-font-14" ng-click="AddOrderInvoice()">填写发票内容</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn c-btn-green c-btn-square c-font-14"  data-dismiss="modal" ng-click="createInvoiceRecord()">保存</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+	   	<div class="modal fade c-content-login-form" id="show-form" role="dialog" >
+            <div class="modal-dialog" style="width: 760px">
+                <div class="modal-content c-square">
+                    <div class="modal-header c-no-border c-bg-grey-1">
+                        <span>发货信息</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row c-margin-b-30 c-margin-t-20">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-md-2 control-label c-font-14">快递公司：</label>
+                                        <div class="col-md-10">
+                                            <select class="form-control  c-square c-theme" type="text" ng-model="delivery" ng-options="com.name for com in ExpressCom">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row c-margin-b-30">
+                                <label class="col-md-2 control-label c-font-14">快递单号：</label>
+                                <div class="col-md-10">
+                                    <input class="form-control  c-square c-theme" type="text" ng-model="data.trackingNumber" />
+                                </div>
+                            </div>
+                            <div class="row c-margin-b-30">
+                                <div class="col-md-6 c-right">
+                                    <button class="btn c-btn-green c-btn-square" ng-click="sendOut()">发货</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn c-btn-grey c-btn-square" ng-click="clean('show-form')">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+   	</div>
+   	
+   </div>
+   <!--E content-->
+
+

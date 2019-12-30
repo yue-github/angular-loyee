@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="css/personalcollection.css"/>
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <ul>
+					  <li><a href="#/collectionProducts">宝贝收藏</a></li>
+					  <li><a href="#/collectionShops"  class="active" >店铺收藏</a></li>
+	   			  </ul>
+						
+						<div class="b_title_table">
+						   <input class="b_title_text" ng-model="data.name" type="text" name="" value="" > <input ng-click="search()" class="b_title_button" type="button" name="" value="搜索">
+					   </div>
+   				</div>
+   				<div class="b_detail">
+					<!--<div class="b_detail_div">
+					   		<label>
+					   		   <span>全选</span> 
+							   <input ng-model="chkall" ng-click="chkAll(chkall)" type="checkbox" name="" value="" >
+							   <div class="checkboxShow-box"></div>
+					   		</label>
+						    <img src="img/delect.png" ng-click="cancleproduct()"/>
+						    
+					</div>-->
+					<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;" ng-show="shops.length==0">暂无数据</p>
+   					<div class="b_detail_content">
+							<div class="b_detail_content_box" ng-repeat="shop in shops" ng-show="shops.length ！= 0">
+								<div class="b_detail_content_box_top2" ng-click="toshopindex(shop.relate_Id)">
+									<img ng-click="toproduct(item.relate_Id)" ng-src="{{shop.logoPic}}" alt="">
+								</div>
+								<div class="b_detail_content_box_bottom2" ng-click="toshopindex(shop.relate_Id)">
+									<p>
+										<span>{{shop.name}} </span>
+										<a href="javascript:void(0);"  ng-click="toshopindex(shop.relate_Id)">进店看看</a>
+									</p>
+								</div>
+							</div>
+   					</div>
+					<div ng-include="'eshop/pages.html'"></div>
+   				</div>
+   			</div>
+   		</div>
+   		<div style="clear: both;"></div>
+   	</div>
+
+   <!--E content-->
+
+   </div>

@@ -1,0 +1,23 @@
+<style>
+	/*S c_page*/
+	.c_page .p_ul{width: 1200px;margin: auto;padding:20px 0px 40px 0px}
+	.c_page .p_ul ul{float: right;}
+	.c_page .p_ul ul li{width:34px;height: 34px;list-style-type: none;float: left;background: white;border: 1px solid #DEDEDE;text-align: center;line-height: 34px;font-size: 14px;margin-left: 8px;}
+	.c_page .p_ul ul li a{color: #858585;}
+	.c_page .p_ul ul li.active{background: #F29700;}
+	.c_page .p_ul ul li.active a{color: white;}
+	.c_page .p_ul ul li:first-child a{width: 0px;height: 0px;border-top: 7px solid transparent;border-right: 8px solid #3F3F3F;border-bottom: 7px solid transparent;display: block;margin-left: 50%;margin-top: 50%;transform: translate(-50%,-50%);}
+	.c_page .p_ul ul li:last-child a{width: 0px;height: 0px;border-top: 7px solid transparent;border-left: 8px solid #3F3F3F;border-bottom: 7px solid transparent;display: block;margin-left: 50%;margin-top: 50%;transform: translate(-50%,-50%);}
+	/*E c_page*/
+</style>
+
+<div class="c_page" style="padding-right:52px;">
+	<div class="p_ul">
+		<ul ng-if="pages[0]">
+			<li ng-click="setpages(-1,0)"><a href="JavaScript:"></a></li>
+			<li class="{{page==pageNumber?'active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages"><a href="JavaScript:;">{{page}}</a></li>
+			<li ng-click="setpages(+1,0)"><a href="JavaScript:"></a></li>
+		</ul>
+		<div style="clear: both;"></div>
+	</div>
+</div>

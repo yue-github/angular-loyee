@@ -1,0 +1,56 @@
+<link rel="stylesheet" type="text/css" href="css/gold.css"/>
+
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <ul>
+	   			  	<li><a href="#/myBankcard">我的银行卡</a></li>
+	   			  	<li><a href="#/myGold" class="active">我的金币</a></li>
+	   			  </ul>
+   				</div>
+   				<div class="b_box">
+   					<div class="b_gold">
+   						<img src="img/gold.png"/>
+   						<span>{{goldAmount}}个</span>
+   					</div>
+   				</div>
+   				<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="pageTotalRrow == 0">抱歉，暂无数据</p>
+   				<div class="b_detail" ng-if="{{pageTotalRrow == 0}}">
+   					<table border="0" cellspacing="0">
+   						<tr>
+   							<td>日期</td>
+   							<td>来源/用途</td>
+   							<td>金币变化</td>
+   							<td>备注</td>
+   						</tr>
+   						<tr ng-repeat="item in GoldList">
+   							<td>{{item.created_at}}</td>
+   							<td>{{item.GoldList}}</td>
+   							<td>{{item.amount}}</td>
+   							<td>{{item.note}}</td>
+   						</tr>
+
+   					</table>
+   					
+					<div class="c_page" ng-if="{{pageTotalRrow == 0}}">
+						<div class="p_ul">
+							<ul>
+								<li><a href="javascript:void(0);"  ng-click="setpages(-1,0)"></a></li>
+								<li class="{{page==data.pageNumber?'active':''}}" ng-repeat="page in pages"><a href="javascript:void(0);">{{page}}</a></li>
+								<li><a href="javascript:void(0);" ng-click="setpages(+1,0)"></a></li>
+							</ul>
+							<div style="clear: both;"></div>
+						</div>
+					</div>
+   				</div>
+   			</div>
+   		</div>
+   		<div style="clear: both;"></div>
+   	</div>
+   </div>

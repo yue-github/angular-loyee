@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="css/personalNotice.css"/>
+
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   		<div class="r_up">
+				<a href="javascript:void(0);" ng-click="selectNotice(0)" class="{{noticeType==0?'active':''}}">全部消息</a>
+				<a href="javascript:void(0);" ng-click="selectNotice(1)" class="{{noticeType==1?'active':''}}">未读消息<span style="color:red;margin:5px;" ng-if="data.noReadCount > 0">{{data.noReadCount}}</span></a>
+				<a href="javascript:void(0);" ng-click="selectNotice(2)" class="{{noticeType==2?'active':''}}">已读消息</a>
+			</div>
+   			<div class="r_box">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="btns">
+							<p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="notices.length==0">抱歉，暂无数据</p>
+							<table ng-show="notices.length!=0">
+								<thead>
+								   <th>消息等级</th><th>消息内容</th><th>时间</th><th>操作</th>
+								</thead>
+								<tbody>
+								  <tr ng-repeat="notice in notices">
+									  <td>
+										  <div class="btns_content">
+											  <div class="btns_content_right">
+												<span>{{notice.msg_grade}}</span>
+											  </div>
+										  </div>
+									  </td>
+									  <td><span>{{notice.msg_content}}</span></td>
+									  <td><span>{{notice.created_at}}</span></td>
+									  <td><a class="viewNotice" href="java:void(0);" ng-click="viewDetails(notice.id)">查看</a>
+									  	<a class="delNotice" href="java:void(0);" ng-click="delNotice(notice.id)">删除</a></td>
+								  </tr>
+								</tbody>
+							</table>
+							<div ng-include="'eshop/pages.html'" ng-show="notices.length!=0"></div>
+	   					</div>
+	   					
+	   					<div class="viewDetails" id="viewDetails" style="display: none">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="form-group" style="padding: 10px 20px;">
+										<p>{{data.content}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+   			</div> 
+   		</div>
+   	</div>
+   </div>

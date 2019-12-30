@@ -1,0 +1,101 @@
+<link rel="stylesheet" type="text/css" href="css/membersarea.css" />
+
+<div class="content">
+    <div class="c_box">
+        <div class="u_left">
+            <div ng-include="'eshop/shopMenu.html'"></div>
+        </div>
+        <div class="c_right">
+            <!-- <div class="r_up">
+                <a href="#/salesPromotion1" class="active">满减</a>
+                <a href="#/salesPromotion2">折扣</a>
+                <a href="#/salesPromotion3">秒杀</a>
+                <a href="#/salesPromotion5">满送</a>
+                <a href="#/salesPromotion6">满包邮</a>
+                <a href="#/salesPromotion7">拼团</a>
+            </div> -->
+            <div class="r_down">
+                <div class="d_detail">
+                    <div class="d_ul">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);" ng-click='ordeShow()'>添加</a>
+                            </li>
+                        </ul>
+                        <div style="clear: both;"></div>
+                    </div>
+                    <p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-if='table.length == 0'>抱歉，暂无数据</p>
+                    <div class="d_tab" ng-if='table.length > 0'>
+                        <table border="0" cellspacing="0" class="table-hover">
+                            <tr style='display: flex; flex-direction: row; align-content: center; align-items: center;'>
+                                <th class="c-center" style='flex:1; height: 60px;line-height: 60px;'>标题</th>
+                                <th class="c-center" style='flex:1; height: 60px;line-height: 60px;'>开始时间</th>
+                                <th class="c-center" style='flex:1; height: 60px;line-height: 60px;'>结束时间</th>
+                            </tr>
+                            <tr ng-repeat = "item in table" style='display: flex; flex-direction: row; align-content: center; align-items: center;'>
+                                <td style='flex:1; height: 55px;line-height: 55px;'>{{item.title}}</td>
+                                <td style='flex:1; height: 55px;line-height: 55px;'>{{item.stime}}</td>
+                                <td style='flex:1; height: 55px;line-height: 55px;'>{{item.etime}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 弹窗 -->
+<div class="orde" ng-if='ordeState'>
+   <div class="table">
+       <div class="top">
+           <span class="title">添加</span>
+           <span class="hides" ng-click='ordeHide()'>&times;</span>
+       </div>
+
+       <div class="box" ng-model='data'>
+           <div class="actName tableItem">
+               <label class="text">标题</label>
+               <input type="text" class="name input" placeholder="标题" ng-model='data.title'>
+           </div>
+
+           <div class="stateT tableItem">
+               <label class="text">开始时间</label>
+               <input type="date" class="sTime input" ng-model='data.stime'>
+           </div>
+
+           <div class="endT tableItem">
+               <label class="text">截止时间</label>
+               <input type="date" class="eTime input" ng-model='data.etime'>
+           </div>
+
+           <div class="money tableItem">
+               <label class="text">商品</label>
+               <select class="moneyAny input">
+                   <option>--请选择--</option>
+                   <option ng-repeat='item in goods' ng-click='goodsShow(item)'>{{item.name}}</option>
+               </select>
+           </div>
+
+           <div class="explain tableItem">
+               <label class="text">商品信息</label>
+               <div class="state" style='max-height: 200px;overflow: auto;'>
+                   <div class="goods" ng-if='good.length > 0' ng-repeat='item in good'>
+                       <div class="stateImg">
+                           <img src ="{{item.img}}" class="imgs">
+                       </div>
+                       <div class="sbox">
+                           <div class="stateName">{{item.name}}</div>
+                           <div class="stateComment">{{item.depict}}</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="submits">
+               <span class="go_submit" ng-click='ordeSubmit()'>提交</span>
+               <span class="reset_submit" ng-click='ordeHide()'>取消</span>
+           </div>
+       </div>
+   </div>
+</div>

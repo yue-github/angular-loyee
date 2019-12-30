@@ -1,0 +1,86 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                <div class="col-md-4">快递模板</div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-7 c-padding-10">
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                        </div>
+                        <div class="col-md-3 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="add()">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-line-left c-theme-bg"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12 c-padding-20">
+                    <div class="table-responsive" ng-repeat="item in logisticss">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr style="background: #E8F2FF">
+                                <th colspan="4">{{item.name}}</th>
+                                <th colspan="2" class="c-right">
+                                    <a class="c-font-blue" style="margin-right: 10px;cursor: pointer" ng-click="edit(item.id)">修改</a>
+                                    <a class="c-font-blue" style="cursor: pointer" ng-click="delete(item.id)">删除</a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="c-bg-grey-1 ">
+                                <td>运送方式</td>
+                                <td>运送到</td>
+                                <td>首重(kg)</td>
+                                <td>运费(元)</td>
+                                <td>续重(kg)</td>
+                                <td>运费(元)</td>
+                            </tr>
+                            <tr ng-repeat="list in item.details">
+                                <td>{{list.expressType}}</td>
+                                <td><span ng-repeat="p in list.provinceItem">{{p.provinceName}}</span></td>
+                                <td>{{list.firstUnit}}</td>
+                                <td>{{list.firstPay}}</td>
+                                <td>{{list.addUnit}}</td>
+                                <td>{{list.addPay}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-20"></div>
+        <ul class="c-content-pagination c-square c-theme pull-right" >
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页 -->
+    </div>
+</div>

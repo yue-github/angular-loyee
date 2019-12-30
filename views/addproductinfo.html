@@ -1,0 +1,419 @@
+
+<div class="container">
+    <!-- BEGIN: 卖家中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">发布宝贝</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="row c-margin-b-40 c-padding-20">
+            <div class="col-md-12 c-border">
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">商品标题：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-7" style="padding-right: 0">
+                        <input ng-model="data.name" ng-change="valiDateLength()" class="form-control  c-square c-theme"
+                                                 type="text"/>
+                    </div>
+                    <div class="col-md-3">
+                        你还可以输入{{fontLength}}个字
+                    </div>
+                </div>
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">商品供应商：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-7" style="padding-right: 0">
+                        <select class="form-control  c-square c-theme" ng-model="data.supplier_id" ng-options="x.id as x.name for x in suppliers">
+                            <option value="">请选择商品供应商</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">商品归类：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-7" style="padding-right: 0">
+                        <select class="form-control  c-square c-theme" ng-model="data.taxId" ng-options="x.id as x.name for x in signsList">
+                            <option value="">请选择商品品类</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">商品属性：</div>
+                    <div class="col-md-10 ">
+                        <div class="col-md-12 c-border c-bg-grey-1 c-padding-10" ng-if="commonAttrs.length>0">
+                            <div class="col-md-6 c-padding-10" ng-repeat="attr in commonAttrs">
+                                <label class="col-md-4 control-label c-font-14">{{attr.propertyName}}：</label>
+                                <div class="col-md-8 c-font-14">
+                                    <select class="form-control  c-square c-theme" ng-model="attrSelecteds[$index]"
+                                            ng-options="x.propertyValueId as x.propertyValueName for x in attr.propertyValueList">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 c-border c-margin-t-15 c-padding-10">
+                            <div class="col-md-6 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">成本价：</label>
+                                <div class="col-md-8 c-font-14">
+                                    <input type="number" min="0" class="form-control  c-square c-theme"
+                                           ng-model="data.unitCost"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">零售价格：<span
+                                        class="c-font-red">*</span></label>
+                                <div class="col-md-8 c-font-14">
+                                    <input type="number" min="0" class="form-control  c-square c-theme"
+                                           ng-model="data.originUnitPrice"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">促销价格：<span
+                                        class="c-font-red">*</span></label>
+                                <div class="col-md-8 c-font-14">
+                                    <input type="number" min="0" class="form-control  c-square c-theme"
+                                           ng-model="data.suggestedRetailUnitPrice"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">库存：<span
+                                        class="c-font-red">*</span></label>
+                                <div class="col-md-8 c-font-14">
+                                    <input type="number" min="0" class="form-control  c-square c-theme"
+                                           ng-model="data.storeAmount"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">库存预警值：<span
+                                        class="c-font-red">*</span></label>
+                                <div class="col-md-8 c-font-14">
+                                    <input type="number" min="0" class="form-control  c-square c-theme"
+                                           ng-model="data.storeAmount"/>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14" style="padding-right: 0">是否支持七天无理由：<span
+                                        class="c-font-red">*</span></label>
+                                <div class="col-md-8 c-font-14">
+                                    <label class="radio-inline c-font-14"><input type="radio" ng-value="1" name="isSupportReturn" ng-model="data.isSupportReturn"/>支持七天无理由</label>
+                                    <label class="radio-inline c-font-14"><input type="radio" ng-value="0" name="isSupportReturn" ng-model="data.isSupportReturn"/>不支持七天无理由</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-padding-10">
+                                <label class="col-md-2 control-label c-font-14" style="padding-right: 0">摘要/卖点：</label>
+                                <div class="col-md-10 c-font-14">
+                                    <input type="text" class="form-control  c-square c-theme" ng-model="data.summary"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">
+                        商品图片： <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-2 c-center" ng-repeat="pic in tpics">
+                        <a ng-click="deleteImg($index)" href="javascript:;"
+                           style="position: absolute;right: 3px;top: -10px;"><i class="fa fa-times-circle-o"></i></a>
+                        <img class="c-border" src="images/addimg.jpg" ng-src="{{pic}}" ng-click="imgcloak($index)"
+                             style="width: 112px; height: 112px;"/>
+                        <input id="imagefile{{$index}}" class="hide" ngf-select="upload($file, $index)" type="file"/>
+                    </div>
+
+                    <div class="col-md-2 c-center" ng-if="tpics.length < 5">
+                        <img class="c-border" src="images/addimg.jpg" ng-click="imgcloak('')"
+                             style="width: 112px; height: 112px;"/>
+                        <input id="imagefile" class="hide" ngf-select="upload($file, -1)" type="file"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2" style="padding-right: 0;"></div>
+                    <div class="col-md-10 c-font-14">
+                        <p>最多可上传5张照片，图片每张最大5M，尺寸为800*800</p>
+                    </div>
+                </div>
+
+
+                <!--start 销售属性-->
+                <div class="row c-padding-10 c-margin-t-15" ng-repeat="attr in saleAttrs">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">{{attr.propertyName}}：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-10 ">
+                        <div class="col-md-12 c-border c-bg-grey-1 c-padding-10">
+                            <div class="col-md-3 c-padding-5" ng-repeat="a in attr.propertyValueList">
+                                <div class="c-checkbox">
+                                    <input ng-model="a.checked" ng-change="cratePrices()" type="checkbox"
+                                           id="checkbox-{{attr.propertyId}}-{{a.propertyValueId}}" class="c-check">
+                                    <label for="checkbox-{{attr.propertyId}}-{{a.propertyValueId}}" class="c-font-14">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box" style="width: 16px; height: 16px; top:5px;"></span>
+                                        {{a.propertyValueName}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end 销售属性-->
+
+                <!--start 产品价格-->
+                <div class="row c-padding-10" ng-if="showPrices">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">产品价格：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-10 c-font-14">
+                        <div class="col-md-12" style="padding: 0">
+                            <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;width: 100%">
+                                <thead class="c-font-14">
+                                <tr class="c-bg-grey-1">
+                                    <th class="c-border c-padding-10" ng-repeat="attr in saleAttrs">
+                                        {{attr.propertyName}}
+                                    </th>
+                                    <th class="c-border c-padding-10">原价(元)</th>
+                                    <th class="c-border c-padding-10">促销价(元)</th>
+                                    <th class="c-border c-padding-10">成本价</th>
+                                    <th class="c-border c-padding-10">库存</th>
+                                </tr>
+                                </thead>
+                                <tbody class="c-font-14">
+                                <tr ng-repeat="item in prices">
+                                    <th class="c-border c-padding-10" ng-repeat="attr in item.attrs">
+                                        {{attr.propertyValueName}}
+                                    </th>
+                                    <th class="c-border c-padding-10">
+                                        <input ng-model="item.originUnitPrice" class="form-control c-square c-theme" type="number" min="0" placeholder="" style="width: 80px;">
+                                    </th>
+                                    <th class="c-border c-padding-10">
+                                        <input ng-model="item.price" class="form-control c-square c-theme" type="number" min="0" placeholder="" style="width: 80px;">
+                                    </th>
+                                    <th class="c-border c-padding-10">
+                                        <input ng-model="item.unitCost" class="form-control c-square c-theme" type="text" min="0" placeholder="" style="width: 80px;">
+                                    </th>
+                                    <th class="c-border c-padding-10">
+                                        <input ng-model="item.productNumber" class="form-control c-square c-theme" type="number" min="0" placeholder="" style="width: 80px;">
+                                    </th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--end 产品价格-->
+
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">商品描述：
+                        <span class="c-font-red" style="float: right">*</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="ueditor" ng-model="data.note" config="_simpleConfig"></div>
+                    </div>
+                </div>
+                <div class="row c-padding-10 c-margin-t-15">
+                    <div class="col-md-2 c-font-16" style="padding-right: 0;">物流服务2：</div>
+                    <div class="col-md-10 ">
+                        <div class="col-md-12 c-border c-bg-grey-1 c-padding-10">
+                            <div class="col-md-8 c-padding-10">
+                                <label class="col-md-4 control-label c-font-14">快递模板：</label>
+                                <div class="col-md-8 c-font-14">
+                                    <select class="form-control  c-square c-theme ng-pristine ng-valid ng-empty ng-touched"
+                                            ng-model="data.logistics_template_id"
+                                            ng-options="x.id as x.name for x in findLogistics" ng-change="sellogistics(data.logistics_template_id)">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 c-padding-10">
+                                <div class="col-md-12 ">
+                                    <button class="btn btn-lg c-btn-green c-btn-square c-theme-btn c-font-14"
+                                            ng-click="addLogistics()">新建快递模板
+                                    </button>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 c-border c-margin-t-15 c-padding-10" ng-if="logisticsinfo">
+                            <div class="col-md-12 c-padding-10 c-margin-b-10" ng-repeat="log in logisticsinfo.expressType">
+                                <div class="col-md-12 c-border-bottom c-margin-b-10">
+                                    {{log.typename}}
+                                </div>
+                                <div class="col-md-12">
+                                   <div class="row">
+                                       <div class="col-md-9">
+                                           默认运费：{{log.firstUnit}}{{logisticsinfo.payname}}内{{log.firstPay}}元，每增加{{log.addUnit}}{{logisticsinfo.payname}}，加{{log.addPay}}元
+                                       </div>
+                                       <div class="col-md-3"><a href="#/updateExpress?id={{logisticsinfo.id}}" target="_blank" >查看详情</a></div>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 c-padding-10" ng-if="logisticsinfo.payType!=1">
+                                <label class="col-md-3 control-label c-font-14" ng-if="logisticsinfo.payType==3">商品体积：</label>
+                                <label class="col-md-3 control-label c-font-14" ng-if="logisticsinfo.payType==2">商品重量：</label>
+                                <div class="col-md-4 c-font-14">
+                                    <input ng-if="logisticsinfo.payType==3" ng-model="data.weight" class="form-control  c-square c-theme ng-pristine ng-valid ng-empty ng-valid-min ng-touched" />
+                                    <input ng-if="logisticsinfo.payType==2" ng-model="data.volume" class="form-control  c-square c-theme ng-pristine ng-valid ng-empty ng-valid-min ng-touched" />
+                                </div>
+                                <div class="col-md-5 c-font-14" ng-if="logisticsinfo.payType==3">
+                                    （立方） 当前运费模板，按物流体积（含包装）计费
+                                </div>
+                                <div class="col-md-5 c-font-14" ng-if="logisticsinfo.payType==2">
+                                    （kg） 当前运费模板，按物流重量（含包装）计费
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row c-padding-10 c-margin-t-15">-->
+                <!--<div class="col-md-2 c-font-16" style="padding-right: 0;">销售属性：-->
+                <!--<span class="c-font-red"style="float: right">*</span>-->
+                <!--</div>-->
+                <!--<div class="col-md-10 c-font-14 c-padding-10">-->
+                <!--<div class="col-md-12 c-border c-bg-grey-1 c-padding-10" style="padding: 10px 0">-->
+                <!--<div class="col-md-12 c-border-bottom c-font-14">-->
+                <!--<label class="c-font-14" style="padding: 0 5px ">-->
+                <!--<input type="radio"/>-->
+                <!--中国码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px ">-->
+                <!--<input type="radio"/>-->
+                <!--均码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--欧码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--美码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--日码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--英码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--德码-->
+                <!--</label>-->
+                <!--<label class="c-font-14" style="padding: 0 5px">-->
+                <!--<input type="radio"/>-->
+                <!--俄码-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 ">-->
+                <!--<label class="c-font-14" style="padding: 0 5px" ng-repeat="attr in size">-->
+                <!--<input type="checkbox"  attr_id="{{attr.attr_id}}" ng-click="selectAttr(attr.attr_name,$index)" type_id="{{attr.type_id}}" type_name="{{attr.type_name}}"/>-->
+                <!--{{attr.attr_name}}-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 c-margin-t-15 c-padding-10" style="padding: 10px 0">-->
+                <!--<div class="col-md-12" style="padding: 0">-->
+                <!--<table cellpadding="0" cellspacing="0" style="border-collapse: collapse;width: 100%">-->
+                <!--<thead class="c-font-14">-->
+                <!--<tr class="c-bg-grey-1">-->
+                <!--<th class="c-border c-padding-10">名称</th>-->
+                <!--<th  class="c-border c-padding-10">备注</th>-->
+                <!--<th  class="c-border c-padding-10">图片</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody class="c-font-14">-->
+                <!--<tr ng-repeat="attr in attrbox">-->
+                <!--<th  class="c-border c-padding-10">{{attr}}</th>-->
+                <!--<th  class="c-border c-padding-10">2</th>-->
+                <!--<th  class="c-border c-padding-10">-->
+
+                <!--</th>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+                <!--</table>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row c-padding-10 c-margin-t-15">-->
+                <!--<div class="col-md-2 c-font-16" style="padding-right: 0;">颜色分类：-->
+                <!--<span class="c-font-red"style="float: right">*</span>-->
+                <!--</div>-->
+                <!--<div class="col-md-10 c-font-14 c-padding-10">-->
+                <!--<div class="col-md-12 c-border c-bg-grey-1 c-padding-10" style="padding: 10px 0">-->
+                <!--<div class="col-md-12  c-font-14">-->
+                <!--<div class="c-font-14 col-md-1 c-boder-r-white-1" style="padding: 0 1px; cursor: pointer;">-->
+                <!--<p style="background:rgb(255, 0, 0);height: 5px;margin: 0"></p>-->
+                <!--<div class="c-bg-white" style="padding:10px 0">-->
+                <!--<div class="cname c-center">红色系</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="c-font-14 col-md-1 c-boder-r-white-1"style="padding: 0 1px;cursor: pointer;">-->
+                <!--<p style="background:rgb(255, 255, 0);height: 5px;margin: 0"></p>-->
+                <!--<div class="" style="padding:10px 0">-->
+                <!--<div class="cname c-center">黄色系</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 c-bg-white">-->
+                <!--<label class="c-font-14 c-margin-t-10" style="padding: 0 5px;line-height: 30px">-->
+                <!--<input type="checkbox"/>&nbsp;-->
+                <!--<span style="background: rgb(255, 0, 0);padding: 0 7px;">&nbsp;</span>-->
+                <!--&nbsp;红色-->
+                <!--</label>-->
+                <!--<label class="c-font-14 c-margin-t-10" style="padding: 0 5px;line-height: 30px">-->
+                <!--<input type="checkbox"/>&nbsp;-->
+                <!--<span style="background: #ff0000;padding: 0 7px;">&nbsp;</span>-->
+                <!--&nbsp;大红色-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 c-margin-t-15 c-padding-10" style="padding: 10px 0">-->
+                <!--<div class="col-md-12" style="padding: 0">-->
+                <!--<table cellpadding="0" cellspacing="0" style="border-collapse: collapse;width: 100%">-->
+                <!--<thead class="c-font-14">-->
+                <!--<tr class="c-bg-grey-1">-->
+                <!--<th class="c-border c-padding-10">名称</th>-->
+                <!--<th  class="c-border c-padding-10">备注</th>-->
+                <!--<th  class="c-border c-padding-10">图片</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody class="c-font-14">-->
+                <!--<tr>-->
+                <!--<th  class="c-border c-padding-10">1</th>-->
+                <!--<th  class="c-border c-padding-10">2</th>-->
+                <!--<th  class="c-border c-padding-10">3</th>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+                <!--</table>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+
+            </div>
+        </div>
+        <div class=" c-right c-margin-t-20">
+            <!-- <a class="btn btn-success c-btn-square" ng-click="promptly()">立即上架</a> -->
+            <a class="btn btn-success c-btn-square" ng-click="submit()">保存</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    window.UEDITOR_HOME_URL = "assets/plugins/ueditor/";
+</script>
+<script type="text/javascript" src="assets/plugins/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="assets/plugins/ueditor/ueditor.all.js"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>

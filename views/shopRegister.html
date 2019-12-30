@@ -1,0 +1,69 @@
+
+<div class="c-content-box c-size-md c-bg-white">
+    <div class="container">
+        <div class="c-content-blog-post-card-1-slider">
+            <div class="c-content-title-1">
+                <h3 class="c-center c-font-uppercase c-font-bold">注册企业店铺</h3>
+                <div class="c-line-center c-theme-bg"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 c-margin-b-30">
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" ng-model="data.name" placeholder="店铺名称"/>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <select class="form-control  c-square c-theme" ng-model="data.shopType" ng-options="x.id as x.name for x in getAllCategories">
+                        <option value="">请选择店铺分类</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 c-margin-b-30">
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" ng-model="data.phone" placeholder="联系人电话"/>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control  c-square c-theme" ng-model="data.contacts" placeholder="联系人姓名"/>
+                </div>
+            </div>
+            <div class="col-md-12 c-margin-b-30">
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" ng-model="data.idcard" placeholder="身份证号码"/>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control  c-square c-theme" ng-model="data.businessLicense" placeholder="营业执照编号"/>
+                </div>
+            </div>
+            <div class="col-md-12 c-margin-t-30">
+                <div class="col-md-9">
+                    <div class="col-md-3 c-center c-border  c-padding-20 c-bg-grey-1 c-margin-r-40" style="border-style: dashed;border-color: #cccccc;" >
+                        <img src="images/addimg.png" ng-src="{{data.idcardPic}}"  ng-click="imgcloak(1)" style="max-width: 100%;cursor:pointer;"/>
+                        <p class="c-margin-t-10">身份证照片</p>
+                        <input id="img1" ngf-select="upload($file,1)"class="hide"  type="file"/>
+                    </div>
+                    <div class="col-md-3 c-center c-border c-padding-20 c-bg-grey-1 c-margin-r-40" style="border-style: dashed;border-color: #cccccc"  >
+                        <img src="images/addimg.png" ng-src="{{data.businessLicensePic}}" ng-click="imgcloak(2)" style="max-width: 100%;cursor:pointer;"/>
+                        <p class="c-margin-t-10">营业执照照片</p>
+                        <input id="img2" ngf-select="upload($file,2)" class="hide" type="file"/>
+                    </div>
+                    <div class="col-md-3 c-center c-border c-padding-20 c-bg-grey-1 " style="border-style: dashed;border-color: #cccccc" >
+                        <img src="images/addimg.png" ng-src="{{data.logoPic}}" ng-click="imgcloak(3)" style="max-width: 100%;cursor:pointer;"/>
+                        <p class="c-margin-t-10">店铺logo</p>
+                        <input id="img3" ngf-select="upload($file,3)" class="hide" type="file"/>
+                    </div>
+                </div>
+
+                <div class="col-md-3 c-right">
+                    <div class="c-margin-t-60"></div>
+                    <button class="btn btn-lg c-btn-green c-btn-square c-margin-t-50" ng-click="submit()">企业注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

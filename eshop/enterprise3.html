@@ -1,0 +1,159 @@
+
+<!Doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>注册企业店铺第三步</title>
+		<meta name="Keywords" content="乐驿">
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="css/enterprise3.css" />
+		<style type="text/css">
+			
+		</style>
+ </head>
+
+<body>
+	<div class="main">
+		
+	<!--S top-->
+   <div class="top">
+      <div class="t_header">
+	     <div class="t_nav">
+	     	
+	     		<select name="" class="t_sel">
+		     		<option value="">选择服务区</option>
+		     		<option value="">湖北省</option>
+		     	</select>
+	     	
+	     	<!--<a href="javascript:void(0);" class="t_nav_img"><img src="img/weixin.png"/ ></a>
+	     	<a href="javascript:void(0);"><img src="img/weibo.png"/ ></a>-->
+		 </div>
+		 <a href="javascript:void(0);" class="sign">签到</a>
+		 <div class="t_inf">
+		 		<a href="login.html">你好，请登录</a>
+		 		<a href="javascript:void(0);">注册</a>
+		 		<a href="cart.html"><img src="img/car.png" width="14" height="14"/>购物车<span>0</span></a>
+		    <a href="javascript:void(0);">商家入驻</a>
+		 </div>
+	  </div>
+   </div>
+   <!--E top-->
+
+   <!--S nav-->
+   <div class="nav">
+   	<div class="nav_box">
+   		<div class="n_logo">
+	      <a href="javascript:void(0);">
+		     <img src="img/logo.png" alt="乐驿" width="230" height="70"/>
+		  </a>
+		  </div>
+		  <div class="n_search">
+		      <div class="n_text">
+			      <input type="text" class="n_txt" placeholder="搜索您需要的商品"/>
+			      <input type="submit" class="n_sub" value=""/>
+			   </div>
+		  </div>
+   	</div>
+      
+	  <div style="clear:both"></div>
+
+	  <div class="n_all">
+	      <ul>
+		      <li><a href="javascript:void(0);" class="all">全部商品分类</a></li>
+				  <li><a href="javascript:void(0);" class="page">商城首页</a></li>
+				  <li><a href="specialty.html">地方特产</a></li>
+				  <li><a href="travel.html">周边游</a></li>
+				  <li><a href="sale.html">优惠活动</a></li>
+		  </ul>
+	  </div>
+   </div>
+   <!--E nav-->
+   
+		 <!--S content-->
+   <div class="content">
+		<div class="box">
+			<div class="b_logo">
+				<span>注册企业店铺</span>
+			</div>
+			<div class="b_line">
+				<img src="img/b_3.png" alt="" />
+			</div>
+			<div class="b_down">
+				<img src="img/true.png"/>
+				<p>审核通过</p>
+			</div>
+		</div>
+	</div>
+  
+   <!--S footer-->
+   <div class="footer">
+   		<ul>
+   			<li><a href="javascript:void(0);"><img src="img/iphone.png" width="26" height="30" />移动版</a></li>
+   			<li><a href="javascript:void(0);">关于我们</a></li>
+   			<li><a href="javascript:void(0);">商家入驻</a></li>
+   			<li><a href="javascript:void(0);">用户协议</a></li>
+   			<li><a href="javascript:void(0);">帮助中心</a></li>
+   			<li><a href="javascript:void(0);">联系我们</a></li>
+   			<li><a href="javascript:void(0);">中文</a></li>
+   			<li><a href="javascript:void(0);">English</a></li>
+   		</ul>
+   		<div class="f_p">
+   			<p>粤ICP备05071255号-2 | Copyright&copy;2016广东通驿高速公路服务区有限公司，All Rights Reserved</p>	 
+   			<a href="javascript:void(0);"><img src="img/weibo.png" width="30" height="24"/></a>
+   			<a href="javascript:void(0);"><img src="img/weixin.png" width="28" height="22"/></a>
+   			
+   		</div>
+   		
+   		
+			    
+   </div>
+   <!--E footer-->
+
+</body>
+
+<script src="js/jquery-1.11.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+			var index=0;
+			var len=$(".c_pic a").length-1;
+//			console.log(len);
+			id=setInterval(navigator,2000,"right")
+			function navigator(dir){
+				if(dir=="left"){
+					index--;
+					if(index<0){
+						index=len;
+					}
+				}
+				if(dir=="right"){
+					index++
+					if(index>len){
+						index=0;
+					}
+					
+				}
+				changeindex(index)
+			};
+			
+			
+			function changeindex(index){
+				$(".c_pic>a").removeClass("active");
+				$(".c_pic>a").eq(index).addClass("active");
+			}
+			
+			
+			var wid=document.body.offsetWidth;
+			var imgs=$(".content .c_banner .c_pic a img");
+			for(var i=0;i<imgs.length;i++){
+				imgs[i].style.width=wid+"px";
+			}
+			
+		})
+	
+</script>
+</html>

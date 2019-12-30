@@ -1,0 +1,120 @@
+
+<!-- BEGIN: 页面内容-->
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-order-complete-1 c-content-bar-1 c-align-left c-bordered  c-border-grey c-border-2px">
+            <div class=" c-padding-20">
+                <div class="findPwd_bar_box">
+                    <div class="findPwd_bar"></div>
+                    <div class="state1 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >1</div>
+                        <p>拍下商品</p>
+                    </div>
+                    <div class="state2 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >2</div>
+                        <p>付款</p>
+                    </div>
+                    <div class="state3 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >3</div>
+                        <p>卖家发货</p>
+                    </div>
+                    <div class="state4 findPwd_bar_state1 ">
+                        <div class="findPwd_bar_round_1" >4</div>
+                        <p>确认收货</p>
+                    </div>
+                    <div class="state5 findPwd_bar_state2 ">
+                        <div class="findPwd_bar_round_2" >5</div>
+                        <p>评价</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEGIN: 订单开始 -->
+            <div class="c-content-box c-size-lg">
+                <div class="container">
+                    <div class="c-shop-cart-page-1 col-md-11">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品信息</h3>
+                            </div>
+                            <div class="col-md-5 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                            </div>
+                            <div class="col-md-1 c-cart-qty">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">单价</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-price">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">数量</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">总价</h3>
+                            </div>
+                        </div>
+                        <!-- BEGIN: 订单列表开始 -->
+                        <div class="row c-cart-table-row" >
+                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                                <img ng-src="{{order.mainPic}}" class="img-responsive"/>
+                            </div>
+                            <div class="col-md-5 col-sm-9 col-xs-7 c-cart-desc">
+                                <p>
+                                    <a href="#/product" class="c-font-bold c-theme-link c-font-dark">{{order.productName}}</a>
+                                </p>
+                                <p>
+                                    <a href="#/product" class="c-theme-link c-font-dark">规格：250-350kg</a>
+                                </p>
+                                <p>
+                                    <a href="#/product" class="c-theme-link c-font-dark">包装：箱装</a>
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                                <p class="c-cart-price c-font-bold">￥{{toDecimal2(order.suggestedRetailUnitPrice)}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                <p class="c-cart-price c-font-bold">{{order.unitOrdered}}</p>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Total</p>
+                                <p class="c-cart-price c-font-bold">￥{{toDecimal2(order.totalActualProductPrice)}}</p>
+                            </div>
+                        </div>
+                        <!-- END: 订单列表结束 -->
+                        <div class="row c-cart-table-row">
+                            <p class="c-review-rating-input">商品评分：
+                                <i class="fa fa-star c-font-yellow-3" ng-repeat="d in score1_1" ng-click="ratings(1,d.value)"></i>
+                                <i class="fa fa-star-o c-font-grey" ng-repeat="d in score1_0" ng-click="ratings(1,d.value)"></i>
+                            </p>
+                            <p class="c-review-rating-input">服务评分：
+                                <i class="fa fa-star c-font-yellow-3" ng-repeat="d in score2_1" ng-click="ratings(2,d.value)"></i>
+                                <i class="fa fa-star-o c-font-grey" ng-repeat="d in score2_0" ng-click="ratings(2,d.value)"></i> 
+                            </p>
+                            <p class="c-review-rating-input">物流速度：
+                                <i class="fa fa-star c-font-yellow-3" ng-repeat="d in score3_1" ng-click="ratings(3,d.value)"></i>
+                                <i class="fa fa-star-o c-font-grey" ng-repeat="d in score3_0" ng-click="ratings(3,d.value)"></i> 
+                            </p>
+                            <p class="c-review-rating-input">商品评价：
+                                <textarea class="form-control  c-square c-theme" placeholder="商品是否让您满意，留下你的评价把，100字以内。" ng-model="data.comment" style="margin-top:10px;height:100px;"></textarea>
+                            </p>
+                        </div>
+                        <div class="row c-cart-table-row">
+                            <div class="col-md-2 c-center" ng-repeat="pic in tpics">
+                                <a ng-click="deleteImg($index)" href="javascript:;" style="position: absolute;right: 3px;top: -10px;"><i class="fa fa-times-circle-o"></i></a>
+                                <img class="c-border" src="images/addimg.jpg" ng-src="{{getAbsolutePath(pic)}}" ng-click="imgcloak($index)" style="width: 112px; height: 112px;"/>
+                                <input id="imagefile{{$index}}" class="hide" ngf-select="upload($file, $index)" type="file"/>
+                            </div>
+
+                            <div class="col-md-2 c-center" ng-if="tpics.length < 5">
+                                <img class="c-border" src="images/addimg.jpg" ng-click="imgcloak('')" style="width: 112px; height: 112px;"/>
+                                <input id="imagefile" class="hide" ngf-select="upload($file, -1)" type="file"/>
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <button ng-click="submit()" style="width:70px;height:30px;margin-top:20px;">发表评价</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: 订单结束 -->
+        </div>
+    </div>
+</div>
+<!-- END:页面内容 -->

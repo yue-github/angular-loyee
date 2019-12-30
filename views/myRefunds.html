@@ -1,0 +1,92 @@
+
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: 订单列表-->
+        <div class="center-block">
+            <div class="c-content-title-1">
+                <div class="c-font-uppercase c-font-bold c-font-20 c-margin-b-15 ">全部订单</div>
+            </div>
+            <div class="c-margin-b-40 c-order-history-2 c-font-16">
+                <div class="row c-cart-table-title">
+                    <div class="col-md-5 c-cart-image">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-desc">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">单价</h3>
+                    </div>
+                    <div class="col-md-1 c-cart-price">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">数量</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-total">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">退款金额</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-qty">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">状态</h3>
+                    </div>
+                </div>
+                <!-- BEGIN: 订单list-->
+                <div class="center-block" ng-repeat="item in orders">
+                    <!-- BEGIN: 订单item-->
+                    <div class="col-md-12 c-cart-table-title c-margin-b-10 c-margin-t-10 c-bg-grey-1">
+                        <div class="col-md-3 c-cart-desc">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2 ">{{item.orderTime}}</h2>
+                        </div>
+                        <div class="col-md-6 c-cart-ref">
+                            <h2 class="c-font-uppercase  c-font-16 c-font-grey-2">订单号：
+                                <span>{{item.orderCode}}</span></h2>
+                        </div>
+                    </div>
+                    <div class="row c-cart-table-row c-font-14 c-border-bottom c-margin-t-10">
+                        <div class="col-md-2 col-sm-3 col-xs-5">
+                            <img class="cbp-l-project-img" ng-src="{{item.mainPic}}" />
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-5">
+                            <p class="c-cart-price c-font-bold c-font-16">{{item.productName}}</p>
+                            <p>{{item.summary}}</p>
+                            <!--<p >包装：箱装</p>-->
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-price ">￥<span ng-model="suggestedRetailUnitPrice">{{toDecimal2(item.actualUnitPrice)}}</span></p>
+                        </div>
+                        <div class="col-md-1 col-sm-2 col-xs-6 c-cart-total">
+                            <p class="c-cart-price " ng-model="amount">{{item.refundAmount}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 c-cart-total">
+                            <p class="c-cart-price c-font-bold">退款金额￥{{toDecimal2(item.refundCash)}}</p>
+                            <p class="c-cart-price c-font-bold">交易金额￥{{toDecimal2(item.tradeCash)}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-center">
+                            <p class=" c-font-14">{{item.status}}</p>
+                            <div><a href="#order?id={{item.order_id}}" class="btn c-font-14">订单详情</a></div>
+                        </div>
+                    </div>
+                    <!-- END: 订单item -->
+                </div>
+                <!-- END: 订单list-->
+            </div>
+        </div>
+        <!-- END: 订单列表-->
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>

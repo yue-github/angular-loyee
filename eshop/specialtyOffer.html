@@ -1,0 +1,38 @@
+<style>
+	/*.top,.nav,.footer{display: none;}*/
+	.viewMore{font-size:12px;text-align: center;cursor: pointer;margin: 30px auto 50px;}
+	.viewMore span{background-color:#F29700;padding: 10px;}
+</style>
+<div class="c_up" style="min-width: 1200px;">
+		<img style="width: 100%;" src="http://admin.eebin.com/upload/b4af9ae8-c31e-444f-8f0e-26a38f05bb87.jpg" />
+	</div>
+<div class="content">
+	<div class="c_down">
+		<div class="d_detail" >
+			<div class="s_list ng-scope" ng-repeat="obj in dataProduct">
+				<div class="s_con" style="height:auto;">
+					<a href ="index.html#/product?id={{obj.id}}" target="view_window">
+							<img class="s_pic" src="{{obj.mainPic}}" />
+					</a>
+					<p class="s_header ng-binding">{{obj.name}}</p>
+					<span class="s_price ng-binding">￥{{obj.suggestedRetailUnitPrice}}</span>
+					<span style="text-decoration: line-through;" ng-if="item.originUnitPrice" class="ng-binding ng-scope">￥200.00</span>
+				</div>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="comfirmOrder(obj.id)">立即购买</a>
+					</div>
+					<div class="btn-group c-border-left c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="shoppingCart(obj.id)">加入购物车</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="viewMore"><span ng-click="viewMore()">+查看更多+</span></div>
+	</div>
+	<div class="row">
+		<!--<div ng-include="'eshop/pages.html'"></div>-->
+	</div>
+</div>

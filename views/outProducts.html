@@ -1,0 +1,130 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                <div class="col-md-4">已下架宝贝</div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3 c-padding-10">
+                            <input class="form-control  c-square c-theme active"  placeholder="宝贝分类" type="text" ng-model="data.categoryName"/>
+                        </div>
+                        <div class="col-md-3 c-padding-10">
+                            <input class="form-control  c-square c-theme active"  placeholder="宝贝名称" type="text" ng-model="data.name"/>
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="select()">搜索</button>
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="onShelf()">上架</button>
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="delete()">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-line-left c-theme-bg"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+                    <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+                        <div class="col-md-2 c-cart-image c-padding-10">
+                            <div class="c-checkbox">
+                                <input ng-model="chkall" ng-click="chkAll(chkall)" type="checkbox" id="checkbox6-444"
+                                       class="c-check">
+                                <label for="checkbox6-444">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全选</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 c-cart-image c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2"></h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">商品</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">价格</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">库存</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">更新时间</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-qty c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">操作</h3>
+                        </div>
+                    </div>
+
+                    <!-- BEGIN: 商品item-->
+                    <div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in products">
+                        <div class="col-md-1 col-xs-6 c-cart-ref c-center c-padding-10">
+                            <div class="c-checkbox">
+                                <input ng-model="item.checked" ng-checked="item.checked"  type="checkbox" id="{{$index}}" class="c-check">
+                                <label for="{{$index}}">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+                            <img src="images/default.jpg" ng-src="{{item.mainPic}}" class="img-responsive"/>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding">
+                            <p class="c-font-14">
+                                <a href="#/product" class="c-font-bold c-theme-link c-font-dark">{{item.name}}</a>
+                            </p>
+                        </div>
+                        <div class="clearfix col-md-2 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-40">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</p>
+                        </div>
+                        <div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-40">{{item.storeAmount}}</p>
+                        </div>
+                        <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-40">{{item.created_at}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10">
+                            <p class="c-margin-t-40">
+                                <a href="#/addProductInfo?id={{item.id}}&catId={{item.category_id}}" class="c-theme-font c-font-14 " style="cursor: pointer;">编辑宝贝</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END: 商品item-->
+                </div>
+            </div>
+
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-40"></div>
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页 -->
+    </div>
+</div>

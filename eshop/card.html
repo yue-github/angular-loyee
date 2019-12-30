@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="css/card.css"/>
+
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <ul>
+					  <li><a href="#/myBankcard" class="active">我的银行卡</a></li>
+					  <li><a href="#/myGold" >我的金币</a></li>
+	   			  </ul>
+   				</div>
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4 c-padding-10"  style="cursor: pointer" ng-repeat="card in cards">
+							<div class="c-bg-blue-2 c-padding-10 c-font-white"  style="border-radius: 5px" ng-click="edit(card.id)">
+								<h2 class="c-font-white">{{card.bankBranch}}</h2>
+								<p class="c-right c-margin-t-30">**** **** **** {{card.accoutNumber}}</p>
+							</div>
+							<div class="c-posAbsolute-tr-10 c-font-red" ng-click="deleteCard(card.id)">X</div>
+						</div>
+						<div class="col-md-4 c-padding-10" ng-click="addCard()">
+							<div class=" c-border-grey c-center c-font-grey-3"style="border-radius: 5px;border-style:dotted;    padding: 15px;">
+								<img class="addimg" src="img/add.png"/>
+								<p class="c-center ">添加银行卡</p>
+							</div>
+						</div>
+					</div>
+				</div>
+   			</div> 
+   		</div>
+   		<div style="clear: both;"></div>
+		<div class="add_card"  id="add_card" style="display: none">
+			<div class="row c-margin-b-10">
+				<div class="form-group">
+					<input type="text" ng-model="data.accountNumber" class="form-control c-square c-theme" placeholder="卡号">
+				</div>
+			</div>
+			<div class="row c-margin-b-10">
+				<div class="form-group">
+					<input type="text" ng-model="data.bankName" class="form-control c-square c-theme" placeholder="开户银行名称">
+				</div>
+			</div>
+			<div class="row c-margin-b-10">
+				<div class="form-group">
+					<input type="text" ng-model="data.bankBranch" class="form-control c-square c-theme" placeholder="开户支行名称">
+				</div>
+			</div>
+			<div class="row c-margin-b-10">
+				<div class="form-group">
+					<input type="text" ng-model="data.accountName"  class="form-control c-square c-theme" placeholder="持卡人姓名">
+				</div>
+			</div>
+			<div class="row c-margin-b-10">
+				<div class="form-group">
+					<input type="text" ng-model="data.contactNumber"  class="form-control c-square c-theme" placeholder="手机号">
+				</div>
+			</div>
+			<!-- <div class="row c-margin-b-10">
+				<div class="col-md-8">
+					<div class="row">
+						<div class="form-group">
+							<input type="text" ng-model="data.code" class="form-control c-square c-theme" placeholder="验证码">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 ">
+					<div class="row c-right">
+						<button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-theme-border c-btn-square c-btn-uppercase c-font-16 c-font-white c-bg-yellow-5" type="button" >获取手机验证码</button>
+					</div>
+				</div>
+			</div> -->
+			<div class="row c-margin-b-10">
+				<div class="col-md-8">
+
+				</div>
+				<div class="col-md-4 c-right">
+					<div class="row c-right">
+						<button class="btn c-btn-green c-theme-btn c-btn-square c-font-white c-bg-yellow-5 submit-class" ng-click="submit()">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+   	</div>
+   </div>

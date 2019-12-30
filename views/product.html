@@ -1,0 +1,577 @@
+<style>
+    .c-bg-img-center{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+    }
+</style>
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both" >
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">商场首页</h3>
+            <h4 class="c-margin-t-15"><span ng-repeat="c in ProCategory">{{c.name}}&nbsp;&gt;&nbsp;</span>{{product.name}}</h4>
+        </div>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<!-- BEGIN: PAGE CONTENT -->
+<!-- BEGIN: CONTENT/SHOPS/SHOP-PRODUCT-DETAILS-2 -->
+<style>
+    .promotionTitle a:hover{
+        text-decoration:underline;
+    }
+    .productDetail p{
+        margin:0;
+    }
+</style>
+
+<div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
+    <div class="container">
+        <div class="c-shop-product-details-2 c-opt-1">
+
+            <div class="row">
+                <div class="" ng-class="{true:'col-md-9',false:'col-md-12'}[shop.shopType!=3]">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="c-product-gallery">
+                                <div class="c-product-gallery-content" ng-style="imgHeight">
+                                    <div class="c-zoom" ng-style="imgHeight" ng-repeat="item in product.pics">
+                                        <img ng-src="{{item}}"></div>
+                                </div>
+                                <div class="row c-product-gallery-thumbnail">
+                                    <div class="col-xs-2 c-product-thumb" ng-style="minImgHeight" ng-repeat="min in product.pics">
+                                        <img ng-src="{{min}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a style="cursor:pointer;float: right" ng-click="collectionProduct()"
+                                       class="c-font-14 c-font-dark-1 c-margin-t-15 c-font-green-hover"><i
+                                            class="fa fa-star"></i>&nbsp;&nbsp;收藏</a>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="jiathis_style c-margin-t-15">
+                                        <span class="jiathis_txt c-font-dark-1" style="font-size: 14px">分享到：</span>
+                                        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+                                    </div>
+                                    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="c-product-meta">
+                                <div class="c-content-title-1">
+                                    <h3 class="c-font-uppercase c-line-height-30" style="margin-bottom: 10px;font-size:20px">
+                                        <span class="c-font-16 c-font-white " style="background: #eb5d68;padding: 5px 10px;" ng-if="product.shopType==3">乐驿自营</span>
+                                        <span class="c-font-16 c-font-white " style="background: #eb5d68;padding: 5px 10px;" ng-if="product.shopType==1">第三方运营</span>
+                                        <span class="c-font-16 c-font-white " style="background: #eb5d68;padding: 5px 10px;" ng-if="product.shopType==2">O2O服务区</span>
+                                        {{product.name}}
+                                    </h3>
+                                </div>
+                                <div class="c-product-review" style="margin: 0"></div>
+                                <div class="row c-product-variant">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <p class="c-product-size c-margin-t-5">
+                                            {{product.summary}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="c-product-price c-font-red-1">￥{{toDecimal2(product.suggestedRetailUnitPrice)}}&nbsp;
+                                    <span ng-if="product.originUnitPrice" class="c-font-14 c-font-line-through c-font-grey-3">￥{{toDecimal2(product.originUnitPrice)}}</span></div>
+                                <div class="c-product-add-cart">
+                                    <div class="row">
+                                        <div class="c-input-group c-spinner col-md-12">
+                                            <div class="col-md-2 padding-0">
+                                                促销活动:
+                                            </div>
+                                            <div class="simplelineicons-demo col-md-10 padding-0">
+                                                <div class="c-product-size c-margin-b-10  c-font-14 promotionTitle"  ng-repeat="promotion in PromotionList" ng-click="toPromotion()">
+                                                   <a class="c-font-red" href="#/miaosha?id={{promotion.id}}&type={{promotion.promotionType}}">{{promotion.promotionTitle}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="c-product-add-cart">
+                                    <div class="row c-margin-t-20">
+                                        <div class="c-input-group c-spinner col-md-12">
+                                            <div class="col-md-2 padding-0">
+                                                	运费:
+                                            </div>
+                                            <div class="simplelineicons-demo col-md-10 padding-0">
+                                                <div class="c-product-size c-margin-t-5">
+                                                    <span class="c-padding-5 c-border" ng-click="showAddress(showType)"  style="cursor: pointer">
+                                                        {{address.provinceName}}{{address.cityName}}<i ng-hide="showType" class="fa fa-angle-down" style="margin-left: 10px;"></i><i style="margin-left: 10px;" ng-show="showType" class="fa fa-angle-up"></i>
+                                                    </span>&nbsp;&nbsp;
+                                                    快递方式：{{express[0].expressType}}&nbsp;&nbsp;运费：￥{{toDecimal2(express[0].freight)}}
+                                                </div>
+                                                <div ng-show="showType" class="c-product-size c-border c-bg-white" style="position: absolute;top: 35px;left: 0;z-index: 10;min-height: 250px;width: 480px">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                           <div class="col-md-12 c-padding-5">
+                                                               <span>配送地址：</span>
+                                                                <span style="float: right" ng-click="showAddress(showType)">
+                                                                    <img src="images/offForm.png" style="width: 20px;"/>
+                                                                </span>
+                                                           </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row c-margin-0">
+                                                        <div class="col-md-12 c-border-bottom padding-0">
+                                                            <div class="col-md-4" style="padding: 0 5px;cursor: pointer;bottom: -1px;"  ng-click="selActive(1)" >
+                                                                <div class="c-border c-center"  ng-style="{{showflog==1?showstyle : 'hidestyle'}}">{{address.provinceName}}&nbsp;<i class="fa fa-angle-down"></i></div>
+                                                            </div>
+                                                            <div class="col-md-4" style="padding: 0 5px;cursor: pointer;bottom: -1px;" ng-click="selActive(0)">
+                                                                <div class="c-border c-center" ng-style="{{showflog==0?showstyle : 'hidestyle'}}" ng-show="address.cityName">{{address.cityName}}&nbsp;<i class="fa fa-angle-down"></i></div>
+                                                                <div class="c-border c-center" ng-style="{{showflog==0?showstyle : 'hidestyle'}}" ng-hide="address.cityName">选择城市&nbsp;<i class="fa fa-angle-down"></i></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 padding-0" ng-show="showflog">
+                                                            <span class="col-md-3 c-padding-10 c-center" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; "  ng-repeat="item in provinces1" ng-click="getCity(item.id,item.name)">{{item.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-12" ng-hide="showflog">
+                                                            <span class="col-md-3 c-padding-10 c-center" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis" ng-repeat="city in cities" ng-click="getTemplate(city.id,city.name)">{{city.name}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row c-margin-t-20">
+                                        <div class="c-input-group c-spinner col-md-12">
+                                            <div class="col-md-2 padding-0">
+                                                数量:
+                                            </div>
+                                            <div class="simplelineicons-demo col-md-10 padding-0">
+                                                <input ng-model="amount" type="text" class="form-control c-item-1">
+                                                <div class="c-input-group-btn-vertical" style="width: 10%">
+                                                    <button class="btn btn-default" type="button" ng-click="setamount(1)">
+                                                        <i class="fa fa-caret-up"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="button" ng-click="setamount(-1)">
+                                                        <i class="fa fa-caret-down"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="c-input-group-btn-vertical c-font-14">
+                                                    件(库存{{product.storeAmount}}件)
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row c-margin-t-20"
+                                         ng-repeat="attr in saleAttrs">
+                                        <div class="c-input-group c-spinner  col-md-12">
+                                            <div class="col-md-2 padding-0">
+                                                {{attr.propertyName}}:
+                                            </div>
+                                            <div class="simplelineicons-demo col-md-10 padding-0">
+                                                <div class="item-box padding-0" style="cursor: pointer ; width: 100%">
+                                                    <div class="item" style="position: relative;min-width: 65px;padding:5px;width: auto;margin-right: 10px;" ng-model="attrSelecteds[$index]" ng-repeat="propertyValue in attr.propertyValueList" ng-click="selectAttr($parent.$index, propertyValue.propertyValueId)">
+                                                        <a class="c-order-date c-font-14 c-font-thin">{{propertyValue.propertyValueName}}</a>
+                                                        <img ng-if="attrSelecteds[$parent.$index] != propertyValue.propertyValueId" src="images/def.png" style="position: absolute;right: 0;bottom:0;width: 20px;"/>
+                                                        <img ng-if="attrSelecteds[$parent.$index] == propertyValue.propertyValueId" src="images/sel.png" style="position: absolute;right: 0;bottom:0;width: 20px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row c-hide c-margin-t-20">
+                                        <div class="col-md-12">
+                                             <p>
+                                                 <span class="c-font-14">距离结束</span>
+                                                 <span class="hour c-font-16">{{hours}}</span>
+                                                 时
+                                                 <span class="minutes c-font-16">{{minutes}}</span>
+                                                 分
+                                                 <span class="seconds c-font-16">{{seconds}}</span>
+                                                 秒
+                                             </p>
+                                             <div class="c-font-16">
+                                                 <img src="images/sidai_bg.png">
+                                                 <div style="position: absolute;top:35px;left: 0;z-index: 5">
+                                                     <div class="btn-group btn-group-justified">
+                                                         <div class="btn-group">
+                                                            <p style="padding-left: 30px;" class="c-margin-t-15 c-font-30 c-font-white c-font-bold"> ￥1000.00</p>
+                                                         </div>
+                                                         <div class="btn-group c-center">
+                                                             <button class="btn c-font-red c-font-20" style="left: 70px;top:5px;width:128px;padding: 4px 0;background:#fee97d;border-radius:5px;">去抢购</button>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row c-margin-t-60 ">
+                                        <div class="col-md-12">
+                                            <button style="background: #FFD1D4;padding: 12px 50px; " class="btn btn-lg  c-font-red c-btn-square c-btn-uppercase c-btn-bold c-btn-red"
+                                                    ng-click="comfirmOrder()">立即购买
+                                            </button>
+                                            
+                                            <button style="padding: 12px 50px;" class="btn btn-lg btn-danger c-btn-square c-btn-uppercase c-btn-bold c-margin-r-20"
+                                                    ng-click="shoppingCart()">加入购物车
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="" ng-class="{true:'col-md-3',false:'c-hide'}[shop.shopType!==3]">
+                    <div class="c-border-grey c-border-bottom c-padding-10">
+                        <img ng-src="{{shop.mainPic}}" src="images/default.jpg" style="max-width: 100%"/>
+                    </div>
+
+                    <p class=" c-border-grey c-border-bottom c-padding-10">{{shop.name}}</p>
+                    <div class="row c-border-grey c-border-bottom">
+                        <div class="col-md-8">
+                            <p class="c-font-14">店铺评价：<span class="c-font-red c-font-12">{{shop.productRating}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12 c-border-grey c-border-bottom c-padding-10 c-font-14">
+                            联系方式：{{shop.phone}}
+                        </div>
+                    </div>
+                    <div class="row c-margin-t-15">
+                        <div class="col-md-12">
+                            <button ng-click="toshop(shop.id,shop.shopType)"
+                                    class="btn c-border-grey c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square"><i
+                                    class="c-font-red glyphicon glyphicon-home"></i>进入店铺
+                            </button>
+                            <button ng-click="collectionshop(shop.id)"
+                                    class="btn c-border-grey c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square"><i
+                                    class="c-font-red glyphicon glyphicon-star"></i>收藏店铺
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: CONTENT/SHOPS/SHOP-PRODUCT-DETAILS-2 -->
+<!--begin套餐搭配-->
+<!--<div class="c-content-box">-->
+    <!--<div class="container">-->
+        <!--<div class="c-border c-margin-b-15">-->
+            <!--<div class="row c-margin-0">-->
+                <!--<a class="c-padding-10 c-font-red c-font-16 c-font-bold" style="border-top:3px solid red;position: relative;float: left">-->
+                    <!--自由搭配组合套餐-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="row c-padding-20">-->
+                <!--<div class="col-md-2 col-sm-6 c-margin-b-20">-->
+                    <!--<div class="c-content-product-2 c-bg-white c-border">-->
+                        <!--<div class="c-content-overlay">-->
+                            <!--<div class="c-overlay-wrapper">-->
+                                <!--<div class="c-overlay-content">-->
+                                    <!--<a href="#/product?id={{product.id}}" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 150px; background-image: url({{product.mainPic}});"></div>-->
+                        <!--</div>-->
+                        <!--<div class="c-padding-5">-->
+                            <!--<div class="c-checkbox">-->
+                                <!--<input type="checkbox" id="dapei0"-->
+                                       <!--class="c-check">-->
+                                <!--<label class="c-font-12 c-font-grey-2" for="dapei0">-->
+                                    <!--<span></span>-->
+                                    <!--<span class="check"></span>-->
+                                    <!--<span class="box"></span>价格：￥{{product.suggestedRetailUnitPrice}}</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-8 padding-0">-->
+                    <!--<div class="col-md-1 c-center padding-0" style="line-height: 190px;width: 18px;">-->
+                        <!--+-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 col-sm-6 c-margin-b-20 ">-->
+                        <!--<div class="c-content-product-2 c-bg-white c-border ">-->
+                            <!--<div class="c-content-overlay">-->
+                                <!--<div class="c-overlay-wrapper">-->
+                                    <!--<div class="c-overlay-content">-->
+                                        <!--<a href="JavaScript:" ng-click="test()" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 150px; background-image: url(http://eshop.bayou-tech.cn/loyee-eshop/upload/37224832-f05b-4952-b1d4-7392aec1436f.png);"></div>-->
+                            <!--</div>-->
+                            <!--<div class="c-padding-5">-->
+                                <!--<div class="c-checkbox">-->
+                                    <!--<input type="checkbox" id="dapei1"-->
+                                           <!--class="c-check">-->
+                                    <!--<label class="c-font-12 c-font-grey-2" for="dapei1">-->
+                                        <!--<span></span>-->
+                                        <!--<span class="check"></span>-->
+                                        <!--<span class="box"></span>价格：￥99.00</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 col-sm-6 c-margin-b-20">-->
+                        <!--<div class="c-content-product-2 c-bg-white c-border">-->
+                            <!--<div class="c-content-overlay">-->
+                                <!--<div class="c-overlay-wrapper">-->
+                                    <!--<div class="c-overlay-content">-->
+                                        <!--<a href="JavaScript:" ng-click="test()" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 150px; background-image: url(http://eshop.bayou-tech.cn/loyee-eshop/upload/fd414ab9-0dfa-4b96-9a1e-24397d71e815.png);"></div>-->
+                            <!--</div>-->
+                            <!--<div class="c-padding-5">-->
+                                <!--<div class="c-checkbox">-->
+                                    <!--<input type="checkbox" id="dapei3"-->
+                                           <!--class="c-check">-->
+                                    <!--<label class="c-font-12 c-font-grey-2" for="dapei3">-->
+                                        <!--<span></span>-->
+                                        <!--<span class="check"></span>-->
+                                        <!--<span class="box"></span>价格：￥99.00</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2">-->
+                    <!--<p class="c-font-14 c-font-red">套餐价：<strong class="c-font-16">￥158..80</strong></p>-->
+                    <!--<p class="c-font-14">价格：￥306.00</p>-->
+                    <!--<p class="c-font-14">省：￥147.20</p>-->
+                    <!--<p><button class="btn c-btn-green  c-btn-bold c-btn-border-1x c-btn-square" ng-click="test()">&nbsp;&nbsp;立即购买&nbsp;</button></p>-->
+                    <!--<p><button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="test()">加入购物车</button></p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+<!--</div>-->
+<!--end套餐搭配-->
+
+<!-- BEGIN: CONTENT/SHOPS/SHOP-PRODUCT-TAB-1 -->
+<div class="c-content-box c-size-md c-no-padding">
+    <div class="c-shop-product-tab-1">
+        <div class="container">
+            <ul class="nav nav-justified">
+                <li class="{{hide}}" ng-click="tabshide()">
+                    <a class="c-font-uppercase c-font-bold">商品详情</a>
+                </li>
+                <li class="{{show}}" ng-click="tabsshow()">
+                    <a class="c-font-uppercase c-font-bold">累计评论({{reviews_num}})</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <div ng-if="hide" class="c-margin-t-15 c-margin-b-15 ">
+                <div ng-if="comAttr.propertyValueList" class="row c-bg-grey-1 c-padding-10 c-border">
+                    <div class="col-md-12 c-margin-b-15">
+                        规格参数
+                    </div>
+                    <div class="col-md-4 c-margin-b-10 c-font-15" ng-repeat="comAttr in commonAttrs">
+                        {{comAttr.propertyName}}：<span ng-repeat="item in comAttr.propertyValueList">{{item.propertyValueName}}{{comAttr.propertyValueList.length==$index+1?"":"、"}}</span>
+                    </div>
+                </div>
+
+                <div class=" product_detail row productDetail" ng-bind-html="trustHtml">
+                </div>
+            </div>
+            <div ng-if="show" class="c-margin-t-15 c-margin-b-15">
+                <div class="row c-border-bottom"></div>
+                <!--BEGIN：好评、差评等有统计显示-->
+                <div class="row c-margin-b-15 c-border-bottom c-padding-20">
+                    <div class="col-md-5">
+                        <div class="col-md-4">
+                            <div class="c-margin-b-40 c-margin-t-40 c-center">
+                                <strong class="c-font-40 c-font-red">
+                                    {{ratings.r1}}%
+                                </strong>
+                                <p>好评率</p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4" style="padding-right:0;padding-left:0; ">
+                                    <p class="c-margin-t-10">
+                                        好评({{ratings.r1}}%)
+                                    </p>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="progress c-margin-t-15" style="height: 14px">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                             aria-valuenow="{{ratings.r1}}" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ratings.r1}}%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" style="padding-right:0;padding-left:0; ">
+                                    <p class="c-margin-t-10">
+                                        中评({{ratings.r2}}%)
+                                    </p>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="progress c-margin-t-15" style="height: 14px">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                             aria-valuenow="{{ratings.r2}}" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ratings.r2}}%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" style="padding-right:0;padding-left:0; ">
+                                    <p class="c-margin-t-10">
+                                        差评({{ratings.r3}}%)
+                                    </p>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="progress c-margin-t-15" style="height: 14px">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                             aria-valuenow="{{ratings.r3}}" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ratings.r3}}%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END：好评、差评等有统计显示-->
+
+                <!--BEGIN：评论列表-->
+                <div class="container c-margin-b-15 c-border-bottom" ng-repeat="review in reviews">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="c-user-avatar">
+                                <img ng-src="{{review.logoPic}}"/>
+                            </div>
+                            <div class="c-product-review-name">
+                                <h3 class="c-font-bold c-font-24 c-margin-b-5">{{review.nickName}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="c-product-rating c-right">
+                                <i class="fa fa-star c-font-red" ng-if="review.ratings1>=1"></i>
+                                <i class="fa fa-star c-font-red" ng-if="review.ratings1>=2"></i>
+                                <i class="fa fa-star c-font-red" ng-if="review.ratings1>=3"></i>
+                                <i class="fa fa-star c-font-red" ng-if="review.ratings1>=4"></i>
+                                <i class="fa fa-star c-font-red" ng-if="review.ratings1>=5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-product-review-content">
+                        <p>{{review.comments}}</p>
+                    </div>
+                    <div class=" c-product-review-content">
+                        <img class=" col-sm-1 c-padding-10  cbp-l-project-img" ng-repeat="img in review.pics"  ng-src="{{img}}"/>
+                    </div>
+                    <div class=" c-product-review-content col-sm-12">
+                        <p>{{item.created_at}}</p>
+                    </div>
+                </div>
+                <!--END：评论列表-->
+                <!-- END: 订单列表-->
+                <div class="c-margin-t-20"></div>
+                <!-- BEGIN: 分页页码 -->
+                <ul class="c-content-pagination c-square c-theme pull-right" ng-if="pages[0]">
+                    <li class="c-prev">
+                        <a href="JavaScript:" ng-click="setpages(-1,0)">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="{{page==productReviewData.page?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                        <a href="JavaScript:">{{page}}</a>
+                    </li>
+                    <li class="c-next">
+                        <a href="JavaScript:" ng-click="setpages(+1,0)">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space">
+    <div class="container">
+        <div class="c-content-title-4">
+            <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                <a href="JavaScript:" ng-click="changeALot()" style="position: absolute;right: 0;z-index: 3" class="btn btn-default c-btn-uppercase c-btn-circle c-btn-uppercase">换一批</a>
+                <span class="c-bg-white">猜你喜欢</span>
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 c-margin-b-20 " ng-repeat="product in recommentProducts">
+                <div class="c-content-product-2 c-bg-white c-border">
+                    <div class="c-content-overlay">
+                        <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">New</div>-->
+                        <div class="c-overlay-wrapper" ng-click="toProductDetail(product.id)">
+                            <div class="c-overlay-content">
+                                <a href="" target="_blank" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url({{product.mainPicPath}});"></div>
+                    </div>
+                    <div class="c-info">
+                        <h2 class="c-title c-font-16 c-font-slim" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{product.name}}</h2>
+                        <p class="c-price c-font-18 c-font-slim c-font-red"><span class="c-font-14">￥</span>{{toDecimal2(product.suggestedRetailUnitPrice)}} &nbsp;
+                            <span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="product.originUnitPrice">￥</span>{{toDecimal2(product.originUnitPrice)}}</span>
+
+                        </p>
+                        <!--<span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="product.shopType==1">第三方运营</span>-->
+                        <!--<span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="product.shopType==2">O2O服务区</span>-->
+                        <!--<span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="product.shopType==3">自营</span>-->
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group c-border-top" role="group">
+                            <button class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" ng-click="toproduct(product.id)">立即购买</button>
+                        </div>
+                        <div class="btn-group c-border-left c-border-top" role="group">
+                            <button class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product" ng-click="toproduct(product.id)">加入购物车</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+<script src="assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+<script src="assets/base/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+<!-- END: CORE PLUGINS -->
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function()
+    {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/plugins/zoom-master/jquery.zoom.min.js" type="text/javascript"></script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->

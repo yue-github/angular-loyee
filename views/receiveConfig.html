@@ -1,0 +1,66 @@
+<style>
+    .receive-config-title{
+        width:48%;
+        margin: 0 auto;
+        display: block;
+    }
+    .receive-config-input{
+        display: block;
+        width:445px;
+        heoght:50px;
+        margin: 10px auto;
+        background: #F4BAB9;
+        border: 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 17px;
+    }
+    .receive-config-a{
+        display: block;
+        width:445px;
+        heoght:50px;
+        margin: 20px auto;
+        background:#FFA938;
+        color: #f1f1f1;
+        text-align: center;
+        cursor: pointer;
+    }
+    .receive-config-center{
+        width: 48%;
+        margin: 0 auto;
+    }
+    .getcode{
+        width:445px;
+        heoght:50px;
+        margin: 20px auto;
+    }
+</style>
+<div style="background-color: #FFD5A8;min-height: 715px;">
+    <div style="width: 100%;height: 100%;background: url('images/receive-config-bg.png')0px / cover no-repeat; background-position-x: center;">
+        <div>
+            <img class="receive-config-title" src="images/receive-config-title.png">
+            <input class="c-padding-10 receive-config-input" ng-model="data.phone" type="text" placeholder="请输入手机号领取优惠券"/>
+            <div class="form-group c-margin-b-5 c-margin-t-10">
+                <div class="input-group input-group-lg c-square getcode">
+                    <input type="text" ng-model="data.code" style="background: #F4BAB9; border: 0;text-align: center;" class="form-control c-square c-font-grey-3 c-border-grey c-theme" placeholder="输入验证码" />
+                        <span class="input-group-btn">
+                            <button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-btn-square c-btn-uppercase c-font-16" type="button" style="background-color:#FFA938;border-color: #FFA938" >{{code_txt}}</button>
+                        </span>
+                </div>
+            </div>
+            <div ng-click="submit()"   class="c-padding-10 c-font-bold receive-config-a" >立即领取</div>
+        </div>
+        <div class="c-margin-t-30 c-font-white receive-config-center" >
+            <strong class="c-font-20" style="margin-bottom: 10px;display: block;">优惠劵的基本使用说明</strong>
+            <p>1、优惠券是仅限在乐驿商城使用，按面值总额减免支付的优惠码。</p>
+            <p>2、优惠券分三种：满减劵、折扣劵、现金劵。</p>
+            <p>3、优惠券获取方式：通过输入手机号码获取。</p>
+            <p>4、使用满减券、折扣券、现金劵提交的订单，在订单未支付时取消订单，则订单取消后，系统自动返还相应的优惠券；若订单支付后，取消某一子单或取消全部子单，优惠券均不返还。</p>
+            <p>5、优惠券不能进行兑现、出售、转让或其他用途。</p>
+            <p>6、本规则由乐驿商城依据国家相关法律法规及规章制度予以解释。</p>
+        </div>
+    </div>
+</div>
+
+
+

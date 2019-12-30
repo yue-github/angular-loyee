@@ -1,0 +1,168 @@
+
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">修改个人信息</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group">
+                    <div class="control-label c-margin-b-10">头像</div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img ng-src="{{data.headImg}}" class="img-responsive" style="display: inline-block" />
+                        </div>
+                        <div class="col-md-2 c-margin-t-80">
+                            <a class="c-font-green-1 c-border-bottom c-border-green-1 c-product-margin-1" style="border-style:none none dashed none;padding-bottom: 5px;cursor: pointer" ng-click="updateImg()">修改头像</a>
+                            <input id="headImg" ngf-select="upload($file)" class="hide" type="file"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label">昵称</label>
+                    <input type="text" class="form-control c-square c-theme" ng-model="data.nickName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group ">
+                    <label class="control-label">真实姓名</label>
+                    <input type="text" class="form-control c-square c-theme" ng-model="data.name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group ">
+                    <label class="control-label">性别</label>
+                    <select class="form-control c-square c-theme" ng-model="data.gender">
+                        <option value="">请选择</option>
+                        <option ng-selected="data.gender == 0" value="0">女</option>
+                        <option ng-selected="data.gender == 1" value="1">男</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group ">
+                    <button class="btn btn-lg c-theme-btn c-btn-square" data-toggle="modal" data-target="#editPhone">修改绑定手机号码</button>
+                    <button class="btn btn-lg c-theme-btn c-btn-square" data-toggle="modal" data-target="#editPassword">修改密码</button>
+                </div>
+            </div>
+            <div class="row c-margin-t-30">
+                <div class="form-group">
+                    <button class="btn btn-lg c-btn-green c-btn-square" ng-click="submit()">保存</button>
+                    <button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x" ng-click="clean()">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="editPhone" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>{{updateTitle}}</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">旧手机号码：{{data.mobilePhone}}</label>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">新手机号码：</label>
+                        <input type="text" ng-model="edit.mobilePhone" class="form-control c-square c-theme" placeholder="手机号码">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group c-margin-b-5 c-margin-t-10">
+                        <label class="control-label">验证码：</label>
+                        <div class="input-group input-group-lg c-square">
+                            <input type="text" ng-model="edit.code" class="form-control c-square c-font-grey-3 c-border-grey c-theme" placeholder="输入验证码" />
+                                <span class="input-group-btn">
+                                    <button ng-click="checkcode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-theme-border c-btn-square c-btn-uppercase c-font-16" type="button" >获取手机验证码</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row c-margin-t-30">
+                    <div class="col-md-6 c-right">
+                        <button ng-click="editPhone()" class="btn c-btn-green c-theme-btn c-btn-square">提交</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn c-btn-grey c-btn-square" ng-click="clean('editPhone')">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="editPassword" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>修改登录密码</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" ng-if="!data.email">
+                    <div  class="form-group c-margin-b-5 c-margin-t-10">
+                        <label class="control-label">验证码：</label>
+                        <div class="input-group input-group-lg c-square">
+                            <input type="text" ng-model="password.code" class="form-control c-square c-font-grey-3 c-border-grey c-theme" placeholder="输入验证码" />
+                                <span class="input-group-btn">
+                                    <button ng-click="checkpasswordCode()" ng-class="paraclass" ng-bind="code_txt" ng-disabled="is_disabled" class="btn  c-theme-btn c-theme-border c-btn-square c-btn-uppercase c-font-16" type="button" >获取手机验证码</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="!data.email">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">新密码：</label>
+                        <input type="password" ng-model="password.password" class="form-control c-square c-theme" placeholder="新密码">
+                    </div>
+                </div>
+                <div class="row"  ng-if="!data.email">
+                    <div class="form-group c-margin-b-5 c-margin-t-10" >
+                        <label class="control-label">确认密码：</label>
+                        <input type="password" ng-model="password.repassword" class="form-control c-square c-theme" placeholder="确认密码">
+                    </div>
+                </div>
+                <div class="row c-margin-t-30" ng-if="!data.email">
+                    <div class="col-md-6 c-right">
+                        <button ng-click="editpassword()" class="btn c-btn-green c-theme-btn c-btn-square">提交</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn c-btn-grey c-btn-square" ng-click="clean('editPassword')">取消</button>
+                    </div>
+                </div>
+                <div class="row c-margin-t-30" ng-if="data.email">
+                    <div class="col-md-12 c-center">
+                        点击‘发送链接’然后到邮箱进行验证，按提示完成找回密码
+                    </div>
+
+                </div>
+                <div class="row c-margin-t-30" ng-if="data.email">
+                    <div class="col-md-6 c-right">
+                        <button ng-click="editpassword()" class="btn c-btn-green c-theme-btn c-btn-square">发送链接</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn c-btn-grey c-btn-square" ng-click="clean('editPassword')">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

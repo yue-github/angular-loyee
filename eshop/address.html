@@ -1,0 +1,104 @@
+<link rel="stylesheet" type="text/css" href="css/address.css"/>
+<style>
+	.c_up .u_right{
+		height: 560px;
+	}
+	.fenye{
+		width: 100%;
+		padding: 15px 0px;
+	}
+	.c_page{padding-right: 0px!important;}
+	.set_default{cursor:pointer;cursor:hand}
+</style>
+   <!--S content-->
+   <div class="content">
+   	<div class="c_up">
+		<div class="u_left">
+			<div ng-include="'eshop/menu.html'"></div>
+		</div>
+   		<div class="u_right">
+   			<div class="r_box">
+   				<div class="b_title">
+	   			  <ul>
+	   			  	<li><a href="javascript:void(0);" class="active">我的地址</a></li>
+	   			  </ul>
+   				</div>
+   				<div class="b_box" >
+   					<div class="add"  ng-click="adddata()">
+   						<img src="img/add.png"/>
+   						<span>添加收货地址</span>
+   					</div>
+   					<div class="address {{item.isDefault == 1?'active':''}} " ng-repeat="item in addresses">
+						<p >
+							<span ng-if="item.isDefault==0" class="set_default" ng-click="setDefault(item.id)">设置为默认地址</span>
+							<span ng-if="item.isDefault" class="set_default">默认地址</span>
+							<span  ng-click="editAddress(item.id)"><a href="javascript:void(0);" >修改</a></span>
+							<img ng-if="item.isDefault==0" src="img/del3.png" alt="" ng-click="remove(item.id)" />
+							<img ng-if="item.isDefault" src="img/del2.png" alt="" ng-click="remove(item.id)"/>
+						</p>
+						<p><span>收货人:</span> <span>{{item.contacts}}</span></p>
+						<p><span>收货地址:</span> <span>{{item.province}}&nbsp;&nbsp;{{item.city}}&nbsp;&nbsp;{{item.district}}&nbsp;&nbsp;{{item.detailedAddress}}</span></p>
+						<p><span>联系方式: </span><span>{{item.phone}}</span></p>
+   					</div>
+   					<div class="row fenye">
+						<div class="col-md-12">
+							<div ng-include="'eshop/pages.html'"></div>
+						</div>
+					</div>
+   				</div>
+   			</div>
+   		</div>
+   		<div style="clear: both;"></div>
+		<div class="add_card" id="add_card" style="display: none">
+			<div class="col-md-12">
+
+				<div class="row">
+					<div class="form-group">
+						<label class="control-label">收货人</label>
+						<input type="text" class="form-control c-square c-theme" ng-model="data.contacts"> </div>
+				</div>
+				<div class="row">
+					<div class="form-group ">
+						<label class="control-label">联系电话</label>
+						<input type="text"  class="form-control c-square c-theme" ng-model="data.phone" onkeyup="value=value.replace(/[^0-9]/g,'')" ng-Keyup="onkeydownNumber()"> </div>
+				</div>
+				<div class="row">
+					<div class="form-group ">
+						<div class="control-label">所在省市区</div>
+						<div class="row c-margin-t-10">
+							<div class="col-md-4">
+								<select class="form-control c-square c-theme" ng-model="data.provinceId" ng-options="x.id as x.name for x in provinces" ng-change="getCity(data.provinceId)">
+									<option value="">请选择省</option>
+								</select>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control c-square c-theme" ng-model="data.cityId" ng-options="x.id as x.name for x in cities" ng-change="getDistricts(data.cityId)">
+									<option value="">请选择市</option>
+								</select>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control c-square c-theme" ng-model="data.districtId"  ng-options="x.id as x.name for x in districts">
+									<option value="">请选择区</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group ">
+						<label class="control-label">详细地址</label>
+						<input type="text" class="form-control c-square c-theme" ng-model="data.detailedAddress" > </div>
+				</div>
+				<div class="row">
+					<div class="form-group ">
+						<button class="btn btn-lg c-btn-green c-btn-square c-bg-yellow-5" ng-click="submit()">保存</button>
+						<button class="btn btn-lg c-btn-dark-3 c-font-uppercase c-btn-square c-btn-border-1x" ng-click="cleaned()">重置</button>
+					</div>
+				</div>
+			</div>
+		</div>
+   	</div>
+   </div>
+<script>
+
+</script>

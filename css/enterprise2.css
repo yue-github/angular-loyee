@@ -1,0 +1,77 @@
+ 	   *{margin:0;padding:0;text-decoration: none;}
+ 	   .main{background-color: #F5F5F5;}
+	   img{border:0;display:block;}
+	   body{font-size:12px;font-family:"黑体";color:#666;}
+	   /*S top*/
+	   .top{width:100%;height:36px;background: #FFFFFF;border-bottom: 1px solid #C5C6C5;}
+	   .top .t_header{width:1200px;height:36px;margin:0 auto;line-height:36px;}
+	   .top .t_header .sign{margin-left: 20px;color: #C5C6C5;}
+	   .top .t_header .t_nav{float: left;}
+	   .top .t_header .t_nav select::-ms-expand{display: none;}
+	   .top .t_header .t_nav .t_sel{display: inline-block;width:140px;height: 22px; border-radius: 11px;padding-left: 20px;outline: none;border: 1px solid #DFDFDF;color: #B6B6B6;}
+	   .top .t_header .t_nav a img{display: inline-block;width: 26px;height: 21px;vertical-align: middle;}
+	   .top .t_header .t_nav .t_nav_img img{width: 23px;height: 16px;}
+	   .top .t_header span{color:#FF7D49;}
+	   .top .t_header .t_inf{float:right;}
+	   .top .t_header .t_inf a{color: #C5C6C5;}
+	   .top .t_header .t_inf a~a{margin-left: 20px;}
+	   .top .t_header .t_inf a img{display: inline;}
+       /*E top*/
+
+       /*S nav*/
+	   .nav{width:100%;margin:0 auto;padding-top:25px;position:relative;background: #FFFFFF;}
+	   .nav .nav_box{width: 1200px;margin: auto;}
+	   .nav .n_search{width:460px;height:40px;float:right;margin-top:-55px;}
+	   .nav .n_search .n_text .n_txt{width:407px;height:40px;border:1px solid #dfdfdf;line-height:38px;padding-left:10px;font-size:14px;color:#333;outline:none;float:left;opacity: 0.8;}
+	   .nav .n_search .n_text .n_sub{width:40px;height:42px;border:1px solid #dfdfdf;background:#fff;outline:none;float:left;border-left:none;font-size:20px;background-image: url(../img/search.png);background-repeat: no-repeat;background-size: 80% 80%;background-position: center;}
+	   .nav .n_all{margin-top:10px;background: #FABA00;}
+	   .nav .n_all ul{width: 1200px;height:50px;margin: auto;}
+	   .nav .n_all ul li{list-style:none;float:left;margin-right:50px;}
+	   .nav .n_all ul li a{text-decoration:none;line-height:50px;padding:0 10px;font-size:16px;color:#fff;display:block;}
+	   .nav .n_all ul li a:hover{background:#333;}
+	   .nav .n_all ul li .all{width:197px;background: #F29700;font-size:18px;}
+	   .nav .n_all ul li .all:hover{background:#ff4a00;}
+	   .nav .n_all .page{background: #FABA00;}
+	   /*E nav*/
+
+	   /*S content*/
+	   .content{height:auto;background: #F5F5F5;padding-bottom: 80px;}
+	   .content .box{width: 1200px;height: auto;background: white;margin: auto;padding: 30px 0 90px 0;}
+	   
+	   .box .b_logo{width: 186px;height: 120px;background: url(../img/b_logo.png) no-repeat;margin: auto;font-size: 24px;text-align: center;position: relative;}
+	   .b_logo span{position: absolute;width: 100%;left: -50%;bottom: 10px;margin-left: 93px;}
+		
+		.box .b_line{width: 1077px;height: 100px;margin: 30px auto;}
+		.box .b_down{width: 903px;height: auto;margin: auto;text-align: center;color: black;}
+		.b_down img{width: 110px;height: 110px;display: initial;}
+		.b_down p:nth-child(2){font-size: 48px;margin-top: 40px;letter-spacing: 8px;}
+		.b_down p:nth-child(3){font-size: 28px;letter-spacing: 2px;}
+		
+	   /*E content*/
+		
+	   /*S footer*/
+	   .footer{width:100%;height:200px;border-bottom:1px solid #dfdfdf;background-image: linear-gradient(to right,#fabe00,#f39700);color: black;}
+	   .footer ul{width: 1200px;height: 105px;line-height: 105px;margin: auto;list-style-type: none;font-size: 14px;border-bottom: 1px solid black;}
+	   .footer ul li{float: left;margin-right: 40px;}
+	   .footer ul li img{display: inline;transform: translateY(40%);}
+	   .footer ul li a{color: black;}
+	   .footer .f_p{width: 1200px;margin: 20px auto;}
+	   .footer  p{display: inline-block;font-size: 14px;}
+	   .footer .f_p a{float: right;margin-right: 10px;}
+	   /*E footer*/
+
+	   @font-face {font-family: 'iconfont';
+	       src: url('css/iconfont.eot'); /* IE9*/
+		   src: url('css/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		   url('css/iconfont.woff') format('woff'), /* chrome、firefox */
+		   url('css/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+		   url('css/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+	   }
+	   .iconfont{
+	       font-family:"iconfont" !important;
+		   font-size:16px;font-style:normal;
+		   -webkit-font-smoothing: antialiased;
+		   -webkit-text-stroke-width: 0.2px;
+		   -moz-osx-font-smoothing: grayscale;
+	   }
+	   .clear{clear:both;}

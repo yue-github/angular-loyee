@@ -1,0 +1,247 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                <div class="col-md-4">优惠劵</div>
+                <div class="col-md-8">
+                    <div class="row">
+
+                        <div class="col-md-7 c-padding-10">
+                        </div>
+                        <div class="col-md-2 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square c-theme-btn" data-toggle="modal" data-target="#coupon-form" ng-click="add()">添加</button>
+                        </div>
+                        <div class="col-md-3 c-padding-10">
+                            <button class="btn c-btn-green c-btn-square">生产优惠劵</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-line-left c-theme-bg"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+                    <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+
+                        <div class="col-md-2 c-cart-image c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">标题</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 c-right">开始</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">结束</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">值</h3>
+                        </div>
+                        <div class="col-md-1 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">满</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">明细</h3>
+                        </div>
+                        <div class="col-md-3 c-cart-qty c-padding-10">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                        </div>
+                    </div>
+
+                    <!-- BEGIN: 优惠劵item-->
+                    <div class="row c-cart-table-row  c-border-bottom c-border-grey">
+
+                        <div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">X-Man促销</p>
+                        </div>
+                        <div class="col-md-1 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-right">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">2016-07-01</p>
+                        </div>
+                        <div class="clearfix col-md-1 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">2016-10-31</p>
+                        </div>
+                        <div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">10.0</p>
+                        </div>
+                        <div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">100</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10 c-center">
+                            <button class="btn c-btn-green c-btn-square" style="padding: 4px 9px 4px 9px;" data-toggle="modal" data-target="#data-form">明细</button>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 c-cart-qty c-padding-10">
+                            <button class="btn c-btn-green c-btn-square" style="padding: 4px 9px 4px 9px;">商品</button>
+                            <button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#coupon-form"style="padding: 4px 9px 4px 9px;">修改</button>
+                            <button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;">删除</button>
+                        </div>
+                    </div>
+
+                    <!--<div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in data">-->
+
+                    <!--<div class="col-md-3 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10" style="clear: none;">-->
+                    <!--<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.couponTitle}}</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-1 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-right">-->
+                    <!--<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">2</p>-->
+                    <!--</div>-->
+                    <!--<div class="clearfix col-md-1 c-center col-sm-3 col-xs-6 c-cart-price c-padding-10 ">-->
+                    <!--<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.type}}</p>-->
+                    <!--</div>-->
+                    <!--<div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">-->
+                    <!--<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.percentageDiscount}}</p>-->
+                    <!--</div>-->
+                    <!--<div class="clearfix col-md-1 col-sm-3 col-xs-6 c-cart-price c-padding-10">-->
+                    <!--<p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.minPurchaseAmount}}</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty c-padding-10 c-center">-->
+                    <!--<button class="btn c-btn-green c-btn-square" style="padding: 4px 9px 4px 9px;" data-toggle="modal" data-target="#data-form">明细</button>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 col-sm-3 col-xs-6 c-cart-qty c-padding-10">-->
+                    <!--<button class="btn c-btn-green c-btn-square" style="padding: 4px 9px 4px 9px;" ng-click="check(item.id)">商品</button>-->
+                    <!--<button class="btn c-btn-green c-btn-square" data-toggle="modal" data-target="#coupon-form" style="padding: 4px 9px 4px 9px;" ng-click="update(item.id)">修改</button>-->
+                    <!--<button class="btn c-btn-grey c-btn-square" style="padding: 4px 9px 4px 9px;" ng-click="delete(item.id)">删除</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!-- END: 优惠劵item-->
+                </div>
+            </div>
+
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-40"></div>
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="javascript:void(0);">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">1</a>
+            </li>
+            <li class="c-active">
+                <a href="javascript:void(0);">2</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">3</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">4</a>
+            </li>
+            <li class="c-next">
+                <a href="javascript:void(0);">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页 -->
+    </div>
+</div>
+<div class="modal fade c-content-login-form" id="coupon-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>添加促销活动</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="名称"/>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="期限（天）"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6">
+                            <select class="form-control  c-square c-theme">
+                                <option>类型</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="值"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="满"/>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade c-content-login-form" id="data-form" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>添加促销活动</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="名称"/>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="期限（天）"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6">
+                            <select class="form-control  c-square c-theme">
+                                <option>类型</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="值"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6">
+                            <input class="form-control  c-square c-theme" type="text" placeholder="满"/>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

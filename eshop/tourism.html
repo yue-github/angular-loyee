@@ -1,0 +1,47 @@
+
+<!--S content-->
+<div class="content">
+	<div class="c_down">
+		<div class="d_detail" ng-repeat="p in PositionTwo">
+			<div class="c-content-title-4" style="width: 100%">
+				<h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+					<span class="c-bg-grey-1">{{p.positionName}}</span>
+				</h3>
+			</div>
+			<div class="s_list" ng-repeat="item in p.productList">
+				<div class="s_con" ng-click="toProductDetail(item.id)" style="height:auto;">
+					<a href="javascript:void(0);">
+						<img class="s_pic" ng-src="{{item.recommendPic}}" width="290" height="265"/>
+					</a>
+					<p class="s_header">{{item.name}}</p>
+					<span class="s_price">￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+				</div>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="comfirmOrder(item.id)">立即购买</a>
+					</div>
+					<div class="btn-group c-border-left c-border-top" role="group">
+						<a class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-yellow-4-hover c-btn-product" ng-click="shoppingCart(item.id)">加入购物车</a>
+					</div>
+				</div>
+			</div>
+
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div class="row" ng-repeat="p in PositionThree"  style="width: 100%;overflow: hidden;">
+	<div class="c-content-title-4" style="width: 100%">
+		<h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+			<span class="c-bg-grey-1">{{p.positionName}}</span>
+		</h3>
+	</div>
+	<div ng-style="threeBox">
+		<div ng-repeat="item in p.productList" style="width: 473px;height: 250px; margin:0px 5px;display: inline-block">
+			<img ng-src="{{baseUrl+item.recommendPic}}" ng-click="toProductDetail(item.id)" style="width: 473px;height: 250px;cursor: pointer">
+		</div>
+	</div>
+</div>
+<!--E content-->
+

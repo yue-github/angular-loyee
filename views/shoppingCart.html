@@ -1,0 +1,224 @@
+
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">我的购物车</h3>
+        </div>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<!-- BEGIN: PAGE CONTENT -->
+<!-- BEGIN: CONTENT/SHOPS/SHOP-CART-1 -->
+<div class="c-content-box c-size-lg">
+    <div class="container">
+
+        <div class="c-shop-cart-page-1" ng-if="carts.shops[0].productList">
+            <div class="row c-cart-table-title">
+                <div class="col-md-1 c-margin-t-5">
+                    <div class="c-checkbox">
+                        <input ng-model="chkall" ng-click="chkAll(chkall)" ng-true-value="1" ng-false-value="0" type="checkbox" id="checkbox6-444"
+                               class="c-check">
+                        <label class="c-font-16 c-font-grey-2" for="checkbox6-444">
+                            <span></span>
+                            <span class="check"></span>
+                            <span class="box"></span>全选</label>
+                    </div>
+                </div>
+                <div class="col-md-2 c-cart-image">
+                    <h3 class="c-font-uppercase  c-font-16 c-font-grey-2">商品</h3>
+                </div>
+                <div class="col-md-3 c-cart-desc">
+                    <h3 class="c-font-uppercase  c-font-16 c-font-grey-2"></h3>
+                </div>
+                <div class="col-md-1 c-cart-qty">
+                    <h3 class="c-font-uppercase  c-font-16 c-font-grey-2">数量</h3>
+                </div>
+                <div class="col-md-2 c-cart-price">
+                    <h3 class="c-font-uppercase  c-font-16 c-font-grey-2">单价</h3>
+                </div>
+                <div class="col-md-2 c-cart-total">
+                    <h3 class="c-font-uppercase  c-font-16 c-font-grey-2">总价</h3>
+                </div>
+                <div class="col-md-1 c-cart-remove"></div>
+            </div>
+            <!-- BEGIN: 购物车item-->
+            <div ng-repeat="cart in carts.shops">
+                <div class="row c-margin-b-15 c-margin-t-20">
+                    <div class="col-md-1 col-xs-6 c-cart-ref c-center" style="width: 5%">
+                        <div class="c-checkbox">
+                            <input ng-model="cart.isSelected" ng-click="shopAll(cart.isSelected,$index)" ng-true-value="1" ng-false-value="0" type="checkbox" id="cart{{$index}}"
+                                   class="c-check">
+                            <label for="cart{{$index}}">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 c-font-16">{{cart.shopName}}</div>
+                </div>
+                <div ng-repeat="product in cart.productList">
+                    <div class="row c-cart-table-row c-margin-b-15" ng-repeat="item in product.products">
+                        <div class="col-md-1 col-xs-6 c-cart-ref c-center">
+                            <div class="col-md-12 c-margin-lr-20">
+                                <div class="c-checkbox">
+                                    <input ng-model="item.isSelected" ng-change="isSelected(item.isSelected,$index,$parent.$index,$parent.$parent.$index)" type="checkbox" ng-true-value="1" ng-false-value="0" id="c{{$parent.$index}}p{{$index}}"
+                                           class="c-check">
+                                    <label for="c{{$parent.$index}}p{{$index}}">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-5">
+                            <img ng-src="{{item.mainPic}}" class="img-max-100"/></div>
+                        <div class="col-md-3 col-sm-9 col-xs-7 c-cart-desc">
+                            <h3>
+                                <a href="#/product?id={{item.product_id}}" target="_blank" class="c-theme-link c-font-18 c-font-dark">{{item.productName}}</a>
+                            </h3>
+                            <p class="c-font-14">{{item.selectProterties}}</p>
+                        </div>
+
+                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                            <div class="c-input-group c-spinner">
+                                <input ng-model="item.amount" ng-change="addamount(item.amount,$index,$parent.$index,$parent.$parent.$index)" type="text"
+                                       class="form-control c-item-1" value="1">
+                                <div class="c-input-group-btn-vertical">
+                                    <button class="btn btn-default" ng-click="addCount($index,1,$parent.$index,$parent.$parent.$index)" type="button"
+                                            data_input="c-item-1">
+                                        <i class="fa fa-caret-up"></i>
+                                    </button>
+                                    <button class="btn btn-default" ng-click="addCount($index,-1,$parent.$index,$parent.$parent.$index)" type="button"
+                                            data_input="c-item-1">
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-price c-font-bold c-font-red"><span class="c-font-12">￥</span><span ng-model="suggestedRetailUnitPrice">{{toDecimal2(item.suggestedRetailUnitPrice)}}</span>
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
+                            <p class="c-cart-price c-font-bold c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(item.totalPrice)}}</p>
+                        </div>
+                        <div class="col-md-1 col-sm-12 c-cart-remove">
+                            <a href="javascript:;" class="c-theme-link c-cart-remove-desktop"
+                               ng-click="remove(item.id)">×</a>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="{{product.isHasProm}}">
+                        <div class="col-md-12 ">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-11 c-bg-grey-1" ng-hide="{{product.remainPay}}">
+                                <div class="c-margin-t-20 c-margin-b-20 c-font-red col-md-10">
+                                    <span class="c-margin-r-20">{{product.promotion.promotionTitle}}</span>
+                                    <span class="c-font-14 c-font-grey-2">已优惠：{{product.promotionDiscount}}</span>
+                                </div>
+                                <div class="col-md-2 c-margin-t-20">
+                                    <span class="c-font-12 c-font-red">￥</span><span class="c-font-red c-font-16">{{toDecimal2(product.productSelectPay-product.promotionDiscount)}}</span>&nbsp;
+                                    <span class="c-font-12">￥</span><span class="c-font-14 c-font-line-through">{{toDecimal2(product.productSelectPay)}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-11 c-bg-grey-1" ng-show="{{product.remainPay}}">
+                                <div class="c-margin-t-20 c-margin-b-20 c-font-red col-md-10">
+                                    <span class="c-margin-r-20">{{product.promotion.promotionTitle}}</span>
+                                    <span class="c-font-14 c-font-grey-2">还差{{product.remainPay}}元才可以优惠</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: 购物车item-->
+
+            <div class="row">
+                <div class="c-cart-subtotal-row">
+                    <div class="col-md-3 col-md-offset-7 col-sm-6 col-xs-6 c-cart-subtotal-border">
+                        <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">已选中{{carts.totalAmount}}件商品，总计：</h3>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-6 c-cart-subtotal-border">
+                        <h3 class="c-font-bold c-font-16"><span style="color: #EB5D69;">￥{{(toDecimal2(carts.totalPrice))}}</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- END: SUBTOTAL ITEM ROW -->
+            <div class="c-cart-buttons">
+                <!--<button type="button" class="btn btn-success c-btn-square c-btn-uppercase c-btn-bold" >继续购物</button>-->
+               <div class="row c-margin-t-20">
+                   <div class="col-md-6">
+                       <a href="#/products"
+                          class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-l">
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;继续购物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                   </div>
+                   <div class="col-md-6 c-right">
+                       <a ng-click="submit()" href="javascript:"
+                          class="btn c-btn btn-lg c-btn-red c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结算&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="c-center" style="height: 400px" ng-if="!carts.shops[0].productList">
+            <img src="images/cartEmpty.png"/>
+            <h2>购物车空空的哦~,去看看心仪的商品吧~</h2>
+            <a href="#home" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-margin-t-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;立即购物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+</div>
+<!-- END: CONTENT/SHOPS/SHOP-CART-1 -->
+<!-- BEGIN: CONTENT/SHOPS/SHOP-2-2 -->
+<div class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space">
+    <div class="container">
+        <div class="c-content-title-4">
+            <h3 class="c-font-uppercase c-center c-font-bold c-line-strike">
+                <span class="c-bg-white">更多商品</span>
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 c-margin-b-20 " ng-repeat="re_item in recommentProducts">
+                <div class="c-content-product-2 c-bg-white c-border">
+                    <div class="c-content-overlay">
+                        <!--<div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">热销</div>-->
+                        <!--<div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">特卖</div>-->
+                        <div class="c-overlay-wrapper" ng-click="toProductDetail(re_item.id)">
+                            <div class="c-overlay-content">
+                                <a href="" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 210px; background-image: url({{re_item.mainPicPath}});"></div>
+                    </div>
+                    <div class="c-padding-10">
+                        <div class="c-title c-font-18 c-font-slim" style="cursor: pointer;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{re_item.name}}</div>
+                        <div class="c-price c-font-16 c-font-slim c-font-red"><span class="c-font-12">￥</span>{{toDecimal2(re_item.suggestedRetailUnitPrice)}} &nbsp;
+                            <span class="c-font-14 c-font-line-through c-font-grey-3"><span class="c-font-12" ng-if="re_item.originUnitPrice">￥</span>{{toDecimal2(re_item.originUnitPrice)}}</span>
+                        </div>
+                        <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==1">第三方运营</span>
+                        <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==2">O2O服务区</span>
+                        <span class="c-product-sale c-font-14 c-bg-green c-font-white" style="padding: 2px 10px;" ng-if="re_item.shopType==3">自营</span>
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group c-border-top" role="group">
+                            <a href="#/product?id={{re_item.id}}" target="_blank" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">立即购买</a>
+                        </div>
+                        <div class="btn-group c-border-left c-border-top" role="group">
+                            <a href="#/product?id={{re_item.id}}" target="_blank" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">加入购物车</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: CONTENT/SHOPS/SHOP-2-2 -->
+<!-- BEGIN: CONTENT/STEPS/STEPS-3 -->
+
+
+<script>
+    $(document).ready(function()
+    {
+        App.init(); // init core
+    });
+</script>

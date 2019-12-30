@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="css/membernav.css" />
+
+<div class="container">
+	<h2 class="title">会员特价</h2>
+	<ul class="hot">
+	   <li class="good" ng-repeat='item in foods'>
+	      <img src="{{item.img}}" class="goodImg" />
+	      <div class="comment">{{item.comment}}</div>
+	      <div class="money">
+	          <span class="now">￥{{toDecimal2(item.now)}}</span>
+	          <del class="old">￥{{toDecimal2(item.old)}}</del>
+	      </div>
+	      <div class="btn">
+	          <div class="success" ng-click="comfirmOrder(item.id)">立即购买</div>
+	          <div class="add" ng-click="shoppingCart(item.id)">加入购物车</div>
+	      </div>
+	   </li>
+	</ul>
+</div>

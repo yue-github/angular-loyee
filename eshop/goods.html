@@ -1,0 +1,85 @@
+<link rel="stylesheet" type="text/css" href="css/goods.css"/>
+
+<!--S content-->
+<div class="content">
+	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+		<div class="c_right">
+			<div class="r_up">
+				<a href="#/myProducts" class="{{menustate==1?'active':''}}">我的商品</a>
+				<a href="#/outProducts" class="{{menustate==2?'active':''}}">下架商品</a>
+				<a href="#/recycleProducts" class="{{menustate==3?'active':''}}">商品回收站</a>
+			</div>
+			<div class="r_down">
+				<div class="d_detail">
+					<div class="container">
+						<div class="row">
+							<ul class="list-group">
+								<li class="list-group-item">
+									<div class="n_search" style="width:520px;height: 84px;">
+										<div class="n_text">
+											<input type="text" class="n_txt" ng-model="data.productName" placeholder="商品名称"/>
+										</div>
+										<div class="n_text">
+											<input type="text" class="n_txt" ng-model="data.supplierName" placeholder="供应商名称" style="margin-left:0px;"/>
+										</div>
+										<div class="n_text">
+											<button style="width:60px;height: 80px;margin-left:10px;position: absolute;top: 0;left: 40%;" ng-click="select()">搜索</button>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item" style="margin-left:20px;margin-top: 20px;"><a href="#/addProduct"><button class="c-font-grey-1">添加商品</button></a></li>
+								<li class="list-group-item" style="margin-top: 20px;" id="up_ground" ng-click="offShelf()"><button class="c-font-grey-1">下架</button></li>
+								<li class="list-group-item" style="margin-top: 20px;" id="delete" ng-click="delete()"><button class="c-font-grey-1">删除</button></li>
+							</ul>
+						</div>
+						<div class="row">
+							 <p style="font-size: 16px;font-weight: 700;text-align: center; padding: 25px 0px;color: #787878;" ng-show="products.length==0">抱歉，暂无数据</p>
+							<table class="table table-bordered" ng-show="products.length != 0">
+								<tr>
+									<th><input type="checkbox" ng-model="chkall" ng-click="chkAll(chkall)" /></th>
+									<th>商品</th>
+									<th>价格</th>
+									<th>库存</th>
+									<th>是否预售</th>
+									<th>更新时间</th>
+									<th>操作</th>
+								</tr>
+								<tr ng-repeat="item in products">
+									<td><input type="checkbox" ng-model="item.checked" ng-checked="item.checked"/></td>
+									<td>
+										<div class="media">
+											<div class="media-left">
+												<img src="img/g_1.png" ng-src="{{item.mainPic}}" class="media-object" />
+						 
+											</div>
+
+											<div class="media-body">
+												<a href="#/product?id={{item.id}}"  class="c-font-bold c-theme-link c-font-dark">{{item.name}}</a>
+											</div>
+										</div>
+									</td>
+									<td>￥{{toDecimal2(item.suggestedRetailUnitPrice)}}</td>
+									<td>{{item.storeAmount}}</td>
+									<td>{{item.is_pre_sale == 1 ? "是" : "否"}}</td>
+									<td><p>{{item.created_at}}</p></td>
+									<td><a  href="#/addProductInfo?id={{item.id}}&catId={{item.category_id}}" >编辑商品</a></td>
+								</tr>
+
+							</table>
+						</div>
+						<div class="row" ng-show="products.length != 0">
+							<div ng-include="'eshop/pages.html'"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+   <!--E content-->
+   
+

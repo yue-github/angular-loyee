@@ -1,0 +1,49 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 c-content-title-1">
+                    <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">我的现金劵</div>
+                    <div class="c-line-left c-theme-bg"></div>
+                </div>
+
+            </div>
+        </div>
+        <!-- BEGIN: 页面内容 -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="c-content-product-2 col-md-4 c-margin-b-30 c-bg-green-font" ng-repeat="item in coupons">
+                    <div class=" c-padding-10  {{item.is_used==0?'isused-1':'isused-0'}}" >
+                        <h2 style="margin: 20px 0 10px 0" class=" {{item.is_used==0?'c-font-white':'c-font-dark'}} "><span>￥</span><strong class="c-font-30">{{toDecimal2(item.cashDiscount)}}</strong><span class="c-font-14 c-margin-t-15" style="float: right;">{{item.cashTitle}}</span></h2>
+                        <p  class="c-font-12 {{item.is_used==0?'c-font-white':'c-font-dark'}}">有效期：{{item.depositTime}}至{{item.expirationTime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: 页面内容-->
+
+        <div class="c-margin-t-20"></div>
+        <!-- BEGIN: 分页页码 -->
+        <ul class="c-content-pagination c-square c-theme pull-right">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页页码-->
+    </div>
+</div>

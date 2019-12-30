@@ -1,0 +1,27 @@
+<style>
+	.u_left{display: inline-block;}
+	.u_left ul li~li{border-top: none;}
+	.u_left ul li a{color: #696969;font-size: 20px!important;font: normal 20px "黑体";}
+	.u_left ul li:last-child{width: 220px;height: 226px;border: none;margin-top: 5px;}
+	.u_left ul li.active{border-left: 4px solid #F29700;background: #F5F5F5;width: 220px;}
+	.content .c_page .p_ul{
+		width: auto;
+	}
+	 .u_left ul li{list-style-type: none;width: 220px;height: 50px;background: white;border: 1px solid #DFDFDF;text-align: left;line-height: 50px;text-align: center; }
+	.all{font: normal 20px "黑体";}
+</style>
+<ul>
+	<li class="{{menu==0?'active':''}}"><a href="#/myOrders?page=0">订单中心</a></li>
+	<li class="{{menu==9?'active':''}}"><a href="#/myRefunds?page=0">售后服务</a></li>
+	<li class="{{menu==1?'active':''}}"><a href="#/collectionProducts">我的收藏</a></li>
+	<li class="{{menu==2?'active':''}}"><a href="#/myAddresses">地址管理</a></li>
+	<li class="{{menu==3?'active':''}}"><a href="#/myCoupons">我的优惠券</a></li>
+	<li class="{{menu==4?'active':''}}"><a href="#/myPoints">积分详情</a></li>
+	<li class="{{menu==5?'active':''}}"><a href="#/myBankcard">我的钱包</a></li>
+	<li class="{{menu==6?'active':''}}"><a href="#/myCurrency">通币详情</a></li>
+	<li class="{{menu==7?'active':''}}"><a href="#/myGrowValue">成长值详情</a></li>
+	<li class="{{menu==8?'active':''}}"><a href="#/myNotice">我的消息</a></li>
+	<li id="dialog1" style="padding: 0px;display: none"><img src="img/c02.png"/></li>
+</ul>
+
+<div style="clear: both;"></div>

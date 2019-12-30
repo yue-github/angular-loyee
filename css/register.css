@@ -1,0 +1,70 @@
+
+/*!  author: Li Zhen Ya
+ *   login.css
+ *   http://azenui.com/
+/*!  http://y-show.com/   */
+
+
+	/*S content*/
+	.content{width: 100%;height: 814px;background-image: url(../img/l_pic.png);background-repeat: no-repeat;background-size: 100% 101%;padding-top: 117px;box-sizing: border-box;}
+	.content .middle{width: 1200px;margin: auto;}
+	.content .box{width: 400px;height: auto;background-color: #FFFFFF;float: right;}
+	.box .register-top{height: 84px;line-height: 84px;text-align: center;}
+	.box .register-top a{width: 50%;display: block;float: left;font-size: 18px;color: #BABABA;}
+	.box .register-top a.active{color: black;background: url(../img/r_box.png) no-repeat;background-position: top;}
+	
+	.box .register-tel{width: 350px;margin: auto;margin-bottom: 30px;}
+	.box .register-tel label{display: block;margin: 14px 0 8px 0;font-size: 14px;}
+	.box .register-tel .box_a label{display: inline-block;font-size: 12px;}
+	.register-tel input[type="text"],.register-tel input[type="password"]{width: 350px;height: 38px;border-radius: 2px;border: 1px solid #B6B6B6;padding-left: 10px;box-sizing: border-box;}
+	.register-tel input[type="text"]:nth-child(4){width: 210px;}
+	.register-tel input[type="text"]:nth-child(7){width: 210px;}
+	.register-tel .b_tel{width: 120px;height: 40px;background: #FABE00;color: white;border: none;float: right;border-radius: 2px;}
+	.register-tel .box_a{letter-spacing: 2px;}
+	.register-tel .box_a a{text-decoration: underline;color: #0288DC;}
+	.register-tel .box_a a:last-child{float: right;line-height: 40px;}
+	.register-tel .b_register{width: 350px;height: 40px;border: none;color: white;background: #FABE00;border-radius: 2px;}
+	
+	.box .register-mail{width: 350px;margin: auto;margin-bottom: 30px;display: none;}
+	.box .register-mail label{display: block;margin: 14px 0 8px 0;font-size: 14px;}
+	.box .register-mail .box_a label{display: inline-block;font-size: 12px;}
+	.register-mail input[type="text"],.register-mail input[type="password"]{width: 350px;height: 38px;border-radius: 2px;border: 1px solid #B6B6B6;padding-left: 10px;box-sizing: border-box;}
+	.register-mail .box_a{letter-spacing: 2px;}
+	.register-mail .box_a a{text-decoration: underline;color: #0288DC;}
+	.register-mail .box_a a:last-child{float: right;line-height: 40px;}
+	.register-mail .b_register{width: 350px;height: 40px;border: none;color: white;background: #FABE00;border-radius: 2px;}
+	
+	.fade{width: 100%;height: 100%;background: black;position: fixed;left: 0;top: 0;opacity: 0.8;display: none;}
+	.tan{width: 1200px;height: 600px;background: white;position: fixed;left: 50%;top: 20px;z-index: 999;margin-left: -600px;display: none;}
+	.tan .text{width: 1063px;margin: auto;}
+	.tan .title{text-align: center;margin: 20px 0 26px 0;}
+	.tan .title img{width: 40px;height: 40px;float: right;transform: translate(50%,-50%);}
+	.tan .title span{display: inline-block;width: 100%;}
+	.tan .text .b_close{width: 150px;height: 50px;background: #555555;color: white;border: none;border-radius: 2px;float: right;letter-spacing: 4px;font-size: 18px;margin-top: 20px;}
+	.text .txt textarea:focus{border: none;}
+	/*E content*/
+	
+
+/* 清理浮动 */
+.fn-clear{
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+    zoom:1; /* for IE6 IE7 */
+}
+
+
+/* 隐藏, 通常用来与 JS 配合 */
+body .hide {
+    display:none;
+}
+
+/* 设置内联, 减少浮动带来的bug */
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+
+/******后期修改样式********/
+#agree{margin-top: 0px;}

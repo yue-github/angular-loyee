@@ -1,0 +1,354 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <div class="row c-font-uppercase c-font-bold c-font-18 ">
+                <div class="col-md-4">{{pageTitle}}</div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6 c-padding-10">
+                        </div>
+                        <div class="col-md-6 c-padding-10 c-right">
+                            <button data-toggle="modal" data-target="#addsalesForm"  ng-click="addForm()" class="btn c-btn-green c-btn-square c-theme-btn">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-line-left c-theme-bg"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-border-bottom c-theme-border-bottom c-border-2px">
+                </div>
+                <div class="c-border col-md-12">
+                    <div class="row c-cart-table-title c-bg-grey-1 c-border-bottom">
+                        <div class="col-md-2 c-cart-image padding-0">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">标题</h3>
+                        </div>
+                        <div class="col-md-3 c-cart-price padding-0 ">
+                            <h3 class="c-font-uppercase c-font-bold  c-font-16 c-font-grey-2 c-center">说明</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price padding-0">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">开始时间</h3>
+                        </div>
+                        <div class="col-md-2 c-cart-price padding-0">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">结束时间</h3>
+                        </div>
+                        <div class="col-md-3 c-cart-qty padding-0">
+                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 c-center">操作</h3>
+                        </div>
+                    </div>
+
+                    <!-- BEGIN: 优惠劵item-->
+                    <div class="row c-cart-table-row  c-border-bottom c-border-grey" ng-repeat="item in many">
+                        <div class="col-md-2 col-sm-6 col-sm-3 col-xs-5 c-cart-image c-padding-10 c-center" style="clear: none;">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.promotionTitle}}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-6 c-cart-desc c-padding-10 c-no-padding c-center">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.promotionDescription}}</p>
+                        </div>
+                        <div class=" col-md-2 col-sm-3 col-xs-6 c-padding-10 c-center">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.startTime}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-padding-10 c-center">
+                            <p class="c-cart-price c-font-bold c-font-14 c-margin-t-5">{{item.endTime}}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 c-cart-qty c-padding-10 ">
+                            <button class="btn c-btn-green c-btn-square c-margin-0"  data-toggle="modal" data-target="#detailForm" ng-click="getPromotion(item.id)" style="padding: 5px 10px">赠品</button>
+                            <button class="btn c-btn-green c-btn-square c-margin-0"  data-toggle="modal" data-target="#productForm" ng-click="getPromotion_id(item.id)" style="padding: 5px 10px">商品</button>
+                            <button class="btn c-btn-green c-btn-square c-margin-0" data-toggle="modal" data-target="#addsalesForm" ng-click="update(item.id)"style="padding: 5px 10px">修改</button>
+                            <button class="btn c-btn-grey c-btn-square c-margin-t-10"  ng-click="delete(item.id)"style="padding: 5px 10px;margin-left: 0">删除</button>
+                        </div>
+                    </div>
+                    <!-- END: 优惠劵item-->
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN:分页 -->
+        <div class="c-margin-t-40"></div>
+        <ul class="c-content-pagination c-square c-theme pull-right" ng-if="pagelength>0">
+            <li class="c-prev">
+                <a href="JavaScript:" ng-click="setpages(-1,0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li class="{{page==data.pageNumber?'c-active':''}}" ng-click="setpages(page,1)" ng-repeat="page in pages">
+                <a href="JavaScript:">{{page}}</a>
+            </li>
+            <li class="c-next">
+                <a href="JavaScript:" ng-click="setpages(+1,0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END: 分页 -->
+    </div>
+</div>
+<!--begin优惠活动信息表单-->
+<div class="modal fade c-content-login-form" id="addsalesForm" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>{{formTitle}}{{pageTitle}}优惠活动</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            名称：
+                        </div>
+                        <div class="col-md-9">
+                            <input ng-model="data.promotionTitle" class="form-control  c-square c-theme" type="text" placeholder="名称"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            活动图片： <span class="c-font-14">(1900*700)</span>
+                        </div>
+                        <div class="col-md-4">
+                            <input ngf-select="upload($file)"  class="form-control c-square c-theme" type="file" />
+                        </div>
+                        <div class="col-md-5">
+                            <img ng-src="{{data.promPic}}" class="img-max-100"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            开始时间：
+                        </div>
+                        <div class="col-md-9">
+                            <!--<input ng-model="data.startTime" name="startTime" type="datetime-local" class="form-control form-filter input-sm ng-pristine ng-valid ng-empty ng-touched"/>-->
+                            <input name="act_start_time" type="text" class=" form-control c-square c-theme text-box" value="" ng-model="data.startTime " placeholder="活动开始时间" title="活动开始时间" readonly="readonly" style="cursor:pointer;background: white;"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            截止时间：
+                        </div>
+                        <div class="col-md-9">
+                            <!--<input ng-model="data.endTime" type="datetime-local" name="endTime" class="form-control form-filter input-sm ng-pristine ng-valid ng-empty ng-touched"/>-->
+                            <input name="act_stop_time" type="text" class=" form-control c-square c-theme text-box" value="" ng-model="data.endTime " placeholder="活动结束时间" title="活动结束时间" readonly="readonly" style="cursor:pointer;background: white;"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            满多少元：
+                        </div>
+                        <div class="col-md-9">
+                            <input ng-model="data.full" class="form-control  c-square c-theme" type="num" placeholder="满多少元"/>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            活动说明：
+                        </div>
+                        <div class="col-md-9">
+                            <textarea class="form-control form-filter input-sm ng-pristine ng-valid ng-empty ng-touched" ng-model="data.promotionDescription"></textarea>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square" ng-click="submit()">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="close('addsalesForm')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end优惠活动信息表单-->
+
+<!--begin优惠活动明细表单-->
+<div class="modal fade c-content-login-form" id="detailForm" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>{{pageTitle}}活动明细</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row c-margin-t-20 c-border-bottom c-padding-10">
+                    <div class="col-md-2">
+                        <div class="c-checkbox">
+                            <input ng-model="chkall" ng-click="chkall(chkall)" ng-true-value="1" ng-false-value="0" type="checkbox" id="cart{{$index}}"
+                                   class="c-check">
+                            <label for="cart{{$index}}">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>全选</label>
+                        </div>
+                    </div>
+                    <div class="col-md-10 c-right">
+                        <button class="btn c-btn-green c-btn-square c-theme-btn" ng-click="submitDetail()">保存</button>
+                        <button class="btn c-btn-grey c-btn-square c-margin-r-20" ng-click="close('detailForm')">取消</button>
+                        <i class="fa fa-plus"  ng-click="addDetailList(1)"></i>
+                    </div>
+                </div>
+               <div class="row c-margin-b-30">
+                   <div class="col-md-12 c-border-bottom c-padding-10" ng-repeat="detail in detailList">
+                       <div class="col-md-1">
+                           <div class="c-checkbox">
+                               <input  ng-true-value="1" ng-false-value="0" type="checkbox" id="1212"
+                                       class="c-check">
+                               <label for="1212">
+                                   <span></span>
+                                   <span class="check"></span>
+                                   <span class="box"></span></label>
+                           </div>
+                       </div>
+                       <div class="col-md-2">
+                            满：(元)
+                       </div>
+                       <div class="col-md-3">
+                           <input class="form-control  c-square c-theme" ng-model="detail.full" />
+                       </div>
+                       <div class="col-md-2">
+                           减：(元)
+                       </div>
+                       <div class="col-md-3">
+                           <input class="form-control  c-square c-theme" ng-model="detail.cashDiscount" />
+                       </div>
+                       <div class="col-md-1 c-right padding-0">
+                           <i class="fa fa-close"  ng-click="deleteDetailList($index,detail.id,detail.promotion_id)"></i>
+                           <i class="fa fa-plus"  ng-click="addDetailList(1)"></i>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end优惠活动明细表单-->
+<!--begin优惠活动商品表单-->
+<div class="modal fade c-content-login-form" id="productForm" role="dialog" >
+    <div class="modal-dialog" style="width: 760px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>{{pageTitle}}活动商品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row c-margin-t-20 c-border-bottom c-padding-10">
+                    <div class="col-md-1">
+                        <div class="c-checkbox">
+                            <input ng-model="chkall" ng-click="chkall(chkall)" ng-true-value="1" ng-false-value="0" type="checkbox" id="product"
+                                   class="c-check">
+                            <label for="product">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p>序号</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>商品图片</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>商品名</p>
+                    </div>
+                    <div class="col-md-4 c-right padding-0">
+                        <button class="btn c-btn-green c-btn-square c-theme-btn"  data-toggle="modal" data-target="#add-product-form" ng-click="getAllCategory()">添加</button>
+                        <button class="btn c-btn-grey c-btn-square" ng-click="close('productForm')">取消</button>
+                    </div>
+                </div>
+                <div class="row c-margin-b-30">
+                    <div class="col-md-12 c-border-bottom c-padding-10" ng-repeat="item in products">
+                        <div class="col-md-1">
+                            <div class="c-checkbox">
+                                <input  ng-true-value="1" ng-false-value="0" type="checkbox" id="product{{$index}}"
+                                        class="c-check">
+                                <label for="product{{$index}}">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <p>{{$index+1}}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="images/default.jpg"  class="img-max-100"/>
+                        </div>
+                        <div class="col-md-4">
+                            <p>	{{item.name}}</p>
+                        </div>
+                        <div class="col-md-3 c-right padding-0">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="deleteProduuct(item.id)">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end优惠活动商品表单-->
+
+<!--begin 选择商品添加-->
+<div class="modal fade c-content-login-form" id="add-product-form" role="dialog" >
+    <div class="modal-dialog" style="width: 600px">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border c-bg-grey-1">
+                <span>添加产品</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            商品分类
+                        </div>
+                        <div class="col-md-9">
+                            <select ng-model="product.cat_id" class="form-control c-square c-theme" name="conditions" ng-change="getProduct(product.cat_id)" ng-options="x.id as x.name for x in category">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row c-margin-b-30 c-margin-t-20">
+                        <div class="col-md-3">
+                            商品
+                        </div>
+                        <div class="col-md-9">
+                            <select ng-model="product.product_id" class="form-control c-square c-theme" name="conditions" ng-options="x.id as x.name for x in productName">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row c-margin-b-30">
+                        <div class="col-md-6 c-right">
+                            <button class="btn c-btn-green c-btn-square" ng-click="saveProduct()">提交</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn c-btn-grey c-btn-square" ng-click="close('add-product-form')">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 选择商品添加-->
+
+<script type="text/javascript">
+    $( "input[name='act_start_time'],input[name='act_stop_time']" ).datetimepicker();
+</script>

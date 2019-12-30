@@ -1,0 +1,29 @@
+
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/menu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="c-content-title-1">
+            <div class="c-font-uppercase c-font-bold c-font-18 c-margin-b-15">银行卡</div>
+            <div class="c-line-left c-theme-bg"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 c-padding-10"  style="cursor: pointer" ng-repeat="card in cards">
+                    <div class="c-bg-blue-2 c-padding-10 c-font-white"  style="border-radius: 5px" ng-click="edit(card.id)">
+                        <h2 class="c-font-white">{{card.bankBranch}}</h2>
+                        <p class="c-right c-margin-t-30">**** **** **** {{card.accoutNumber}}</p>
+                    </div>
+                    <i class="glyphicon glyphicon-remove-circle c-font-red c-posAbsolute-tr-10" style="cursor: pointer" ng-click="deleteCard(card.id)"></i>
+                </div>
+                <div class="col-md-4 c-padding-10" ng-click="addCard()">
+                    <div class="c-padding-10 c-border-grey c-center c-font-grey-3"style="border-radius: 5px;border-style:dotted;">
+                        <i class="fa fa-plus fa-2x c-margin-b-10 c-margin-t-10"></i>
+                        <p class="c-center ">添加银行卡</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

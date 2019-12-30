@@ -1,0 +1,185 @@
+<link rel="stylesheet" type="text/css" href="css/express.css"/>
+
+<!--S content-->
+   <div class="content">
+   	<div class="c_box">
+		<div class="u_left">
+			<div ng-include="'eshop/shopMenu.html'"></div>
+		</div>
+	   	<div class="c_right">
+	   		<div class="r_up">
+	   			<a href="javascript:void(0);" class="active">快递模块</a>
+	   		</div>
+	   		<div class="r_down">
+	   			<div class="d_detail row">
+					<div class=" col-md-12 ">
+						<div class="row">
+							<div class="col-md-2">模板名称：<span class="c-font-red">*</span></div>
+							<div class="col-md-8"><input ng-model="data.name" class="form-control c-square c-theme ng-pristine ng-valid ng-empty ng-touched" type="text"/></div>
+						</div>
+						<div class="row c-margin-t-15">
+							<div class="col-md-2">商品地址：<span class="c-font-red">*</span></div>
+							<div class="col-md-3">
+								<select ng-model="data.province_id"  ng-options="x.id as x.name for x in provinces" ng-change="getcitys(data.province_id)" class="form-control  c-square c-theme" type="text">
+									<option value="">请选择商品所在的省份</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<select ng-if="cityshow==1" ng-model="data.city_id" ng-options="x.id as x.name for x in citys" ng-change="getdistricts(data.city_id)" class="form-control  c-square c-theme" type="text">
+									<option value="">请选择商品所在的城市</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<select ng-if="districtsshow==1" ng-model="data.district_id" ng-options="x.id as x.name for x in districts" class="form-control  c-square c-theme" type="text">
+									<option value="">请选择商品所在的区镇</option>
+								</select>
+							</div>
+						</div>
+						<div class="row c-margin-t-15">
+							<div class="col-md-2">是否包邮：<span class="c-font-red">*</span></div>
+							<div class="col-md-10">
+								<label class="radio-inline">
+									<input type="radio"  ng-model="data.isFree" ng-value="0"  name="is_bear"/>
+									自定义运费
+								</label>
+								<label class="radio-inline">
+									<input type="radio" ng-model="data.isFree" ng-value="1"  name="is_bear"/>
+									卖家承担运费
+								</label>
+							</div>
+						</div>
+						<div class="row c-margin-t-15">
+							<div class="col-md-2">计价方式：<span class="c-font-red">*</span></div>
+							<div class="col-md-10">
+								<label class="radio-inline">
+									<input type="radio" ng-model="data.payType" ng-value="1"  ng-change="setUnitname(data.payType)"  name="payType"/>
+									按件数
+								</label>
+								<label class="radio-inline">
+									<input type="radio"  ng-model="data.payType" ng-value="2" ng-change="setUnitname(data.payType)"  name="payType"/>
+									按重量
+								</label>
+								<label class="radio-inline">
+									<input type="radio"  ng-model="data.payType" ng-value="3" ng-change="setUnitname(data.payType)"  name="payType"/>
+									按体积
+								</label>
+							</div>
+
+						</div>
+						<div class="row c-margin-t-15 c-margin-b-15">
+							<div class="col-md-2">运送方式：<span class="c-font-red">*</span></div>
+							<div class="col-md-10 c-font-14 c-font-regular">
+								除指定地区外，其余地区的运费采用“默认运费”
+							</div>
+						</div>
+
+						<div class="row c-margin-b-15" ng-repeat="item in data.expressType">
+							<div class="col-md-2"></div> 
+							<div class="col-md-10">
+								<label><input type="checkbox" ng-model="item.expressType" ng-true-value="{{$index+1}}" ng-false-value="" class="c-margin-r-20"/>{{item.expressname}}{{show}}</label>
+								<div class="table-responsive {{!item.expressType?'hide':''}}">
+									<table class="table table-bordered c-margin-b-15">
+										<thead>
+										<tr class="c-bg-grey">
+											<th colspan="7" style="font-size: 14px">
+												默认运费:<input ng-model="item.firstUnit" style="width: 50px;margin: 0 5px;" type="text"/>{{unitname}}内，
+												<input ng-model="item.firstPay" style="width: 80px;margin: 0 5px;" type="text"/>元，每增加<input ng-model="item.addUnit" style="width:50px;margin: 0 5px;" type="text"/>{{unitname}}，
+												增加运费<input ng-model="item.addPay" style="width: 80px;margin: 0 5px;" type="text"/>元
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr class="c-bg-grey-1 c-font-14">
+											<td>运送到</td>
+											<td>首件({{unitname}})</td>
+											<td>首费(元)</td>
+											<td>续件({{unitname}})</td>
+											<td>续费(元)</td>
+											<td>操作</td>
+										</tr>
+										<tr class="c-font-14" ng-repeat="detail in item.details">
+											<td>
+												<div style="width: 180px">
+													<p class="col-md-9 col-sm-3">
+														<span ng-if="!detail.provinceItem[0].name">未添加地区</span>
+														<span ng-if="detail.provinceItem[0].name" class="c-padding-5" ng-repeat="cname in detail.provinceItem">{{cname.name}}</span>
+
+													</p>
+													<a href="javascript:" class="c-font-blue"  data-toggle="modal" data-target="#provinceform" ng-click="getformprovince($parent.$index,$index,detail.provinceItem)">编辑</a>
+												</div>
+											</td>
+											<td><input ng-model="detail.firstUnit"  style="width: 100%" type="text"/></td>
+											<td><input ng-model="detail.firstPay" style="width: 100%" type="text"/></td>
+											<td><input ng-model="detail.addUnit" style="width: 100%" type="text"/></td>
+											<td><input ng-model="detail.addPay" style="width: 100%" type="text"/></td>
+											<td><div class="c-center" style="width: 60px"><a href="javascript:" ng-click="deletelist($parent.$index,$index)" class="c-font-blue">删除</a></div></td>
+										</tr>
+										</tbody>
+									</table>
+									<label><a href="javascript:" class="c-font-blue c-font-14" ng-click="addExpressTypelist($index)">为指定地区城市设置运费</a></label>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row c-margin-t-15">
+							<div class="col-md-12 c-center">
+								<button class="btn c-bg-yellow-5 c-font-grey-1"  ng-click="submit()">保存</button>
+								<button class="btn" ng-click="cancel()">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			 </div>
+		</div>
+	</div>
+   <!--E content-->
+   </div>
+
+<!--begin 选择省份-->
+<div class="modal fade c-content-login-form" id="provinceform" role="dialog" >
+	<div class="modal-dialog" style="width: 760px">
+		<div class="modal-content c-square">
+			<div class="modal-header c-no-border c-bg-grey-1">
+				<span>选择区域</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row c-margin-b-30 c-margin-t-20">
+						<div class="col-md-12">
+							<div class="col-md-3 c-margin-b-15 c-font-14" ng-repeat="x in provinceOrcity">
+								<div>
+									<lable id="p{{x.id}}" ng-click="selProvince($index)" style="cursor: pointer"><input ng-model="province" type="checkbox"   ng-checked="x.is_sel==1" />{{x.name}}</lable>
+									<a href="javascript:" class="c-font-grey-3" ng-click="showCitybox(x.id)"><span class="fa fa-caret-down"></span></a>
+								</div>
+
+								<div ng-show="x.id==shownum" class="c-bg-grey c-padding-10" style="width:200%;position: absolute;z-index: 10;top:20px;left:15px; ">
+									<lable ng-click="selCity($parent.$index,$index)" class=" c-margin-b-10 c-padding-5" ng-repeat="c in x.cities"><input ng-checked="c.is_sel==1" ng-true-value="{{c.id}}" type="checkbox"/>{{c.name}}</lable>
+									<div class="c-right">
+										<a href="javascript:" ng-click="offCity()">关闭</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div>
+
+						</div>
+					</div>
+					<div class="row c-margin-b-30">
+						<div class="col-md-6 c-right">
+							<button class="btn  c-bg-yellow-5 c-font-grey-1" ng-click="submitCity()" data-dismiss="modal">保存</button>
+						</div>
+						<div class="col-md-6">
+							<button class="btn" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end 选择省份-->

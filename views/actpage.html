@@ -1,0 +1,76 @@
+<div class="container">
+    <!-- BEGIN: 个人中心菜单 -->
+    <div ng-include="'views/shopMenu.html'"></div>
+    <!-- END: 个人中心菜单 -->
+    <div class="c-layout-sidebar-content ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-5 c-center c-theme-bg">
+                    <div class="c-margin-t-30" style="width:150px;max-height:150px;display: inline-block;overflow: hidden">
+                        <img ng-src="{{data.logoPic}}" style="max-width: 100%;max-height:100%"/>
+                    </div>
+                    <p class="c-margin-t-10">
+                        <strong class="c-font-white c-font-16 c-margin-t-20 c-margin-b-5">{{data.name}}</strong>
+                    </p>
+                    <p class="c-margin-b-25">
+                        <a href="#/updateShop">
+                            <span class="c-font-14 c-font-grey-1 ">修改店铺信息&nbsp;&nbsp;</span><img src="images/edit.png">
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-7">
+                    <div class="c-content-panel">
+                        <div class="c-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="c-content-title-3 c-title-md c-theme-border">
+                                        <div class="c-font-16 c-font-bold" >销售情况</div>
+                                    </div>
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <td class="col-md-4">销量</td>
+
+                                            <td class="col-md-8 c-right"><span class="c-font-red">{{data.sales}}</span></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="col-md-4">收藏</td>
+
+                                            <td class="col-md-8 c-right"><span class="c-font-red">{{data.collect}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4">退货退款</td>
+
+                                            <td class="col-md-8 c-right"><span class="c-font-red">{{data.backs}}</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function()
+    {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/plugins/zoom-master/jquery.zoom.min.js" type="text/javascript"></script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
